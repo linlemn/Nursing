@@ -79,7 +79,7 @@
               </el-submenu>
             </el-menu>
           </el-aside>
-          <el-main :span="16">Main
+          <el-main :span="16">
             <router-view></router-view>
           </el-main>
         </el-container>
