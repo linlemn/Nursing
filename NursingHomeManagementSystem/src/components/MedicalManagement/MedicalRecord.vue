@@ -1,24 +1,19 @@
 <template>
- <div class="page">
-  good!!!!!!!!
- </div>
+  <div class="page">
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
- export default {
-   data() {
-     return {
-
-     }
-
-   },
-   components: {
-
-   }
- }
+  export default {
+    data() {
+      return {
+      }
+    },
+    components: {
+    }
+  }
 </script>
 
 <style scoped>
 
- 
 </style>
