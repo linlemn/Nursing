@@ -37,8 +37,8 @@
                 <i class="el-icon-bell"></i>
                 <span>护理管理</span>
               </div>
-              <el-menu-item :index="getRoutes(11)">个人卫生</el-menu-item>
-              <el-menu-item :index="getRoutes(12)">沐浴记录</el-menu-item>
+              <el-menu-item :index="getRoutes(12)">个人卫生</el-menu-item>
+              <el-menu-item :index="getRoutes(11)">沐浴记录</el-menu-item>
               <el-menu-item :index="getRoutes(13)">翻身记录</el-menu-item>
             </el-submenu>
             <el-submenu index="5">
