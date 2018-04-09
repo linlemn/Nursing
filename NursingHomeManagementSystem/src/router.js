@@ -106,8 +106,13 @@ const routes = [{
         component: elderlyInfo
     },
     {
+<<<<<<< HEAD
         path: medicalRoute + "/MedicineRecord",
         component: medicineRecord
+=======
+        path: medicalRoute + "/MedicalRecord",
+        component: medicalRecord
+>>>>>>> 730318963c32b02a173f194561be90b4f902a6fc
     },
     {
         path: medicalRoute + "/MedicalHistory",

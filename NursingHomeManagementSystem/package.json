@@ -8,8 +8,14 @@
     "build": "rimraf dist && webpack -p --progress --hide-modules"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "echarts": "^3.8.5",
     "element-ui": "^2.0.0",
     "vue": "^2.5.16",
+<<<<<<< HEAD
+=======
+    "vue-echarts-v3": "^1.0.18",
+>>>>>>> 730318963c32b02a173f194561be90b4f902a6fc
     "vue-multiselect": "^2.0.8",
     "vue-router": "^3.0.1"
   },
