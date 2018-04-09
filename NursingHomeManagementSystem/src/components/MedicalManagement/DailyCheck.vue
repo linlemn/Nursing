@@ -198,6 +198,7 @@ export default {
             label: "4楼"
           }
         ],
+        roomNos: [],
         searchResults: [],
         addDailyCheckFormVisible: false,
         addDailyCheckForm: [],
