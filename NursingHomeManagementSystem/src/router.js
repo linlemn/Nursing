@@ -106,7 +106,7 @@ const routes = [{
         component: elderlyInfo
     },
     {
-        path: medicalRoute + "/MedicineRecord",
+        path: medicalRoute + "/MedicalRecord",
         component: medicalRecord
     },
     {
