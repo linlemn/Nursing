@@ -108,7 +108,7 @@
               <el-row>
                 <el-col :span="23">
                   <el-form-item label="现居住地址">
-                    <el-input v-model="applicationForm.residence" size="small"></el-input>
+                    <el-input v-model="applicationForm.currentResidence" size="small"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row> 
@@ -145,7 +145,7 @@
               </el-row>
               <el-row>
                 <el-form-item label="病史介绍">
-                  <el-checkbox-group v-model="historyData" size="small">
+                  <el-checkbox-group v-model="applicationForm.historyData" size="small">
                     <el-checkbox label="高血压" border></el-checkbox>
                     <el-checkbox label="脑血管意外" border></el-checkbox>
                     <el-checkbox label="心肌梗死" border></el-checkbox>
@@ -265,6 +265,7 @@ import Multiselect from 'vue-multiselect'
           educationLevel: "",
           highestEduBG: "",
           residence: "",
+          currentResidence: "",
           accountAddress: "",
           presentResidence: "",
           agentName: "",

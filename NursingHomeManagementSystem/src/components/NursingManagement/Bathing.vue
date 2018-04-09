@@ -16,11 +16,11 @@
           <el-col :span="24">
             <el-card>
               <div slot="header">
-                <el-form :inline="true" label-position="top" :model="personalHygieneForm" label-width="70px">
+                <el-form :inline="true" label-position="top" :model="bathingForm" label-width="70px">
                   <el-row>
                     <el-col :span="4">
                       <el-form-item label="楼层">
-                        <el-select v-model="personalHygieneForm.storeyNo" placeholder="请选择" size="small">
+                        <el-select v-model="bathingForm.storeyNo" placeholder="请选择" size="small">
                           <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.value">
                           </el-option>
                         </el-select>
@@ -28,7 +28,7 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="房间号">
-                        <el-select v-model="personalHygieneForm.roomNo" placeholder="请选择" size="small">
+                        <el-select v-model="bathingForm.roomNo" placeholder="请选择" size="small">
                           <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.value">
                           </el-option>
                         </el-select>
@@ -36,17 +36,17 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="姓名">
-                        <el-input v-model="personalHygieneForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input v-model="bathingForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="时间">
-                        <el-input v-model="personalHygieneForm.date" size="small" placeholder="输入时间"></el-input>
+                        <el-input v-model="bathingForm.date" size="small" placeholder="输入时间"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="4">
                       <el-form-item label="床号">
-                        <el-input v-model="personalHygieneForm.roomNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="bathingForm.roomNo" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -146,7 +146,7 @@
 export default {
   data() {
     return {
-      personalHygieneForm: {
+      bathingForm: {
         storeyNo: "",
         roomNo: "",
         name: "",
