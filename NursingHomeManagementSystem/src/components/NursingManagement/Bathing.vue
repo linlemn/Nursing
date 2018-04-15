@@ -6,9 +6,40 @@
           <el-col :span="6" :offset="9">
             沐浴记录
           </el-col>
-          <el-col :span="1" :offset="6">
-            <el-button type="success" plain size="small">打印</el-button>
+          <el-col :span="1" :offset="4">
+            <el-button type="primary" plain size="small" @click="ableToAddToday">新增</el-button>
+            <el-dialog title="添加今日沐浴记录" :visible.sync="addTodayFormVisible" width="80%" style="text-align: left">
+              <el-form label-width="200px" v-model="addTodayForm">
+                <el-row>
+                  <el-col :span="23">
+                    <el-form-item label="沐浴记录：">
+                      <el-checkbox-group v-model="todayBathing" @change="handleTodayBathingChange">
+                        <el-checkbox v-for="h in bathingOptions" :label="h" :key="h">{{h}}</el-checkbox>
+                      </el-checkbox-group>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-form-item label="日期（不选则默认今天）">
+                    <el-date-picker
+                      v-model="date"
+                      type="date"
+                      placeholder="选择日期"
+                      format="yyyy 年 MM 月 dd 日"
+                      value-format="yyyy-MM-dd">
+                    </el-date-picker>                    
+                  </el-form-item>
+                </el-row>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="addTodayFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleAddSubmit">提 交</el-button>
+              </div>              
+            </el-dialog>
           </el-col>
+          <el-col :span="1" :offset="1">
+            <el-button type="success" plain size="small">打印</el-button>
+          </el-col> 
         </el-row>
       </el-header>
       <el-main>
@@ -20,8 +51,8 @@
                   <el-row>
                     <el-col :span="4">
                       <el-form-item label="楼层">
-                        <el-select v-model="bathingForm.storeyNo" placeholder="请选择" size="small">
-                          <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.value">
+                        <el-select v-model="bathingForm.storeyNo" placeholder="请选择" size="small" @change="storeyChange">
+                          <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -29,7 +60,7 @@
                     <el-col :span="5">
                       <el-form-item label="房间号">
                         <el-select v-model="bathingForm.roomNo" placeholder="请选择" size="small">
-                          <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.value">
+                          <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -55,8 +86,8 @@
                       <el-tooltip placement="top">
                         <div slot="content">
                           <h3>备注：</h3>
-                          <p>沐浴: ★</p>
-                          <p>擦身：▲</p>
+                          <p>沐浴: a</p>
+                          <p>擦身：b</p>
                         </div>
                         <el-button size="small" type="primary">查询</el-button>
                       </el-tooltip>
@@ -65,7 +96,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResult" height="250" border style="width: 100%">
+                <el-table :data="searchResults" border style="width: 100%">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -131,8 +162,8 @@
                   <el-table-column prop="dates29" label="30">
                   </el-table-column>
                   <el-table-column prop="dates30" label="31">
-                  </el-table-column>                                                                                   
-                  </el-table>                
+                  </el-table-column>
+                </el-table>
               </div>
             </el-card>
           </el-col>
@@ -143,105 +174,218 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      bathingForm: {
-        storeyNo: "",
-        roomNo: "",
-        name: "",
+  export default {
+    data() {
+      return {
+        bathingForm: {
+          floor: "",
+          roomNumber: "",
+          name: "",
+          date: "",
+          bedNumber: ""
+        },
+        storeys: [{
+            value: "选项1",
+            label: "1楼"
+          },
+          {
+            value: "选项2",
+            label: "2楼"
+          },
+          {
+            value: "选项3",
+            label: "3楼"
+          },
+          {
+            value: "选项4",
+            label: "4楼"
+          }
+        ],
+        roomNos: [{
+            value: "选项1",
+            label: "全部"
+          },
+          {
+            value: "选项2",
+            label: "102"
+          },
+          {
+            value: "选项3",
+            label: "103"
+          },
+          {
+            value: "选项4",
+            label: "104"
+          },
+          {
+            value: "选项5",
+            label: "105"
+          },
+          {
+            value: "选项6",
+            label: "106"
+          },
+          {
+            value: "选项7",
+            label: "107"
+          }
+        ],
+        searchResults: [],
+        middleUrl: "/bathingRecord",
+        permanentResults: [],
+        bathingOptions: ['沐浴: a', '擦身：b'],
+        idSelection: "",
+        addTodayFormVisible: false,
+        addTodayForm: {
+          bathing: "",
+          year: "",
+          month: "",
+          day: "",
+        },
+        todayBathing: [],
         date: "",
-        bedNo: ""
+      };
+    },
+    methods: {
+      getAllBathingInfo: function() {
+        let self = this
+        $.ajax({
+          url: self.urlHeader + self.middleUrl + '/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            if (data[200] == "操作成功") {
+              self.searchResults = data.data
+              self.permanentResults = data.data
+            } else {
+              self.$message({
+                message: '列表加载失败，请检查网络',
+                type: 'error',
+              });
+            }
+          },
+          error: function() {
+            self.$message({
+              message: '列表加载失败，请检查网络',
+              type: 'error',
+            });
+          }
+        })
       },
-      storeys: [
-        {
-          value: "选项1",
-          label: "1楼"
-        },
-        {
-          value: "选项2",
-          label: "2楼"
-        },
-        {
-          value: "选项3",
-          label: "3楼"
-        },
-        {
-          value: "选项4",
-          label: "4楼"
+      storeyChange: function(val) {
+        switch (val) {
+          case "1楼":
+            this.changeRoomNo(1)
+            break;
+          case "2楼":
+            this.changeRoomNo(2)
+            break;
+          case "3楼":
+            this.changeRoomNo(3)
+            break;
+          case "4楼":
+            this.changeRoomNo(4)
+            break;
         }
-      ],
-      roomNos: [
-        {
-          value: "选项1",
-          label: "全部"
-        },
-        {
-          value: "选项2",
-          label: "102"
-        },
-        {
-          value: "选项3",
-          label: "103"
-        },
-        {
-          value: "选项4",
-          label: "104"
-        },
-        {
-          value: "选项5",
-          label: "105"
-        },
-        {
-          value: "选项6",
-          label: "106"
-        },
-        {
-          value: "选项7",
-          label: "107"
+      },
+      changeRoomNo: function(val) {
+        for (var i in this.roomNos) {
+          if (i != 0) {
+            var a = parseInt(i) + 1
+            this.roomNos[i].label = val + "0" + a
+          }
         }
-      ],
-      searchResult: [{
-        order: "",
-        name: "",
-        dates0: "",
-        dates1: "",
-        dates2: "",
-        dates3: "",
-        dates4: "",
-        dates5: "",
-        dates6: "",
-        dates7: "",
-        dates8: "",
-        dates9: "",
-        dates10: "",
-        dates11: "",
-        dates12: "",
-        dates13: "",
-        dates14: "",
-        dates15: "",
-        dates16: "",
-        dates17: "",
-        dates18: "",
-        dates19: "",
-        dates20: "",
-        dates21: "",
-        dates22: "",
-        dates23: "",
-        dates24: "",
-        dates25: "",
-        dates26: "",
-        dates27: "",
-        dates28: "",
-        dates29: "",
-        dates30: ""
-      }]
-    };
-  },
-  methods: {}
-};
+      },
+      onSearch: function() {
+        if (this.bathingForm.name.length == 0 && this.bathingForm.floor.length == 0 && this.bathingForm.roomNumber.length == 0 && this.bathingForm.bedNumber.length == 0 && this.bathingForm.bedNumber.length == 0) {
+          this.$message({
+            message: '查询关键词为空',
+            type: 'error',
+          });
+          this.searchrResults = this.permanentResults
+        }
+        var tempResults = []
+        for (var i in this.permanentResults) {
+          if (this.checkValid(this.permanentResults[i])) {
+            tempResults.push(this.permanentResults[i])
+          }
+        }
+        this.searchResults = tempResults
+  
+      },
+      checkValid: function(val) {
+        if (this.bathingForm.name.length != 0) {
+          if (val.name.search(this.bathingForm.name) == -1) {
+            return false
+          }
+        }
+        if (this.bathingForm.floor.length != 0) {
+          if (val.floor != this.bathingForm.floor) {
+            return false
+          }
+        }
+        if (this.bathingForm.roomNumber.length != 0) {
+          if (val.roomNumber != this.bathingForm.roomNumber) {
+            return false
+          }
+        }
+        if (this.bathingForm.bedNo.length != 0) {
+          if (val.bedNo != this.bathingForm.bedNo) {
+            return false
+          }
+        }
+        if (this.bathingForm.date.length != 0) {
+          if (val.date != this.bathingForm.date) {
+            return false
+          }
+        }
+        return true
+      },
+      handleTodayBathingChange: function(val) {
+        let v = val[val.length-1]
+        this.addTodayForm.bathing += String(v.charAt(v.length-1))
+        console.log(this.addTodayForm.bathing);
+        
+      },
+      ableToAddToday: function() { 
+        if (this.idSelection != "") {
+          for (var i in this.permanentResults) {
+            if (this.permanentResults[i].id == this.idSelection) {
+              this.addTodayFormVisible = true
+            }
+          }
+        } else {
+          this.$message({
+            message: '未选择修改对象！',
+            type: 'error',
+          });
+        }
+      },
+      handleAddSubmit: function() {        
+        if(this.date == 0) {
+          var myDate = new Date()
+          this.addTodayForm.year = myDate.getFullYear()
+          this.addTodayForm.month = myDate.getMonth()
+          this.addTodayForm.day = myDate.getDate()         
+        }
+        else {
+          let date = this.date.split("-")
+          this.addTodayForm.year = date[0]
+          this.addTodayForm.month = date[1]
+          this.addTodayForm.day = date[2]
+        }
+        
+      },       
+    },
+    mounted: function() {
+      this.getAllBathingInfo()
+    }
+  };
 </script>
 
 <style scoped>
-
+  
 </style>

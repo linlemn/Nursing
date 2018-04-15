@@ -12,18 +12,18 @@
               <el-form label-width="160px" v-model="addMedicalRecordForm">
                 <el-row>
                   <el-col :span="8">
-                    <el-form-item label="楼层">
-                      <el-input v-model="addMedicalRecordForm.name" size="small"></el-input>
+                    <el-form-item label="姓名">
+                      <el-input v-model="addMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期">
-                      <el-input v-model="addMedicalRecordForm.birth" size="small"></el-input>
+                      <el-input v-model="addMedicalRecordForm.birthDate" size="small" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
                     <el-form-item label="性别">
-                      <el-radio-group v-model="addMedicalRecordForm.gender">
+                      <el-radio-group v-model="addMedicalRecordForm.gender" :rules="[{ required: true, message: '性别不能为空', trigger: 'change'}]">
                         <el-radio label="男"></el-radio>
                         <el-radio label="女"></el-radio>
                       </el-radio-group>
@@ -33,7 +33,7 @@
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="婚姻状况">
-                      <el-radio-group v-model="addMedicalRecordForm.marriageStatus">
+                      <el-radio-group v-model="addMedicalRecordForm.maritalStatus">
                         <el-radio label="已婚"></el-radio>
                         <el-radio label="离婚"></el-radio>
                         <el-radio label="丧偶"></el-radio>
@@ -42,7 +42,189 @@
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
-                </el-row>                                                                                                                                                                             
+                </el-row>
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="年龄">
+                      <el-input v-model="addMedicalRecordForm.age" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="国籍">
+                      <el-input v-model="addMedicalRecordForm.origin" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>  
+                  <el-col :span="8">
+                    <el-form-item label="出生地">
+                      <el-input v-model="addMedicalRecordForm.birthPlace" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                
+                </el-row> 
+                <el-row>
+                  <el-col :span="16">
+                    <el-form-item label="户口地址">
+                      <el-input v-model="addMedicalRecordForm.accountAddress" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="邮政编码">
+                      <el-input v-model="addMedicalRecordForm.zipCodeAccount" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                  
+                </el-row>
+                <el-row>
+                  <el-col :span="16">
+                    <el-form-item label="居住地址">
+                      <el-input v-model="addMedicalRecordForm.liveAddress" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="邮政编码">
+                      <el-input v-model="addMedicalRecordForm.zipCodeLive" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                  
+                </el-row>  
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="工作单位">
+                      <el-input v-model="addMedicalRecordForm.workUnit" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="联系人">
+                      <el-input v-model="addMedicalRecordForm.contact" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>  
+                  <el-col :span="8">
+                    <el-form-item label="联系人电话">
+                      <el-input v-model="addMedicalRecordForm.contactNumber" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>               
+                </el-row>  
+                <el-row>
+                  <el-col :span="16">
+                    <el-form-item label="联系人地址">
+                      <el-input v-model="addMedicalRecordForm.contactAddress" size="small"></el-input>
+                     </el-form-item>
+                  </el-col>                    
+                </el-row> 
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="入院日期">
+                      <el-input v-model="addMedicalRecordForm.hospitalizationDate" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="出院日期">
+                      <el-input v-model="addMedicalRecordForm.dischargeDate" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>  
+                  <el-col :span="8">
+                    <el-form-item label="实际住院天数">
+                      <el-input v-model="addMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>               
+                </el-row>
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="入院原因">
+                      <el-input v-model="addMedicalRecordForm.hospitalizationReason" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="入院后确诊日期">
+                      <el-input v-model="addMedicalRecordForm.confirmedDate" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="入院时情况">
+                      <el-radio-group v-model="addMedicalRecordForm.hospitalizationCondition">
+                        <el-radio label="危"></el-radio>
+                        <el-radio label="急"></el-radio>
+                        <el-radio label="一般"></el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="出院时情况">
+                      <el-radio-group v-model="addMedicalRecordForm.dischargeCondition">
+                        <el-radio label="治愈"></el-radio>
+                        <el-radio label="好转"></el-radio>
+                        <el-radio label="未愈"></el-radio>
+                        <el-radio label="死亡"></el-radio>
+                        <el-radio label="其他"></el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="入院科别">
+                      <el-input v-model="addMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="病室">
+                      <el-input v-model="addMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>  
+                  <el-col :span="8">
+                    <el-form-item label="转科时间">
+                      <el-input v-model="addMedicalRecordForm.transformDepartDate" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>               
+                </el-row>
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="出院科别">
+                      <el-input v-model="addMedicalRecordForm.dischargeDepartment" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="病室">
+                      <el-input v-model="addMedicalRecordForm.dischargeSickroom" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                
+                </el-row>
+                <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="门（急）诊诊断">
+                      <el-input
+                          type="textarea"
+                          :autosize="{ minRows: 5, maxRows: 6}"
+                          placeholder="请输入内容"
+                          v-model="addMedicalRecordForm.outpatientDiagnosis">
+                        </el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="8">
+                    <el-form-item label="入院诊断">
+                      <el-input
+                          type="textarea"
+                          :autosize="{ minRows: 5, maxRows: 6}"
+                          placeholder="请输入内容"
+                          v-model="addMedicalRecordForm.hospitalizationDiagnosis">
+                        </el-input>
+                    </el-form-item>
+                  </el-col>                
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="附件上传">
+                      <el-upload
+                        class="upload-demo"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :on-remove="handleRemove"
+                        multiple
+                        :limit="1"
+                        :file-list="fileList">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                      </el-upload>  
+                    </el-form-item>                  
+                  </el-col>
+                </el-row>                                                                                                                                                                              
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button @click="addMedicalRecordFormVisible = false">取 消</el-button>
@@ -51,23 +233,23 @@
             </el-dialog>
           </el-col>
           <el-col :span="1" :offset="1">
-            <el-button type="primary" plain size="small" @click="updateMedicalRecordFormVisible = true">修改</el-button>
-            <el-dialog title="修改住院病案记录" :visible.sync="updateMedicalRecordFormVisible" width="80%" style="text-align: left">
+            <el-button type="primary" plain size="small" @click="ableToModify">修改</el-button>
+            <el-dialog title="添加住院病案记录" :visible.sync="updateMedicalRecordFormVisible" width="80%" style="text-align: left">
               <el-form label-width="160px" v-model="updateMedicalRecordForm">
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateMedicalRecordForm.name" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期">
-                      <el-input v-model="updateMedicalRecordForm.birth" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.birthDate" size="small" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
                     <el-form-item label="性别">
-                      <el-radio-group v-model="updateMedicalRecordForm.gender">
+                      <el-radio-group v-model="updateMedicalRecordForm.gender" :rules="[{ required: true, message: '性别不能为空', trigger: 'change'}]">
                         <el-radio label="男"></el-radio>
                         <el-radio label="女"></el-radio>
                       </el-radio-group>
@@ -77,7 +259,7 @@
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="婚姻状况">
-                      <el-radio-group v-model="updateMedicalRecordForm.marriageStatus">
+                      <el-radio-group v-model="updateMedicalRecordForm.maritalStatus">
                         <el-radio label="已婚"></el-radio>
                         <el-radio label="离婚"></el-radio>
                         <el-radio label="丧偶"></el-radio>
@@ -95,7 +277,7 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="国籍">
-                      <el-input v-model="updateMedicalRecordForm.nationality" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.origin" size="small"></el-input>
                     </el-form-item>
                   </el-col>  
                   <el-col :span="8">
@@ -107,82 +289,82 @@
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="户口地址">
-                      <el-input v-model="updateMedicalRecordForm.residence" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.accountAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="updateMedicalRecordForm.postCode" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.zipCodeAccount" size="small"></el-input>
                     </el-form-item>
                   </el-col>                  
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="居住地址">
-                      <el-input v-model="updateMedicalRecordForm.currentResidence" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.liveAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="updateMedicalRecordForm.currentPostCode" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.zipCodeLive" size="small"></el-input>
                     </el-form-item>
                   </el-col>                  
                 </el-row>  
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="工作单位">
-                      <el-input v-model="updateMedicalRecordForm.workAdr" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.workUnit" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="联系人">
-                      <el-input v-model="updateMedicalRecordForm.linkman" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.contact" size="small"></el-input>
                     </el-form-item>
                   </el-col>  
                   <el-col :span="8">
                     <el-form-item label="联系人电话">
-                      <el-input v-model="updateMedicalRecordForm.linkmanTel" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.contactNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>               
                 </el-row>  
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="联系人地址">
-                      <el-input v-model="updateMedicalRecordForm.linkmanAdr" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.contactAddress" size="small"></el-input>
                      </el-form-item>
                   </el-col>                    
                 </el-row> 
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院日期">
-                      <el-input v-model="updateMedicalRecordForm.checkinDate" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.hospitalizationDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出院日期">
-                      <el-input v-model="updateMedicalRecordForm.checkoutDate" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.dischargeDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>  
                   <el-col :span="8">
                     <el-form-item label="实际住院天数">
-                      <el-input v-model="updateMedicalRecordForm.stayTime" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
                     </el-form-item>
                   </el-col>               
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院原因">
-                      <el-input v-model="updateMedicalRecordForm.checkinReason" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.hospitalizationReason" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院后确诊日期">
-                      <el-input v-model="updateMedicalRecordForm.diagnoseDate" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.confirmedDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院时情况">
-                      <el-radio-group v-model="updateMedicalRecordForm.checkinStatus">
+                      <el-radio-group v-model="updateMedicalRecordForm.hospitalizationCondition">
                         <el-radio label="危"></el-radio>
                         <el-radio label="急"></el-radio>
                         <el-radio label="一般"></el-radio>
@@ -193,7 +375,7 @@
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="出院时情况">
-                      <el-radio-group v-model="updateMedicalRecordForm.checkoutStatus">
+                      <el-radio-group v-model="updateMedicalRecordForm.dischargeCondition">
                         <el-radio label="治愈"></el-radio>
                         <el-radio label="好转"></el-radio>
                         <el-radio label="未愈"></el-radio>
@@ -206,29 +388,29 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院科别">
-                      <el-input v-model="updateMedicalRecordForm.checkinSubject" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="updateMedicalRecordForm.checkinWard" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>  
                   <el-col :span="8">
                     <el-form-item label="转科时间">
-                      <el-input v-model="updateMedicalRecordForm.transferDate" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.transformDepartDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>               
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="出院科别">
-                      <el-input v-model="updateMedicalRecordForm.checkoutSubject" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.dischargeDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="updateMedicalRecordForm.checkoutWard" size="small"></el-input>
+                      <el-input v-model="updateMedicalRecordForm.dischargeSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>                
                 </el-row>
@@ -239,7 +421,7 @@
                           type="textarea"
                           :autosize="{ minRows: 5, maxRows: 6}"
                           placeholder="请输入内容"
-                          v-model="updateMedicalRecordForm.diagnose">
+                          v-model="updateMedicalRecordForm.outpatientDiagnosis">
                         </el-input>
                     </el-form-item>
                   </el-col>
@@ -249,7 +431,7 @@
                           type="textarea"
                           :autosize="{ minRows: 5, maxRows: 6}"
                           placeholder="请输入内容"
-                          v-model="updateMedicalRecordForm.checkinDiagnose">
+                          v-model="updateMedicalRecordForm.hospitalizationDiagnosis">
                         </el-input>
                     </el-form-item>
                   </el-col>                
@@ -272,12 +454,12 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button @click="updateMedicalRecordFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="handleAddSubmit">提 交</el-button>
+                <el-button type="primary" @click="handleUpdateSubmit">提 交</el-button>
               </div>              
             </el-dialog>
           </el-col>
           <el-col :span="1" :offset="1">
-            <el-button type="danger" plain size="small">删除</el-button>
+            <el-button type="danger" plain size="small" @click="handleDeletion">删除</el-button>
           </el-col>
         </el-row>
       </el-header>
@@ -290,8 +472,8 @@
                   <el-row>
                     <el-col :span="7">
                       <el-form-item label="楼层">
-                        <el-select v-model="medicalRecordForm.storeyNo" placeholder="请选择" size="small">
-                          <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.value">
+                        <el-select v-model="medicalRecordForm.storeyNo" placeholder="请选择" size="small" @change="storeyChange">
+                          <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -299,7 +481,7 @@
                     <el-col :span="7">
                       <el-form-item label="房间号">
                         <el-select v-model="medicalRecordForm.roomNo" placeholder="请选择" size="small">
-                          <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.value">
+                          <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -321,7 +503,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResult" height="250" border style="width: 100%">
+                <el-table :data="searchResult" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -332,15 +514,15 @@
                   </el-table-column>
                   <el-table-column prop="gender" label="性别" fixed>
                   </el-table-column>
-                  <el-table-column prop="checkinStatus" label="入院时情况"></el-table-column>
-                  <el-table-column prop="checkoutDate" label="出院时间">
+                  <el-table-column prop="hospitalizationCondition" label="入院时情况"></el-table-column>
+                  <el-table-column prop="dischargeDate" label="出院时间">
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
                           <el-button
                             size="mini"
                             type="danger"
-                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                            @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
                 </el-table>                
@@ -380,15 +562,38 @@
             label: "4楼"
           }
         ],
-        searchResult: [{
-          id: "",
-          name: "",
-          gender: "",
-          storeyNo: "",
-          roomNo: "",
-          checkinStatus: "",
-          checkoutDate: ""
-        }],
+        roomNos: [
+        {
+          value: "选项1",
+          label: "全部"
+        },
+        {
+          value: "选项2",
+          label: "102"
+        },
+        {
+          value: "选项3",
+          label: "103"
+        },
+        {
+          value: "选项4",
+          label: "104"
+        },
+        {
+          value: "选项5",
+          label: "105"
+        },
+        {
+          value: "选项6",
+          label: "106"
+        },
+        {
+          value: "选项7",
+          label: "107"
+        }
+      ],
+        searchResult: [],
+        permanentResults: [],
         chosenData: {
           name: "",
           birth: "",
@@ -421,22 +626,264 @@
           checkoutDiagnose: ""
         },
         addMedicalRecordFormVisible: false,
-        addMedicalRecordForm: [],
+        addMedicalRecordForm: {
+          name: "",
+          gender: "",
+          birthDate: "",
+          maritalStatus: "",
+          age: "",
+          origin: "",
+          birthPlace: "",
+          accountAddress: "",
+          zipCodeAccount: "",
+          liveAddress: "",
+          zipCodeLive: "",
+          workUnit: "",
+          contact: "",
+          contactNumber: "",
+          contactAddress: "",
+          hospitalizationDate: "",
+          dischargeDate: "",
+          numberOfDaysInHospital: "",
+          hospitalizationCondition: "",
+          hospitalizationReason: "",
+          confirmedDate: "",
+          dischargeCondition: "",
+          hospitalizationDepartment: "",
+          hospitalizationSickroom: "",
+          transformDepartDate: "",
+          dischargeDepartment: "",
+          dischargeSickroom: "",
+          outpatientDiagnosis: "",
+          hospitalizationDiagnosis: "",
+        },
         updateMedicalRecordFormVisible: false,
-        updateMedicalRecordForm: [],
-
+        updateMedicalRecordForm: {
+          name: "",
+          gender: "",
+          birthDate: "",
+          maritalStatus: "",
+          age: "",
+          origin: "",
+          birthPlace: "",
+          accountAddress: "",
+          zipCodeAccount: "",
+          liveAddress: "",
+          zipCodeLive: "",
+          workUnit: "",
+          contact: "",
+          contactNumber: "",
+          contactAddress: "",
+          hospitalizationDate: "",
+          dischargeDate: "",
+          numberOfDaysInHospital: "",
+          hospitalizationCondition: "",
+          hospitalizationReason: "",
+          confirmedDate: "",
+          dischargeCondition: "",
+          hospitalizationDepartment: "",
+          hospitalizationSickroom: "",
+          transformDepartDate: "",
+          dischargeDepartment: "",
+          dischargeSickroom: "",
+          outpatientDiagnosis: "",
+          hospitalizationDiagnosis: "",
+        },
+        fileList: [],
+        middleUrl: "/medicalRecord",
+        idSelection: "",
       };
     },
     methods: {
-      handleDeletion: function() {
-  
-      },
       handleRemove: function() {
 
       },
-      handleSubmit: function() {
-
-      }
+      handleSelection: function(val) {
+        this.idSelection = val
+      },
+      ableToModify: function() {
+        if (this.idSelection != "" ) {
+          for (var i in this.permanentResults) {
+            if (this.permanentResults[i] == this.idSelection) {             
+              this.updateMedicalRecordFormVisible = true
+              this.updateMedicalRecordForm = this.permanentResults[i]
+            }
+          }
+        } else {
+          this.$message({
+            message: '未选择修改对象！',
+            type: 'error',
+          });
+        }
+      },      
+      handleAddSubmit: function() {
+        let self = this
+        if (self.addMedicalRecordForm.name.length == 0 || self.addMedicalRecordForm.birthDate.length == 0 || self.addMedicalRecordForm.gender.length == 0) {
+          self.$message({
+            message: '必填字段为空',
+            type: 'error',
+          });
+          return
+        }
+        //发送请求
+        $.ajax({
+          url: self.urlHeader + self.middleUrl + '/create',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify(self.addMedicalRecordForm),
+          success: function(data) {
+            //解析返回的data
+            if (data.data != null) {
+              self.$message({
+                message: '提交成功',
+                type: 'success',
+              });
+              self.addMedicalRecordFormVisible = false
+              self.getAllRecordInfo()
+            } else {
+              self.$message({
+                message: '创建失败',
+                type: 'error',
+              });
+            }
+          },
+          error: function(err) {
+            self.$alert('创建失败', '失败', {
+              confirmButtonText: '确定'
+            });
+            console.log(err)
+          }
+        })
+      },
+      handleUpdateSubmit: function() {
+        let self = this
+        if (self.updateMedicalRecordForm.name.length == 0 || self.updateMedicalRecordForm.birthDate.length == 0 || self.updateMedicalRecordForm.gender.length == 0) {
+          self.$message({
+            message: '必填字段为空',
+            type: 'error',
+          });
+          return
+        }
+        //发送请求
+        $.ajax({
+          url: self.urlHeader + self.middleUrl + '/change',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify(self.updateMedicalRecordForm),
+          success: function(data) {
+            //解析返回的data
+            if (data.data != null) {
+              self.$message({
+                message: '提交成功',
+                type: 'success',
+              });
+              self.updateMedicalRecordFormVisible = false
+              self.getAllRecordInfo()
+            } else {
+              self.$message({
+                message: '创建失败',
+                type: 'error',
+              });
+            }
+          },
+          error: function(err) {
+            self.$alert('创建失败', '失败', {
+              confirmButtonText: '确定'
+            });
+            console.log(err)
+          }
+        })        
+      },
+      storeyChange: function(val) {
+        switch(val) {
+          case "1楼":
+            this.changeRoomNo(1)
+            break;
+          case "2楼":
+            this.changeRoomNo(2)
+            break;
+          case "3楼":
+            this.changeRoomNo(3)
+            break;
+          case "4楼":
+            this.changeRoomNo(4)
+            break;                                    
+        }        
+      },
+      changeRoomNo: function(val) {
+          for (var i in this.roomNos) {
+            if (i != 0) {
+              var a = parseInt(i)+1
+              this.roomNos[i].label = val + "0" + a
+            }           
+          }
+      },
+      getAllRecordInfo: function() {
+        let self = this
+        $.ajax({
+          url: self.urlHeader + self.middleUrl +'/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            self.searchResult = data.data
+            self.permanentResults = data.data
+          },
+          error: function() {
+              self.$message({
+                message: '列表加载失败，请检查网络',
+                type: 'error',
+              });           
+          }
+        })        
+      }, 
+      handleDeletion: function() {
+        if (this.idSelection == "") {
+            this.$message({
+              message: '未选择删除对象！',
+              type: 'error',
+            });   
+            return       
+        }
+        this.handleDelete(this.idSelection.id)
+      },
+      handleDelete: function(id) { 
+        let self = this
+        console.log(id)
+        $.ajax({
+          url: self.urlHeader + self.middleUrl + '/delete',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: id
+          }),
+          success: function(data) {
+            console.log(data)
+            if (data[200] == "操作成功") {
+              self.$message({
+                message: '删除成功',
+                type: 'success',
+              });
+            } else {
+              self.$message({
+                message: '删除失败',
+                type: 'error',
+              });
+            }
+          },
+          error: function() {
+              self.$message({
+                message: '删除失败，请检查网络',
+                type: 'error',
+              });           
+          }
+        })        
+      },           
+    },
+    mounted: function() {
+      this.getAllRecordInfo()
     }
   };
 </script>

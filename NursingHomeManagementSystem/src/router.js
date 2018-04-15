@@ -28,6 +28,7 @@ import personalHygiene from "./components/NursingManagement/PersonalHygiene.vue"
 import turnOver from "./components/NursingManagement/TurnOver.vue";
 //总览组件
 import overview from "./components/Overview.vue";
+import login from "./components/Login.vue";
 //系统信息管理组件
 import bedInfoManagment from "./components/SystemInfoManagement/BedInfoManagment.vue";
 import carerOfBedManagement from "./components/SystemInfoManagement/CarerOfBedManagement.vue";
@@ -106,13 +107,8 @@ const routes = [{
         component: elderlyInfo
     },
     {
-<<<<<<< HEAD
-        path: medicalRoute + "/MedicineRecord",
-        component: medicineRecord
-=======
         path: medicalRoute + "/MedicalRecord",
         component: medicalRecord
->>>>>>> 730318963c32b02a173f194561be90b4f902a6fc
     },
     {
         path: medicalRoute + "/MedicalHistory",
@@ -153,7 +149,11 @@ const routes = [{
     // 重定向
     {
         path: '/',
-        redirect: '/Overview'
+        redirect: '/Login'
+    },
+    {
+        path: '/Login',
+        component: login
     }
 ]
 
