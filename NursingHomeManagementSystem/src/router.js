@@ -29,6 +29,7 @@ import turnOver from "./components/NursingManagement/TurnOver.vue";
 //总览组件
 import overview from "./components/Overview.vue";
 import login from "./components/Login.vue";
+import userAssesment from './components/UserAssesment.vue';
 //系统信息管理组件
 import bedInfoManagment from "./components/SystemInfoManagement/BedInfoManagment.vue";
 import carerOfBedManagement from "./components/SystemInfoManagement/CarerOfBedManagement.vue";
@@ -39,11 +40,13 @@ import role from "./components/SystemInfoManagement/role.vue";
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
-const adminRoute = "/AdministrativeManagement"
-const businessRoute = "/BusinessManagement"
-const medicalRoute = "/MedicalManagement"
-const nursingRoute = "/NursingManagement"
-const systemInfoRoute = "/SystemInfo"
+const firstRoute = "/UserAssesment"
+
+const adminRoute = firstRoute + "/AdministrativeManagement"
+const businessRoute = firstRoute + "/BusinessManagement"
+const medicalRoute = firstRoute + "/MedicalManagement"
+const nursingRoute = firstRoute + "/NursingManagement"
+const systemInfoRoute = firstRoute + "/SystemInfo"
 
 //按app.vue中顺序排列
 const routes = [{
@@ -154,6 +157,10 @@ const routes = [{
     {
         path: '/Login',
         component: login
+    },
+    {
+        path: '/UserAssesment',
+        component: userAssesment
     }
 ]
 

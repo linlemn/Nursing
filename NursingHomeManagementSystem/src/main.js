@@ -24,5 +24,7 @@ Date.prototype.format = function(formatStr) {
     return str;
 }
 
+
+
 //全局变量header
 Vue.prototype.urlHeader = 'http://10.60.43.111:12222'
