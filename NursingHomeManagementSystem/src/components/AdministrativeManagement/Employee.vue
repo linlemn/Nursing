@@ -295,6 +295,7 @@
         loading: true,
         //当前表格绑定data
         curData: [],
+        currentClick: -1,
       }
     },
     methods: {
@@ -302,9 +303,11 @@
       modifiedButtClick: function(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.curData[index]
+        this.currentClick = index
       },
       //修改信息
-      handleInfoModified: function(index) {
+      handleInfoModified: function() {
+        var index = this.currentClick
         let self = this
         //发送修改请求
         $.ajax({

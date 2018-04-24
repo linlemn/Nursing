@@ -266,6 +266,7 @@
         queryName: '',
         curData: [],
         selection: [],
+        currentClick: -1,
       }
     },
     methods: {
@@ -309,9 +310,11 @@
       modifiedButtClick(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.dutyData[index]
+this.currentClick = index
       },
-      handleInfoModified(index) {
+      handleInfoModified() {
         let self = this
+        var index = this.currentClick
         //发送修改请求
         $.ajax({
           url: self.urlHeader + '/dutyRecord/change',
@@ -320,7 +323,7 @@
           data: JSON.stringify(self.modifiedInfo),
           success: function(data) {
             //解析返回的data
-            self.curData[index - 1] = self.modifiedInfo
+            self.curData[index] = self.modifiedInfo
             self.modifiedFormVisible = false
             self.getAllDutyInfo(false)
             self.$message({

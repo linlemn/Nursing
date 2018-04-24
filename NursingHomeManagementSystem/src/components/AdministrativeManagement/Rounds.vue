@@ -318,6 +318,7 @@
           message: '处置建议不能为空',
           trigger: 'change'
         }],
+        currentClick: -1,
       }
     },
     methods: {
@@ -361,8 +362,10 @@
       modifiedButtClick(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.curData[index]
+        this.currentClick = index
       },
-      handleInfoModified(index) {
+      handleInfoModified() {
+        var index = this.currentClick
         //发送请求
         let self = this
         //发送修改请求
@@ -373,7 +376,7 @@
           data: JSON.stringify(self.modifiedInfo),
           success: function(data) {
             //解析返回的data
-            self.curData[index - 1] = self.modifiedInfo
+            self.curData[index] = self.modifiedInfo
             self.getAllRoundsInfo(false)
             self.modifiedFormVisible = false
             self.$message({

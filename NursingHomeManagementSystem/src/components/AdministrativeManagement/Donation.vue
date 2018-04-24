@@ -189,6 +189,7 @@
         selection: [],
         loading: true,
         curData: [],
+        currentClick: -1,
       }
     },
     methods: {
@@ -236,9 +237,11 @@
       modifiedButtClick: function(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.curData[index]
+        this.currentClick = index
       },
       //删除一件捐赠品
-      deleteADonation(index) {
+      deleteADonation() {
+        var index = this.currentClick
         let self = this
         this.$confirm('此操作将删除该捐赠物，是否继续?', '提示', {
           confirmButtonText: '确定',
@@ -287,7 +290,7 @@
           data: JSON.stringify(self.modifiedInfo),
           success: function(data) {
             //解析返回的data
-            self.curData[index - 1] = self.modifiedInfo
+            self.curData[index] = self.modifiedInfo
             self.modifiedFormVisible = false
             self.getAllDonationInfo(false)
             self.$message({

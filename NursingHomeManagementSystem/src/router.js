@@ -42,113 +42,171 @@ Vue.use(VueRouter);
 
 const firstRoute = "/UserAssesment"
 
-const adminRoute = firstRoute + "/AdministrativeManagement"
-const businessRoute = firstRoute + "/BusinessManagement"
-const medicalRoute = firstRoute + "/MedicalManagement"
-const nursingRoute = firstRoute + "/NursingManagement"
-const systemInfoRoute = firstRoute + "/SystemInfo"
+const adminRoute = "/AdministrativeManagement"
+const businessRoute = "/BusinessManagement"
+const medicalRoute = "/MedicalManagement"
+const nursingRoute = "/NursingManagement"
+const systemInfoRoute = "/SystemInfo"
+
+//所有权限通用路由表 
+//如首页和登录页和一些不用权限的公用页面
+const constantRouterMap = [
+    // 重定向
+    {
+        path: '/',
+        redirect: '/Login'
+    },
+    {
+        path: '/Login',
+        component: login,
+    },
+]
+
+//异步挂载的路由
+//动态需要根据权限加载的路由表 
+// export const asyncRouterMap = [{
+const asyncRouterMap = [{
+        path: '/UserAssesment',
+        component: userAssesment,
+        children: [
+            //总览
+            {
+                path: "/Overview",
+                components: { main: overview },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            //行政管理
+            {
+                path: adminRoute + "/Employee",
+                components: { main: employee },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Donation",
+                components: { main: donation },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Error",
+                components: { main: error },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Rounds",
+                components: { main: rounds },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Duty",
+                components: { main: duty },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Suggestion",
+                components: { main: suggestion },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            {
+                path: adminRoute + "/Complaints",
+                components: { main: complaints },
+                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+            },
+            //业务管理
+            {
+                path: businessRoute + "/Registration",
+                components: { main: registration },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: businessRoute + "/Application",
+                components: { main: application },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: businessRoute + "/Approval",
+                components: { main: approval },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            //护理管理
+            {
+                path: nursingRoute + "/Bathing",
+                components: { main: bathing },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: nursingRoute + "/PersonalHygiene",
+                components: { main: personalHygiene },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: nursingRoute + "/TurnOver",
+                components: { main: turnOver },
+                meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            //医务管理
+            {
+                path: medicalRoute + "/ElderlyInfo",
+                components: { main: elderlyInfo },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/MedicalRecord",
+                components: { main: medicalRecord },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/MedicalHistory",
+                components: { main: medicalHistory },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/DailyCheck",
+                components: { main: dailyCheck },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/DailyInspection",
+                components: { main: dailyInspection },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/TourRecord",
+                components: { main: tourRecord },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: medicalRoute + "/MedicineRecord",
+                components: { main: medicineRecord },
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+            },
+            {
+                path: systemInfoRoute + "/Role",
+                components: { main: role },
+                meta: { role: ['admin'] }, //页面需要的权限
+            },
+            {
+                path: systemInfoRoute + "/Department",
+                components: { main: department },
+                meta: { role: ['admin'] }, //页面需要的权限
+            },
+            {
+                path: systemInfoRoute + "/BedInfoManagment",
+                components: { main: bedInfoManagment },
+                meta: { role: ['admin'] }, //页面需要的权限
+            },
+            {
+                path: systemInfoRoute + "/CarerOfBedManagement",
+                components: { main: carerOfBedManagement },
+                meta: { role: ['admin'] }, //页面需要的权限
+            },
+
+        ]
+    },
+    { path: '*', redirect: '/404', hidden: true }
+]
 
 //按app.vue中顺序排列
-const routes = [{
-        path: "/Overview",
-        component: overview
-    },
-    {
-        path: adminRoute + "/Employee",
-        component: employee
-    },
-    {
-        path: adminRoute + "/Donation",
-        component: donation
-    },
-    {
-        path: adminRoute + "/Error",
-        component: error
-    },
-    {
-        path: adminRoute + "/Rounds",
-        component: rounds
-    },
-    {
-        path: adminRoute + "/Duty",
-        component: duty
-    },
-    {
-        path: adminRoute + "/Suggestion",
-        component: suggestion
-    },
-    {
-        path: adminRoute + "/Complaints",
-        component: complaints
-    },
-    {
-        path: businessRoute + "/Registration",
-        component: registration
-    },
-    {
-        path: businessRoute + "/Application",
-        component: application
-    },
-    {
-        path: businessRoute + "/Approval",
-        component: approval
-    },
-    {
-        path: nursingRoute + "/Bathing",
-        component: bathing
-    },
-    {
-        path: nursingRoute + "/PersonalHygiene",
-        component: personalHygiene
-    },
-    {
-        path: nursingRoute + "/TurnOver",
-        component: turnOver
-    },
-    {
-        path: medicalRoute + "/ElderlyInfo",
-        component: elderlyInfo
-    },
-    {
-        path: medicalRoute + "/MedicalRecord",
-        component: medicalRecord
-    },
-    {
-        path: medicalRoute + "/MedicalHistory",
-        component: medicalHistory
-    },
-    {
-        path: medicalRoute + "/DailyCheck",
-        component: dailyCheck
-    },
-    {
-        path: medicalRoute + "/DailyInspection",
-        component: dailyInspection
-    },
-    {
-        path: medicalRoute + "/TourRecord",
-        component: tourRecord
-    },
-    {
-        path: medicalRoute + "/MedicineRecord",
-        component: medicineRecord
-    },
-    {
-        path: systemInfoRoute + "/Role",
-        component: role
-    },
-    {
-        path: systemInfoRoute + "/Department",
-        component: department
-    },
-    {
-        path: systemInfoRoute + "/BedInfoManagment",
-        component: bedInfoManagment
-    },
-    {
-        path: systemInfoRoute + "/CarerOfBedManagement",
-        component: carerOfBedManagement
-    },
+const routes = [
     // 重定向
     {
         path: '/',
@@ -160,12 +218,175 @@ const routes = [{
     },
     {
         path: '/UserAssesment',
-        component: userAssesment
-    }
+        component: userAssesment,
+        children: [{
+                path: "/Overview",
+                components: { main: overview }
+            },
+            {
+                path: adminRoute + "/Employee",
+                components: { main: employee }
+            },
+            {
+                path: adminRoute + "/Donation",
+                components: { main: donation }
+            },
+            {
+                path: adminRoute + "/Error",
+                components: { main: error }
+            },
+            {
+                path: adminRoute + "/Rounds",
+                components: { main: rounds }
+            },
+            {
+                path: adminRoute + "/Duty",
+                components: { main: duty }
+            },
+            {
+                path: adminRoute + "/Suggestion",
+                components: { main: suggestion }
+            },
+            {
+                path: adminRoute + "/Complaints",
+                components: { main: complaints }
+            },
+            {
+                path: businessRoute + "/Registration",
+                components: { main: registration }
+            },
+            {
+                path: businessRoute + "/Application",
+                components: { main: application }
+            },
+            {
+                path: businessRoute + "/Approval",
+                components: { main: approval }
+            },
+            {
+                path: nursingRoute + "/Bathing",
+                components: { main: bathing }
+            },
+            {
+                path: nursingRoute + "/PersonalHygiene",
+                components: { main: personalHygiene }
+            },
+            {
+                path: nursingRoute + "/TurnOver",
+                components: { main: turnOver }
+            },
+            {
+                path: medicalRoute + "/ElderlyInfo",
+                components: { main: elderlyInfo }
+            },
+            {
+                path: medicalRoute + "/MedicalRecord",
+                components: { main: medicalRecord }
+            },
+            {
+                path: medicalRoute + "/MedicalHistory",
+                components: { main: medicalHistory }
+            },
+            {
+                path: medicalRoute + "/DailyCheck",
+                components: { main: dailyCheck }
+            },
+            {
+                path: medicalRoute + "/DailyInspection",
+                components: { main: dailyInspection }
+            },
+            {
+                path: medicalRoute + "/TourRecord",
+                components: { main: tourRecord }
+            },
+            {
+                path: medicalRoute + "/MedicineRecord",
+                components: { main: medicineRecord }
+            },
+            {
+                path: systemInfoRoute + "/Role",
+                components: { main: role }
+            },
+            {
+                path: systemInfoRoute + "/Department",
+                components: { main: department }
+            },
+            {
+                path: systemInfoRoute + "/BedInfoManagment",
+                components: { main: bedInfoManagment }
+            },
+            {
+                path: systemInfoRoute + "/CarerOfBedManagement",
+                components: { main: carerOfBedManagement }
+            },
+        ],
+    },
 ]
 
 var router = new VueRouter({
-    routes
+    routes: constantRouterMap,
 })
+
+// //路由钩子函数
+// router.beforeEach((to, from, next) => {
+//     if (document.cookie) { // 判断是否有token，有token就是登陆过了
+//         if (from.path == '/Login') { //从登录来
+//             console.log("!")
+//             const arr = document.cookie.split(';')
+//             var roles = ''
+//                 //找到role
+//             for (var i = 0; i < arr.length; i++) {
+//                 if (arr[i].indexOf('role') >= 0) {
+//                     roles = arr[i].split('=')[1]
+//                     break
+//                 }
+//             }
+//             generateRoutes([roles], next, to)
+//                 // next(false)
+//                 // console.log(router)
+//                 // next({...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+//         } else {
+//             next() //当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面
+//         }
+
+//     } else { //没有token需要登录
+//         console.log("!!!")
+//         next('/'); // 否则全部重定向到登录页
+//     }
+// });
+
+function hasPermission(roles, route) {
+    if (route.meta && route.meta.role) {
+        return roles.some(role => route.meta.role.join('').indexOf(role) >= 0)
+    } else {
+        return true
+    }
+}
+
+export function generateRoutes(data, next, to) {
+    const roles = data;
+    const accessedRouters = asyncRouterMap.filter(v => {
+        if (roles.join('').indexOf('admin') >= 0) return true;
+        if (hasPermission(roles, v)) {
+            if (v.children && v.children.length > 0) {
+                v.children = v.children.filter(child => {
+                    if (hasPermission(roles, child)) {
+                        return child
+                    }
+                    return false;
+                });
+                return v
+            } else {
+                return v
+            }
+        }
+        return false;
+    });
+
+    router.options.routes = router.options.routes.concat(accessedRouters)
+    router.addRoutes(accessedRouters)
+}
+
+
 
 export default router;

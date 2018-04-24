@@ -11,10 +11,6 @@
       return {}
     },
     methods: {
-      //获取路径名称
-      getRoutes(index) {
-        return router.options.routes[index].path
-      }
     },
   };
 </script>

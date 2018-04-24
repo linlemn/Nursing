@@ -158,6 +158,7 @@
         loading: true,
         selection: [],
         curData: [],
+        currentClick: -1,
       }
     },
     methods: {
@@ -203,8 +204,10 @@
       modifiedButtClick(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.curData[index]
+        this.currentClick = index
       },
-      handleInfoModified(index) {
+      handleInfoModified() {
+        var index = this.currentClick
         //发送请求
         let self = this
         //发送修改请求
@@ -215,7 +218,7 @@
           data: JSON.stringify(self.modifiedInfo),
           success: function(data) {
             //解析返回的data
-            self.curData[index - 1] = self.modifiedInfo
+            self.curData[index] = self.modifiedInfo
             self.getAllErrorInfo(false)
             self.modifiedFormVisible = false
             self.$message({

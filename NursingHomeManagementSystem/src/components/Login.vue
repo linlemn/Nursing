@@ -39,6 +39,9 @@
 </template>
 
 <script>
+  import {
+    generateRoutes
+  } from '../router'
   export default {
     data() {
       return {
@@ -46,14 +49,40 @@
           username: "",
           password: ""
         },
-        
       }
     },
     methods: {
       login: function() {
-        this.$router.push("/UserAssesment")
+        //删除之前的cookie
+        var time = new Date()
+        time.setTime(time.getTime() - 10000)
+        document.cookie="token=balabala; role=admin;expires="+time.toGMTString(); 
+        //登录成功之后存储token和role到cookie中
+        document.cookie = 'token=balabala;role=admin'
+        //动态生成路由
+        this.formRoute()
+      },
+      formRoute() {
+        if (document.cookie) { // 判断是否有token，有token就是登陆过了
+          const arr = document.cookie.split(';')
+          console.log(document.cookie)
+          var roles = ''
+          //找到role
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i].indexOf('role') >= 0) {
+              console.log(arr[i])
+              roles = arr[i].split('=')[1]
+              break
+            }
+          }
+          generateRoutes([roles])
+          this.$router.push('/UserAssesment')
+        } else { //没有token需要登录
+          this.$router.push('/')
+          // next('/'); // 否则全部重定向到登录页
+        }
       }
-    }
+    },
   }
 </script>
 
@@ -64,5 +93,4 @@
     text-align: center;
     font-size: 64px;
   }
-  
 </style>

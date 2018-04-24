@@ -190,6 +190,7 @@
         modifiedInfo: {},
         selection: [],
         curData: [],
+        currentClick: -1,
       }
     },
     methods: {
@@ -233,8 +234,10 @@
       modifiedButtClick(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.complaintsData[index]
+        this.currentClick = index
       },
-      handleInfoModified(index) {
+      handleInfoModified() {
+        var index = this.currentClick
         let self = this
         //发送修改请求
         $.ajax({
@@ -244,7 +247,7 @@
           data: JSON.stringify(self.modifiedInfo),
           success: function(data) {
             //解析返回的data
-            self.curData[index - 1] = self.modifiedInfo
+            self.curData[index] = self.modifiedInfo
             self.getAllComplaintsInfo(false)
             self.modifiedFormVisible = false
             self.$message({
