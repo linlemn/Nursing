@@ -4,17 +4,17 @@
       <el-header class="sub-header">
         <el-row>
           <el-col :span="6" :offset="9">
-            个人卫生
+            沐浴记录
           </el-col>
           <el-col :span="1" :offset="4">
-            <el-button type="primary" plain size="small" @click="ableToAddToday">新增</el-button>
-            <el-dialog title="添加今日个人卫生状况" :visible.sync="addTodayFormVisible" width="80%" style="text-align: left">
+            <el-button type="primary" plain size="small" @click="addTodayFormVisible = true">新增</el-button>
+            <el-dialog title="添加今日沐浴记录" :visible.sync="addTodayFormVisible" width="80%" style="text-align: left">
               <el-form label-width="200px" v-model="addTodayForm">
                 <el-row>
                   <el-col :span="23">
-                    <el-form-item label="当日卫生状况：">
-                      <el-checkbox-group v-model="todayHygiene" @change="handleTodayHygieneChange">
-                        <el-checkbox v-for="h in hygieneOptions" :label="h" :key="h">{{h}}</el-checkbox>
+                    <el-form-item label="沐浴记录：">
+                      <el-checkbox-group v-model="todayBathing" @change="handleTodayBathingChange">
+                        <el-checkbox v-for="h in bathingOptions" :label="h" :key="h">{{h}}</el-checkbox>
                       </el-checkbox-group>
                     </el-form-item>
                   </el-col>
@@ -39,7 +39,7 @@
           </el-col>
           <el-col :span="1" :offset="1">
             <el-button type="success" plain size="small">打印</el-button>
-          </el-col>          
+          </el-col> 
         </el-row>
       </el-header>
       <el-main>
@@ -47,11 +47,11 @@
           <el-col :span="24">
             <el-card>
               <div slot="header">
-                <el-form :inline="true" label-position="top" :model="personalHygieneForm" label-width="70px">
+                <el-form :inline="true" label-position="top" :model="bathingForm" label-width="70px">
                   <el-row>
                     <el-col :span="4">
                       <el-form-item label="楼层">
-                        <el-select v-model="personalHygieneForm.floor" placeholder="请选择" size="small" @change="storeyChange">
+                        <el-select v-model="bathingForm.storeyNo" placeholder="请选择" size="small" @change="storeyChange">
                           <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -59,7 +59,7 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="房间号">
-                        <el-select v-model="personalHygieneForm.roomNumber" placeholder="请选择" size="small">
+                        <el-select v-model="bathingForm.roomNo" placeholder="请选择" size="small">
                           <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -67,17 +67,17 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="姓名">
-                        <el-input v-model="personalHygieneForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input v-model="bathingForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="时间">
-                        <el-input v-model="personalHygieneForm.date" size="small" placeholder="输入时间"></el-input>
+                        <el-input v-model="bathingForm.date" size="small" placeholder="输入时间"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="4">
                       <el-form-item label="床号">
-                        <el-input v-model="personalHygieneForm.roomNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="bathingForm.roomNo" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -86,10 +86,8 @@
                       <el-tooltip placement="top">
                         <div slot="content">
                           <h3>备注：</h3>
-                          <p>剃胡须: a</p>
-                          <p>剪指（趾）甲：b</p>
-                          <p>口腔：c</p>
-                          <p>时间查询格式：yyyy-mm, 不填写则默认为当前月份</p>
+                          <p>沐浴: a</p>
+                          <p>擦身：b</p>
                         </div>
                         <el-button size="small" type="primary">查询</el-button>
                       </el-tooltip>
@@ -102,8 +100,6 @@
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
-                  </el-table-column>
-                  <el-table-column prop="gender" label="性别" fixed>
                   </el-table-column>
                   <el-table-column prop="dates0" label="1">
                   </el-table-column>
@@ -181,7 +177,7 @@
   export default {
     data() {
       return {
-        personalHygieneForm: {
+        bathingForm: {
           floor: "",
           roomNumber: "",
           name: "",
@@ -235,24 +231,23 @@
           }
         ],
         searchResults: [],
-        middleUrl: "/hygiene",
+        middleUrl: "/bathingRecord",
         permanentResults: [],
+        bathingOptions: ['沐浴: a', '擦身：b'],
+        idSelection: "",
         addTodayFormVisible: false,
         addTodayForm: {
-          hygiene: "",
+          bathing: "",
           year: "",
           month: "",
           day: "",
         },
-        idSelection: "",
-        hygieneOptions: ['剃胡须: a', '剪指（趾）甲：b', '口腔：c'],
-        todayHygiene: [],
+        todayBathing: [],
         date: "",
-
       };
     },
     methods: {
-      getAllHygieneInfo: function() {
+      getAllBathingInfo: function() {
         let self = this
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/findAll',
@@ -264,6 +259,7 @@
           success: function(data) {
             if (data[200] == "操作成功") {
               self.searchResults = data.data
+              self.permanentResults = data.data
             } else {
               self.$message({
                 message: '列表加载失败，请检查网络',
@@ -304,60 +300,57 @@
         }
       },
       onSearch: function() {
-        if (this.personalHygieneForm.name.length == 0 && this.personalHygieneForm.floor.length == 0 && this.personalHygieneForm.roomNumber.length == 0 && this.personalHygieneForm.bedNumber.length == 0 && this.personalHygieneForm.bedNumber.length == 0) {
+        if (this.bathingForm.name.length == 0 && this.bathingForm.floor.length == 0 && this.bathingForm.roomNumber.length == 0 && this.bathingForm.bedNumber.length == 0 && this.bathingForm.bedNumber.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
           });
-          this.searchResults = this.permanentResults
+          this.searchrResults = this.permanentResults
         }
         var tempResults = []
-        for (var i in this.permanentResults) { 
-          if (this.checkValid(this.permanentResults[i])) {            
-            tempResults.push(this.permanentResults[i])            
-          }                            
+        for (var i in this.permanentResults) {
+          if (this.checkValid(this.permanentResults[i])) {
+            tempResults.push(this.permanentResults[i])
+          }
         }
         this.searchResults = tempResults
-        
+  
       },
       checkValid: function(val) {
-        if (this.personalHygieneForm.name.length != 0) {
-          if (val.name.search(this.personalHygieneForm.name) == -1) {
+        if (this.bathingForm.name.length != 0) {
+          if (val.name.search(this.bathingForm.name) == -1) {
             return false
           }
         }
-        if (this.personalHygieneForm.floor.length != 0) {
-          if (val.floor != this.personalHygieneForm.floor) {
+        if (this.bathingForm.floor.length != 0) {
+          if (val.floor != this.bathingForm.floor) {
             return false
           }
         }
-        if (this.personalHygieneForm.roomNumber.length != 0) {
-          if (val.roomNumber != this.personalHygieneForm.roomNumber) {
+        if (this.bathingForm.roomNumber.length != 0) {
+          if (val.roomNumber != this.bathingForm.roomNumber) {
             return false
           }
         }
-        if (this.personalHygieneForm.bedNo.length != 0) {
-          if (val.bedNo!= this.personalHygieneForm.bedNo) {
+        if (this.bathingForm.bedNo.length != 0) {
+          if (val.bedNo != this.bathingForm.bedNo) {
             return false
           }
         }
-        if (this.personalHygieneForm.date.length != 0) {
-          if (val.date!= this.personalHygieneForm.date) {
+        if (this.bathingForm.date.length != 0) {
+          if (val.date != this.bathingForm.date) {
             return false
           }
-        }         
-        return true                         
-      }, 
-      addToday: function() {
-
+        }
+        return true
       },
-      handleTodayHygieneChange: function(val) {
+      handleTodayBathingChange: function(val) {
         let v = val[val.length-1]
-        this.addTodayForm.hygiene += String(v.charAt(v.length-1))
-        console.log(this.addTodayForm.hygiene);
+        this.addTodayForm.bathing += String(v.charAt(v.length-1))
+        console.log(this.addTodayForm.bathing);
         
       },
-      ableToAddToday: function() {
+      ableToAddToday: function() { 
         if (this.idSelection != "") {
           for (var i in this.permanentResults) {
             if (this.permanentResults[i].id == this.idSelection) {
@@ -385,10 +378,10 @@
           this.addTodayForm.day = date[2]
         }
         
-      },    
+      },       
     },
     mounted: function() {
-      this.getAllHygieneInfo()
+      this.getAllBathingInfo()
     }
   };
 </script>

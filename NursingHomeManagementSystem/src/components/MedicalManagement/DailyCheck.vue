@@ -69,6 +69,11 @@
                   </el-col>
                 </el-row>
                 <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="addDailyCheckForm.doctor" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                  
                   <el-col :span="12">
                     <el-form-item label="巡房记录">
                       <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyCheckForm.patrolRecord">
@@ -146,6 +151,11 @@
                   </el-col>
                 </el-row>
                 <el-row>
+                  <el-col :span="8">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="updateDailyCheckForm.doctor" size="small"></el-input>
+                    </el-form-item>
+                  </el-col>                  
                   <el-col :span="12">
                     <el-form-item label="巡房记录">
                       <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyCheckForm.patrolRecord">
@@ -174,7 +184,7 @@
                   <el-row>
                     <el-col :span="7">
                       <el-form-item label="楼层">
-                        <el-select v-model="dailyCheckForm.storeyNo" placeholder="请选择" size="small" @change="storeyChange">
+                        <el-select v-model="dailyCheckForm.floor" placeholder="请选择" size="small" @change="storeyChange">
                           <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -182,7 +192,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="房间号">
-                        <el-select v-model="dailyCheckForm.roomNo" placeholder="请选择" size="small">
+                        <el-select v-model="dailyCheckForm.roomNumber" placeholder="请选择" size="small">
                           <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -195,7 +205,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="dailyCheckForm.roomNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="dailyCheckForm.roomNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
@@ -219,7 +229,7 @@
                   <el-table-column prop="pulse" label="脉搏"></el-table-column>
                   <el-table-column prop="bloodSugarValue" label="血糖值">
                   </el-table-column>
-                  <el-table-column prop="physician" label="主治医师">
+                  <el-table-column prop="doctor" label="主治医师">
                   </el-table-column>
                   <el-table-column prop="latestTime" label="最近时间">
                   </el-table-column>
@@ -246,9 +256,9 @@
     data() {
       return {
         dailyCheckForm: {
-          storeyNo: "",
-          roomNo: "",
-          bedNo: "",
+          floor: "",
+          roomNumber: "",
+          bedNumber: "",
           name: ""
         },
         storeys: [{
@@ -310,7 +320,8 @@
     },
     methods: {
       onSearch: function() {
-        if (this.dailyCheckForm.name.length == 0 ) {
+        console.log(this.dailyCheckForm)
+        if (this.dailyCheckForm.name.length == 0 && this.dailyCheckForm.floor.length == 0&& this.dailyCheckForm.roomNumber.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -318,20 +329,42 @@
           this.results = this.permanentResults
         }
         var tempResults = []
-        for (var i in this.permanentResults) {
-          if (this.permanentResults[i].name.search(this.dailyCheckForm.name) != -1) {
-            tempResults.push(this.permanentResults[i])
-          }
+        for (var i in this.permanentResults) { 
+          if (this.checkValid(this.permanentResults[i])) {            
+            tempResults.push(this.permanentResults[i])            
+          }                            
         }
         this.searchResults = tempResults
-      },      
+        
+      },
+      checkValid: function(val) {
+        if (this.dailyCheckForm.name.length != 0) {
+          if (val.name.search(this.dailyCheckForm.name) == -1) {
+            return false
+          }
+        }
+        if (this.dailyCheckForm.floor.length != 0) {
+          if (val.floor != this.dailyCheckForm.floor) {
+            return false
+          }
+        }
+        if (this.dailyCheckForm.roomNumber.length != 0) {
+          if (val.roomNumber != this.dailyCheckForm.roomNumber) {
+            return false
+          }
+        }
+        if (this.dailyCheckForm.bedNo.length != 0) {
+          if (val.bedNo!= this.dailyCheckForm.bedNo) {
+            return false
+          }
+        } 
+        return true                         
+      },     
       handleSelection: function(val) {
         this.idSelection = val.id
       },      
       handleAddSubmit: function() {
         let self = this  
-        console.log(self.addDailyCheckForm.name);
-         
         if (self.addDailyCheckForm.name.length == 0) {
           self.$message({
             message: '必填字段为空',
@@ -339,6 +372,8 @@
           });
           return
         }
+        var myDate = new Date()
+        self.addDailyCheckForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()        
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',

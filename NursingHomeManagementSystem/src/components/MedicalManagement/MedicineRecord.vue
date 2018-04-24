@@ -262,7 +262,7 @@ export default {
   },
     methods: {
       onSearch: function() {
-        if (this.medicineRecordForm.date.length == 0 && this.medicineRecordForm.name.length == 0) {
+        if (this.tourRecordForm.date.length == 0 && this.tourRecordForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -279,16 +279,26 @@ export default {
   
       },
       checkValid: function(val) {
-        if (this.medicineRecordForm.name.length != 0) {
-          if (val.medicineName.search(this.medicineRecordForm.name) == -1) {
+        if (this.tourRecordForm.name.length != 0) {
+          if (val.name.search(this.tourRecordForm.name) == -1) {
             return false
           }
         }
-        if (this.medicineRecordForm.date.length != 0) {
-          if (val.date != this.medicineRecordForm.date) {
+        if (this.tourRecordForm.floor.length != 0) {
+          if (val.floor != this.tourRecordForm.floor) {
             return false
           }
-        }
+        } 
+        if (this.tourRecordForm.roomNumber.length != 0) {
+          if (val.roomNumber != this.tourRecordForm.roomNumber) {
+            return false
+          }
+        }  
+        if (this.tourRecordForm.bedNumber.length != 0) {
+          if (val.bedNumber != this.tourRecordForm.bedNumber) {
+            return false
+          }
+        }                          
         return true
       },
       handleSelection: function(val) {

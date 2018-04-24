@@ -178,7 +178,7 @@
                   <el-row>
                     <el-col :span="7">
                       <el-form-item label="楼层">
-                        <el-select v-model="medicalHistoryForm.storeyNo" placeholder="请选择" size="small">
+                        <el-select v-model="medicalHistoryForm.storeyNumber" placeholder="请选择" size="small" @change="storeyChange">
                           <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -186,7 +186,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="房间号">
-                        <el-select v-model="medicalHistoryForm.roomNo" placeholder="请选择" size="small">
+                        <el-select v-model="medicalHistoryForm.roomNumber" placeholder="请选择" size="small">
                           <el-option v-for="item in roomNos" :key="item.value" :label="item.label" :value="item.label">
                           </el-option>
                         </el-select>
@@ -199,7 +199,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="medicalHistoryForm.bedNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="medicalHistoryForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
@@ -250,9 +250,9 @@
     data() {
       return {
         medicalHistoryForm: {
-          storeyNo: "",
-          roomNo: "",
-          bedNo: "",
+          floor: "",
+          roomNumber: "",
+          bedNumber: "",
           name: ""
         },
         storeys: [{
@@ -314,7 +314,7 @@
     },
     methods: {
       onSearch: function() {
-        if (this.medicalHistoryForm.name.length == 0 ) {
+        if (this.medicalHistoryForm.date.length == 0 && this.medicalHistoryForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -323,12 +323,36 @@
         }
         var tempResults = []
         for (var i in this.permanentResults) {
-          if (this.permanentResults[i].name.search(this.medicalHistoryForm.name) != -1) {
+          if (this.checkValid(this.permanentResults[i])) {
             tempResults.push(this.permanentResults[i])
           }
         }
         this.searchResults = tempResults
-      },      
+  
+      },
+      checkValid: function(val) {
+        if (this.medicalHistoryForm.name.length != 0) {
+          if (val.name.search(this.medicalHistoryForm.name) == -1) {
+            return false
+          }
+        }
+        if (this.medicalHistoryForm.floor.length != 0) {
+          if (val.floor != this.medicalHistoryForm.floor) {
+            return false
+          }
+        } 
+        if (this.medicalHistoryForm.roomNumber.length != 0) {
+          if (val.roomNumber != this.medicalHistoryForm.roomNumber) {
+            return false
+          }
+        }  
+        if (this.medicalHistoryForm.bedNumber.length != 0) {
+          if (val.bedNumber != this.medicalHistoryForm.bedNumber) {
+            return false
+          }
+        }                          
+        return true
+      },     
       handleSelection: function(val) {
         this.idSelection = val.id
       },      

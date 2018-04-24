@@ -35,7 +35,7 @@
                   </el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="23">
+                  <el-col :span="16">
                     <el-form-item label="护理级别">
                       <el-radio-group v-model="addTourRecordForm.nursingGrade">
                         <el-radio label="一级"></el-radio>
@@ -48,6 +48,12 @@
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
+                  <el-col :span="7">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="addTourRecordForm.doctor" size="small" placeholder="输入主治医师">
+                      </el-input>
+                    </el-form-item>
+                  </el-col>                  
                 </el-row>
                 <el-row>
                   <el-col :span="15">
@@ -93,7 +99,7 @@
                   </el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="23">
+                  <el-col :span="16">
                     <el-form-item label="护理级别">
                       <el-radio-group v-model="updateTourRecordForm.nursingGrade">
                         <el-radio label="一级"></el-radio>
@@ -106,6 +112,12 @@
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
+                  <el-col :span="7">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="updateTourRecordForm.doctor" size="small" placeholder="输入主治医师">
+                      </el-input>
+                    </el-form-item>
+                  </el-col>                   
                 </el-row>
                 <el-row>
                   <el-col :span="15">
@@ -181,7 +193,7 @@
                   <el-table-column prop="taboo" label="禁忌"></el-table-column>
                   <el-table-column prop="nursingGrade" label="护理等级">
                   </el-table-column>
-                  <el-table-column prop="physician" label="主治医师">
+                  <el-table-column prop="doctor" label="主治医师">
                   </el-table-column>
                   <el-table-column prop="latestTime" label="最近时间">
                   </el-table-column>
@@ -330,6 +342,8 @@
           });
           return
         }
+        var myDate = new Date()
+        self.addTourRecordForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',

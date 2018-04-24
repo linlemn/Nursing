@@ -43,12 +43,20 @@
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
+                  <el-col :span="7">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="addDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
+                      </el-input>
+                    </el-form-item>
+                  </el-col>                  
+                </el-row>
+                <el-row>
                   <el-col :span="15">
                     <el-form-item label="巡查内容">
                       <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyInspectionForm.patrolContent">
                       </el-input>
                     </el-form-item>
-                  </el-col>
+                  </el-col>                  
                 </el-row>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -94,12 +102,20 @@
                       </el-radio-group>
                     </el-form-item>
                   </el-col>
+                  <el-col :span="7">
+                    <el-form-item label="主治医师">
+                      <el-input v-model="updateDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
+                      </el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
                   <el-col :span="15">
                     <el-form-item label="巡查内容">
                       <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyInspectionForm.patrolContent">
                       </el-input>
                     </el-form-item>
-                  </el-col>
+                  </el-col>                  
                 </el-row>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -164,7 +180,7 @@
                   </el-table-column>
                   <el-table-column prop="gender" label="性别">
                   </el-table-column>
-                  <el-table-column prop="physician" label="主治医师">
+                  <el-table-column prop="doctor" label="主治医师">
                   </el-table-column>
                   <el-table-column prop="latestTime" label="最近时间">
                   </el-table-column>
@@ -307,6 +323,8 @@
           });
           return
         }
+        var myDate = new Date()
+        self.addDailyInspectionForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()        
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
