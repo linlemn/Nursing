@@ -67,7 +67,7 @@
                       </el-checkbox-group>
                     </el-form-item>
                   </el-col>
-                </el-row>
+                </el-row>               
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button @click="modifyTodayFormVisible = false">取 消</el-button>
@@ -110,7 +110,7 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="时间">
-                        <el-input v-model="personalHygieneForm.date" size="small" placeholder="输入时间"></el-input>
+                        <el-input v-model="personalHygieneForm.time" size="small" placeholder="输入时间"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="4">
@@ -129,7 +129,7 @@
                           <p>口腔：c</p>
                           <p>时间查询格式：yyyy-mm, 不填写则默认为当前月份</p>
                         </div>
-                        <el-button size="small" type="primary">查询</el-button>
+                        <el-button size="small" type="primary" @click="onSearch">查询</el-button>
                       </el-tooltip>
                     </el-col>
                   </el-row>
@@ -222,8 +222,8 @@
         personalHygieneForm: {
           floor: "",
           roomNumber: "",
-          name: "",
-          date: "",
+          elderlyName: "",
+          time: "",
           bedNumber: ""
         },
         storeys: [{
@@ -280,7 +280,7 @@
           completedDate: "",
           year: "",
           month: "",
-          day: "",
+          time: "",
           floor: "",
           roomNumber: "",
           elderlyName: "",
@@ -314,12 +314,10 @@
           }),
           success: function(data) {
             if (data[200] == "操作成功") {
-              console.log(data.data);
               self.searchResults = data.data;
-              self.permanentResults = data.data
               for (var i in self.searchResults) {
                 let completedDate = self.searchResults[i].completedDate
-                if (completedDate != null) {
+                if (completedDate != null) {                                   
                   self.searchResults[i].dates = completedDate.split(",")
                   self.searchResults[i].dates0 = self.searchResults[i].dates[0]
                   self.searchResults[i].dates1 = self.searchResults[i].dates[1]
@@ -354,6 +352,7 @@
                   self.searchResults[i].dates30 = self.searchResults[i].dates[30]
                   self.searchResults[i].dates31 = self.searchResults[i].dates[31]
                 }
+                self.permanentResults = self.searchResults
               }
             } else {
               self.$message({
@@ -396,7 +395,7 @@
       },
       onSearch: function() {
         if (
-          this.personalHygieneForm.name.length == 0 &&
+          this.personalHygieneForm.elderlyName.length == 0 &&
           this.personalHygieneForm.floor.length == 0 &&
           this.personalHygieneForm.roomNumber.length == 0 &&
           this.personalHygieneForm.bedNumber.length == 0 &&
@@ -417,8 +416,8 @@
         this.searchResults = tempResults;
       },
       checkValid: function(val) {
-        if (this.personalHygieneForm.name.length != 0) {
-          if (val.name.search(this.personalHygieneForm.name) == -1) {
+        if (this.personalHygieneForm.elderlyName.length != 0) {
+          if (val.elderlyName.search(this.personalHygieneForm.elderlyName) == -1) {
             return false;
           }
         }
@@ -439,10 +438,10 @@
         }
         if (this.personalHygieneForm.time.length != 0) {
           let date = this.personalHygieneForm.time.split('-')
-          if (date[0] != this.personalHygieneForm.year) {
+          if (date[0] != val.year) {
             return false;
           }
-          if (date[1] != this.personalHygieneForm.month) {
+          if (date[1] != val.month) {
             return false;
           }
         }
@@ -455,13 +454,20 @@
         }
         let v = val[val.length - 1];
         this.addTodayForm.hygiene += String(v.charAt(v.length - 1));
-        console.log(this.addTodayForm.hygiene);
       },
       ableToAddToday: function() {
         if (this.idSelection != "") {
           for (var i in this.permanentResults) {
-            if (this.permanentResults[i].id == this.idSelection) {
-              this.modifyTodayFormVisible = true;
+            if (this.permanentResults[i] == this.idSelection) {
+              var myDate = new Date()
+              if (this.idSelection.dates.length < myDate.getDate()) {
+                this.modifyTodayFormVisible = true;
+              } else {
+                this.$message({
+                  message: '今日信息已添加！',
+                  type: 'error',
+                });                
+              }
             }
           }
         } else {
@@ -476,7 +482,11 @@
         if (this.date == 0) {
           var myDate = new Date();
           this.addTodayForm.year = myDate.getFullYear();
-          this.addTodayForm.month = myDate.getMonth();
+          let month = myDate.getMonth()+1
+          if (String(month).length == 1) {
+            var a = "0"
+            this.addTodayForm.month = a + (month)
+          } 
           this.addTodayForm.time = myDate.getDate();
         } else {
           let date = this.date.split("-");
@@ -484,6 +494,7 @@
           this.addTodayForm.month = date[1];
           this.addTodayForm.time = date[2];
         }
+        
   
         if (this.addTodayForm.elderlyName.length == 0) {
           this.$message({
@@ -492,10 +503,15 @@
           });
           return;
         } else {
-          for (var i = 0; i < 31; i++) {
+          // console.log(this.addTodayForm.time)
+          for (var i = 0; i < this.addTodayForm.time-1; i++) {
             self.addTodayForm.completedDate += " ,"
           }
-          self.addTodayForm.completedDate += this.addTodayForm.hygiene
+          if (this.addTodayForm.hygiene.length > 0) {
+            self.addTodayForm.completedDate += this.addTodayForm.hygiene
+          } else {
+             self.addTodayForm.completedDate += " "
+          }
   
           $.ajax({
             url: self.urlHeader + '/hygiene/create',
@@ -508,8 +524,10 @@
                   message: '创建成功',
                   type: 'success',
                 });
-                self.todayHygiene = ""
+                self.todayHygiene = []
+                self.date = ""
                 self.addTodayFormVisible = false
+                self.getAllHygieneInfo()
               } else {
                 self.$message({
                   message: '创建失败，请检查网络',
@@ -533,29 +551,43 @@
       },
       handleModifySubmit: function() {
         let self = this;
+        if (this.date == 0) {
+          var myDate = new Date();
+          this.addTodayForm.year = myDate.getFullYear();
+          this.addTodayForm.month = myDate.getMonth();
+          this.addTodayForm.time = myDate.getDate();
+        } else {
+          let date = this.date.split("-");
+          this.addTodayForm.year = date[0];
+          this.addTodayForm.month = date[1];
+          this.addTodayForm.time = date[2];
+        }        
         let modifyTodayForm = this.idSelection
-        modifyTodayForm.completedDate += ("," + this.todayHygiene)
+        modifyTodayForm.completedDate += ("," + this.addTodayForm.hygiene)
         $.ajax({
             url: self.urlHeader + '/hygiene/change',
             type: 'post',
             contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify(self.modifyTodayForm),
+            data: JSON.stringify(modifyTodayForm),
             success: function(data) {
               if (data[200] == "操作成功") {
                 self.$message({
-                  message: '创建成功',
+                  message: '修改成功',
                   type: 'success',
                 });
+                self.date = ""
+                self.modifyTodayFormVisible = false
+                self.getAllHygieneInfo()
               } else {
                 self.$message({
-                  message: '创建失败，请检查网络',
+                  message: '修改失败，请检查网络',
                   type: 'error',
                 });
               }
             },
             error: function() {
               self.$message({
-                message: '列表加载失败，请检查网络',
+                message: '请检查网络！',
                 type: 'error',
               });
             }
