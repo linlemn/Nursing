@@ -166,7 +166,7 @@
                         left: 'center',
                     },
                     xAxis: {
-                        data: ['个人清洁', '擦洗沐浴', '排泄护理', '进食', '环境整洁', '翻身', '医务', '巡护', '其他']
+                        data: ['个人清洁', '擦洗沐浴', '排泄护理', '进食', '环境整洁', '翻身']
                     },
                     yAxis: {
                         axisLabel: {
@@ -176,7 +176,26 @@
                     series: [{
                         name: '次数',
                         type: 'bar',
-                        data: [5, 20, 36, 10, 10, 20, 15, 21, 13],
+                        // data: [5, 20, 36, 10, 10, 20, 15, 21, 13],
+                        data: [{
+                            name: '个人清洁',
+                            value: 0
+                        }, {
+                            name: '擦洗沐浴',
+                            value: 0
+                        }, {
+                            name: '排泄护理',
+                            value: 0
+                        }, {
+                            name: '进食',
+                            value: 0
+                        }, {
+                            name: '环境整洁',
+                            value: 0
+                        }, {
+                            name: '翻身',
+                            value: 0
+                        }],
                         itemStyle: {
                             normal: {　　　　　　　　　　　　　　 //好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
                                 color: function(params) {
@@ -252,7 +271,44 @@
                     series: [{
                         name: '次数',
                         type: 'line',
-                        data: [5, 20, 36, 10, 10, 20, 15, 21, 13, 15, 34, 44],
+                        // data: [5, 20, 36, 10, 10, 20, 15, 21, 13, 15, 34, 44],
+                        data: [{
+                            name: '1月',
+                            value: 0
+                        }, {
+                            name: '2月',
+                            value: 0
+                        }, {
+                            name: '3月',
+                            value: 0
+                        }, {
+                            name: '4月',
+                            value: 0
+                        }, {
+                            name: '5月',
+                            value: 0
+                        }, {
+                            name: '6月',
+                            value: 0
+                        }, {
+                            name: '7月',
+                            value: 0
+                        }, {
+                            name: '8月',
+                            value: 0
+                        }, {
+                            name: '9月',
+                            value: 0
+                        }, {
+                            name: '10月',
+                            value: 0
+                        }, {
+                            name: '11月',
+                            value: 0
+                        }, {
+                            name: '12月',
+                            value: 0
+                        }],
                         symbolSize: 15,
                     }],
                     tooltip: {
@@ -292,11 +348,78 @@
                     }],
                 },
                 monthlyCarerLoading: false,
+                test: '',
             }
         },
-        methods: {},
+        methods: {
+            sendFormalRequest(param, dataParam) {
+                let self = this
+                var url = 'http://101.132.142.238:12222/statistics/' + param
+                //发送修改请求
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify({
+                        id: 1
+                    }),
+                    success: function(data) {
+                        //解析返回的data
+                        self[dataParam] = data.data.result
+                        console.log(data)
+                    },
+                    error: function(err) {
+                        self.$alert('请求数据失败，请检查网络', '失败', {
+                            confirmButtonText: '确定'
+                        });
+                        console.log(err)
+                    },
+                })
+            },
+            sendSpecialRequest(param, dataParam) {
+                let self = this
+                var url = 'http://101.132.142.238:12222/statistics/' + param
+                //发送修改请求
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify({
+                        id: 1
+                    }),
+                    success: function(data) {
+                        //解析返回的data
+                        var dict = data.data
+                        var count = 0
+                        for (var key in dict) {
+                            self[dataParam].series[0].data[count].value = dict[key]
+                            self[dataParam].series[0].data[count].name = key
+                            count++
+                        }
+                        // console.log(self[dataParam].series[0].data)
+                    },
+                    error: function(err) {
+                        self.$alert('请求数据失败，请检查网络', '失败', {
+                            confirmButtonText: '确定'
+                        });
+                        console.log(err)
+                    },
+                })
+            }
+        },
         mounted: function() {
             //请求总的数据
+            this.sendFormalRequest('bedSum', 'totalBed')
+            this.sendFormalRequest('elderlySum', 'totalElder')
+            this.sendFormalRequest('IntensiveCareSum', 'elderFocusing')
+            this.sendFormalRequest('dayOffSum', 'elderLeaving')
+            // 请求图表数据
+            this.sendSpecialRequest('nurseType', 'careTypeOptions')
+            this.sendSpecialRequest('foodType', 'dietTypeOptions')
+            this.sendSpecialRequest('nurseCondition', 'monthlyCareOptions')
+            this.sendSpecialRequest('elderlyNurseNum', 'monthlyElderOptions')
+            this.sendSpecialRequest('monthNurseSum', 'test')
+            this.sendSpecialRequest('nurserNurseNum', 'monthlyCarerOptions')
         }
     }
 </script>

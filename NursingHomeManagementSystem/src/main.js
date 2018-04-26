@@ -27,4 +27,4 @@ Date.prototype.format = function(formatStr) {
 
 
 //全局变量header
-Vue.prototype.urlHeader = 'http://10.60.43.111:12222'
+Vue.prototype.urlHeader = 'http://101.132.142.238:12222'

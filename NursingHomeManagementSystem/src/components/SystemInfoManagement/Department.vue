@@ -309,7 +309,7 @@
         //获取所有员工信息
         $.ajax({
           // url: self.urlHeader + '/employee/findAll',
-          url: 'http://10.60.43.111:12222/department/findAll',
+          url: 'http://101.132.142.238:12222/department/findAll',
           type: 'post',
           contentType: 'application/json;charset=UTF-8',
           data: JSON.stringify({

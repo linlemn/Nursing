@@ -56,11 +56,33 @@
         //删除之前的cookie
         var time = new Date()
         time.setTime(time.getTime() - 10000)
-        document.cookie="token=balabala; role=admin;expires="+time.toGMTString(); 
-        //登录成功之后存储token和role到cookie中
-        document.cookie = 'token=balabala;role=admin'
-        //动态生成路由
-        this.formRoute()
+        document.cookie = "token=balabala; role=admin;expires=" + time.toGMTString();
+        let self = this
+        var url = this.urlHeader + '/statistics/login'
+        //发送修改请求
+        $.ajax({
+          url: url,
+          type: 'post',
+          crossDomain: true,
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            userName: self.loginForm.username,
+            password: self.loginForm.password
+          }),
+          success: function(data) {
+            //登录成功之后存储token和role到cookie中
+            document.cookie = 'role=' + data.data.role
+            //动态生成路由
+            self.formRoute()
+            console.log(data)
+          },
+          error: function(err) {
+            self.$alert('请求数据失败，请检查网络', '失败', {
+              confirmButtonText: '确定'
+            });
+            console.log(err)
+          },
+        })
       },
       formRoute() {
         if (document.cookie) { // 判断是否有token，有token就是登陆过了

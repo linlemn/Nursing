@@ -65,7 +65,13 @@ const constantRouterMap = [
 //异步挂载的路由
 //动态需要根据权限加载的路由表 
 // export const asyncRouterMap = [{
-const asyncRouterMap = [{
+const asyncRouterMap = [
+    // // 重定向
+    // {
+    //     path: '/UserAssesment',
+    //     redirect: '/UserAssesment/Overview'
+    // }, 
+    {
         path: '/UserAssesment',
         component: userAssesment,
         children: [
@@ -79,53 +85,53 @@ const asyncRouterMap = [{
             {
                 path: adminRoute + "/Employee",
                 components: { main: employee },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Donation",
                 components: { main: donation },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Error",
                 components: { main: error },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Rounds",
                 components: { main: rounds },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Duty",
                 components: { main: duty },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Suggestion",
                 components: { main: suggestion },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             {
                 path: adminRoute + "/Complaints",
                 components: { main: complaints },
-                meta: { role: ['admin', 'leader'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人'] }, //页面需要的权限
             },
             //业务管理
             {
                 path: businessRoute + "/Registration",
                 components: { main: registration },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: businessRoute + "/Application",
                 components: { main: application },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: businessRoute + "/Approval",
                 components: { main: approval },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             //护理管理
             {
@@ -141,63 +147,63 @@ const asyncRouterMap = [{
             {
                 path: nursingRoute + "/TurnOver",
                 components: { main: turnOver },
-                meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
             },
             //医务管理
             {
                 path: medicalRoute + "/ElderlyInfo",
                 components: { main: elderlyInfo },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/MedicalRecord",
                 components: { main: medicalRecord },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/MedicalHistory",
                 components: { main: medicalHistory },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/DailyCheck",
                 components: { main: dailyCheck },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/DailyInspection",
                 components: { main: dailyInspection },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/TourRecord",
                 components: { main: tourRecord },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: medicalRoute + "/MedicineRecord",
                 components: { main: medicineRecord },
-                // meta: { role: ['admin', 'leader', 'staff'] }, //页面需要的权限
+                meta: { role: ['系统管理员', '负责人', '职员'] }, //页面需要的权限
             },
             {
                 path: systemInfoRoute + "/Role",
                 components: { main: role },
-                meta: { role: ['admin'] }, //页面需要的权限
+                meta: { role: ['系统管理员'] }, //页面需要的权限
             },
             {
                 path: systemInfoRoute + "/Department",
                 components: { main: department },
-                meta: { role: ['admin'] }, //页面需要的权限
+                meta: { role: ['系统管理员'] }, //页面需要的权限
             },
             {
                 path: systemInfoRoute + "/BedInfoManagment",
                 components: { main: bedInfoManagment },
-                meta: { role: ['admin'] }, //页面需要的权限
+                meta: { role: ['系统管理员'] }, //页面需要的权限
             },
             {
                 path: systemInfoRoute + "/CarerOfBedManagement",
                 components: { main: carerOfBedManagement },
-                meta: { role: ['admin'] }, //页面需要的权限
+                meta: { role: ['系统管理员'] }, //页面需要的权限
             },
 
         ]
