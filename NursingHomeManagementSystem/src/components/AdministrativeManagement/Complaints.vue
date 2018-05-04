@@ -408,6 +408,7 @@
     },
     mounted: function() {
       this.getAllComplaintsInfo(true)
+      // console.log('good')
     }
   }
 </script>
