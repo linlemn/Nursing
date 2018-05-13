@@ -176,7 +176,7 @@
         curData: [],
         currentClick: -1,
         userTypeOption: ['系统用户', '普通用户'],
-        departmentOption: ['护工一楼', '护工二楼', '护工三楼', '行政'],
+        departmentOption: [],
         currentPage: 1,
         pagesize: 20,
       }
@@ -522,10 +522,44 @@
       },
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage
+      },
+      getDep() {
+        let self = this
+        $.ajax({
+          // url: self.urlHeader + '/employee/findAll',
+          url: 'http://101.132.142.238:12222/department/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            //解析返回的data
+            var depData = data.data
+            for (let i = 0; i < depData.length; i++) {
+              self.departmentOption.push(depData[i].departmentName)
+            }
+          },
+          error: function() {
+            self.$confirm('部门加载失败，请检查网络', '失败', {
+              confirmButtonText: '重新加载',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              self.getDep()
+            }).catch(() => {
+              self.$message({
+                type: 'info',
+                message: '取消加载'
+              });
+            });
+          }
+        })
       }
     },
     mounted: function() {
       this.getAllNurseBedInfo(true)
+      this.getDep()
     }
   }
 </script>
