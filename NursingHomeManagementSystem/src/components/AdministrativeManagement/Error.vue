@@ -60,7 +60,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55">
           </el-table-column>
           <el-table-column type="index" width="55" label="序号">
@@ -124,6 +124,8 @@
             </div>
           </el-table-column>
         </el-table>
+        <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -159,6 +161,8 @@
         selection: [],
         curData: [],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
       }
     },
     methods: {
@@ -385,7 +389,7 @@
           }
         }
         if (!this.queryState && !this.queryDate) {
-          this.$message('查询条件不能为空');
+           this.curData = this.errorData
           return
         }
         function intersection(obj1, obj2, index1, index2) {
@@ -437,6 +441,9 @@
         var result = intersection(stateResult, dateResult, 0, 1)
         this.curData = result
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      }
     },
     mounted: function() {
       this.getAllErrorInfo(true)

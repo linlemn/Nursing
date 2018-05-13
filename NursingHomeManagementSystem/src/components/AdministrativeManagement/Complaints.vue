@@ -78,7 +78,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55">
           </el-table-column>
           <el-table-column width="55" type="index" label="序号">
@@ -163,6 +163,8 @@
             </div>
           </el-table-column>
         </el-table>
+         <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -191,6 +193,8 @@
         selection: [],
         curData: [],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
       }
     },
     methods: {
@@ -400,7 +404,7 @@
             }
           }
         } else {
-          this.$message('查询条件不能为空');
+          this.curData = this.complaintsData
           return
         }
         this.curData = nameResult
@@ -408,6 +412,7 @@
     },
     mounted: function() {
       this.getAllComplaintsInfo(true)
+      // console.log('good')
     }
   }
 </script>

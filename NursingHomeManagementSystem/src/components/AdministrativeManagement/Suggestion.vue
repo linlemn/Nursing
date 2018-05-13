@@ -29,7 +29,7 @@
                 <el-form-item label="意见内容" prop="suggestionContent" :rules="[{ required: true, message: '意见内容不能为空', trigger: 'change'}]">
                   <el-input type="textarea" v-model="newSuggestionInfo.suggestionContent" placeholder="请输入意见内容"></el-input>
                 </el-form-item>
-                <el-form-item label="意见处理反馈" prop="processFeedback" :rules="[{ required: true, message: '意见处理反馈不能为空', trigger: 'change'}]">
+                <el-form-item label="意见处理反馈" prop="processFeedback">
                   <el-input type="textarea" v-model="newSuggestionInfo.processFeedback" placeholder="请输入意见处理反馈"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
@@ -56,7 +56,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55">
           </el-table-column>
           <el-table-column width="55" type="index" label="序号">
@@ -113,6 +113,8 @@
             </div>
           </el-table-column>
         </el-table>
+        <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -138,11 +140,16 @@
         selection: [],
         curData: [],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
       }
     },
     methods: {
       handleNewSuggestion(formName) {
         let self = this
+        if (self.newSuggestionInfo.processFeedback.length == 0) {
+          self.newSuggestionInfo.processFeedback = '无'
+        }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             //发送请求
@@ -314,7 +321,7 @@
             id: '1'
           }),
           success: function(data) {
-            if(flag) {
+            if (flag) {
               self.curData = data.data
             }
             //解析返回的data
@@ -347,11 +354,14 @@
             }
           }
         } else {
-          this.$message('查询条件不能为空');
+          this.curData = this.suggestionData
           return
         }
         this.curData = nameResult
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      }
     },
     mounted: function() {
       this.getAllSuggestionInfo(true)

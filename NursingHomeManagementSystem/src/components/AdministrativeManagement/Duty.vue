@@ -13,12 +13,18 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="行政部门" prop="executiveDepatment" :rules="[{ required: true, message: '行政部门不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDutyInfo.executiveDepatment" placeholder="请输入行政部门"></el-input>
+                      <el-select class="widen" v-model="newDutyInfo.executiveDepatment" placeholder="请输入行政部门">
+                        <el-option v-for="item in departments" :key="item" :label="item" :value="item">
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="医务部门" prop="medicalDepatment" :rules="[{ required: true, message: '医疗部门不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDutyInfo.medicalDepatment" placeholder="请输入医疗部门"></el-input>
+                      <el-select class="widen" v-model="newDutyInfo.medicalDepatment" placeholder="请输入医疗部门">
+                        <el-option v-for="item in departments" :key="item" :label="item" :value="item">
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -30,7 +36,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="天气" prop="weather">
-                      <el-select class="widen" v-model="newDutyInfo.weather" placeholder="请选择天气" :rules="[{ required: true, message: '天气不能为空', trigger: 'change'}]">
+                      <el-select class="widen" v-model="newDutyInfo.weather" placeholder="请选择天气">
                         <el-option v-for="item in weatherOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -44,12 +50,12 @@
                 <el-form-item>日班值班情况记录</el-form-item>
                 <el-row :gutter="10">
                   <el-col :span="12">
-                    <el-form-item label="值班人" prop="dayShiftPerson" >
+                    <el-form-item label="值班人" prop="dayShiftPerson">
                       <el-input v-model="newDutyInfo.dayShiftPerson" placeholder="请输入日班值班人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="值班情况" prop="dayShiftSituation" >
+                    <el-form-item label="值班情况" prop="dayShiftSituation">
                       <el-input v-model="newDutyInfo.dayShiftSituation" placeholder="请输入日班值班情况"></el-input>
                     </el-form-item>
                   </el-col>
@@ -60,7 +66,7 @@
                 <el-form-item>夜班值班情况记录</el-form-item>
                 <el-row :gutter="10">
                   <el-col :span="12">
-                    <el-form-item label="值班人" prop="nightShiftPerson" >
+                    <el-form-item label="值班人" prop="nightShiftPerson">
                       <el-input v-model="newDutyInfo.nightShiftPerson" placeholder="请输入夜班值班人"></el-input>
                     </el-form-item>
                   </el-col>
@@ -97,7 +103,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="expand">
             <div slot-scope="props">
               <el-form label-position="left">
@@ -162,12 +168,18 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="行政部门" prop="executiveDepatment">
-                        <el-input v-model="modifiedInfo.executiveDepatment" :placeholder="modifiedInfo.executiveDepatment"></el-input>
+                        <el-select class="widen" v-model="modifiedInfo.executiveDepatment" :placeholder="modifiedInfo.executiveDepatment">
+                          <el-option v-for="item in departments" :key="item" :label="item" :value="item">
+                          </el-option>
+                        </el-select>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="医疗部门" prop="medicalDepatment">
-                        <el-input v-model="modifiedInfo.medicalDepatment" :placeholder="modifiedInfo.medicalDepatment"></el-input>
+                        <el-select class="widen" v-model="modifiedInfo.medicalDepatment" :placeholder="modifiedInfo.medicalDepatment">
+                          <el-option v-for="item in departments" :key="item" :label="item" :value="item">
+                          </el-option>
+                        </el-select>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -235,6 +247,8 @@
             </div>
           </el-table-column>
         </el-table>
+        <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -267,6 +281,9 @@
         curData: [],
         selection: [],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
+        departments: [],
       }
     },
     methods: {
@@ -310,7 +327,7 @@
       modifiedButtClick(index) {
         this.modifiedFormVisible = true
         this.modifiedInfo = this.dutyData[index]
-this.currentClick = index
+        this.currentClick = index
       },
       handleInfoModified() {
         let self = this
@@ -477,15 +494,51 @@ this.currentClick = index
             }
           }
         } else {
-          this.$message('查询条件不能为空');
+          this.curData = this.dutyData
           return
         }
-        
         this.curData = nameResult
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },
+      getDep() {
+        let self = this
+        $.ajax({
+          // url: self.urlHeader + '/employee/findAll',
+          url: 'http://101.132.142.238:12222/department/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            //解析返回的data
+            var depData = data.data
+            for (let i = 0; i < depData.length; i++) {
+              self.departments.push(depData[i].departmentName)
+            }
+          },
+          error: function() {
+            self.$confirm('部门加载失败，请检查网络', '失败', {
+              confirmButtonText: '重新加载',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              self.getDep()
+            }).catch(() => {
+              self.$message({
+                type: 'info',
+                message: '取消加载'
+              });
+            });
+          }
+        })
+      }
     },
     mounted: function() {
       this.getAllDutyInfo(true)
+      this.getDep()
     }
   }
 </script>

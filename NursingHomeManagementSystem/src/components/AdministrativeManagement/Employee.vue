@@ -24,8 +24,8 @@
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
-                    <el-form-item label="密码" type="password" prop="password" :rules="passWordRule">
-                      <el-input type="password" v-model="newEmployeeInfo.password" placeholder="请输入密码"></el-input>
+                    <el-form-item label="密码" type="password" prop="passWord" :rules="passWordRule">
+                      <el-input type="password" v-model="newEmployeeInfo.passWord" placeholder="请输入密码"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -37,7 +37,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="角色" prop="role" :rules="[{ required: true, message: '员工角色不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色">
+                      <el-select class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -45,7 +45,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="部门" prop="department" :rules="[{ required: true, message: '员工部门不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色">
+                      <el-select class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -53,7 +53,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="用户类型" prop="userType" :rules="[{ required: true, message: '用户类型不能为空', trigger: 'change'}]">
-                  <el-select class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型">
+                  <el-select class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型" clearable>
                     <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                     </el-option>
                   </el-select>
@@ -76,19 +76,19 @@
         </el-row class="header-row">
         <el-row type="flex" justify="space-around">
           <el-col :span="6">
-            <el-input v-model="usrName" placeholder="请输入用户名"></el-input>
+            <el-input v-model="usrName" placeholder="请输入用户名" clearable></el-input>
           </el-col>
           <el-col :span="6">
-            <el-input v-model="name" placeholder="请输入姓名"></el-input>
+            <el-input v-model="name" placeholder="请输入姓名" clearable></el-input>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="role" placeholder="请选择角色">
+            <el-select class="widen" v-model="role" placeholder="请选择角色" clearable>
               <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="department" placeholder="请选择部门">
+            <el-select class="widen" v-model="department" placeholder="请选择部门" clearable>
               <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -99,7 +99,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table v-loading='loading' :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table v-loading='loading' :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55">
           </el-table-column>
           <el-table-column type="index" width="55" label="序号">
@@ -166,8 +166,8 @@
               <el-button type="text" size="small" @click="handleResetClick(scope.$index)">重置密码</el-button>
               <el-dialog title="重置密码" :visible.sync="resetFormVisible">
                 <el-form :model="resetPasswordInfo" ref="resetPasswordInfo">
-                  <el-form-item label="新的密码" type="password" prop="password" :rules="resetPasswordRule">
-                    <el-input type="password" v-model="resetPasswordInfo.password" placeholder="请输入密码"></el-input>
+                  <el-form-item label="新的密码" type="password" prop="passWord" :rules="resetPasswordRule">
+                    <el-input type="password" v-model="resetPasswordInfo.passWord" placeholder="请输入密码"></el-input>
                   </el-form-item>
                   <el-form-item label="确认密码" type="password" prop="checkPass" :rules="resetCheckPassRule">
                     <el-input type="password" v-model="resetPasswordInfo.checkPass" placeholder="确认密码"></el-input>
@@ -182,6 +182,8 @@
             </div>
           </el-table-column>
         </el-table>
+        <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -204,7 +206,7 @@
       var validateCheckPass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.newEmployeeInfo.password) {
+        } else if (value !== this.newEmployeeInfo.passWord) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
@@ -224,7 +226,7 @@
       var validateResetCheckPass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.resetPasswordInfo.password) {
+        } else if (value !== this.resetPasswordInfo.passWord) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
@@ -250,7 +252,7 @@
           name: '',
           department: '',
           notes: '',
-          password: '',
+          passWord: '',
           iCCard: '',
           checkPass: '',
           userType: '',
@@ -286,7 +288,7 @@
         //重置密码框是否可见
         resetFormVisible: false,
         resetPasswordInfo: {
-          password: '',
+          passWord: '',
           checkPass: ''
         },
         //用户类型
@@ -296,6 +298,8 @@
         //当前表格绑定data
         curData: [],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
       }
     },
     methods: {
@@ -482,7 +486,7 @@
           if (valid) {
             //发送修改密码请求
             let self = this
-            self.modifiedInfo.password = self.resetPasswordInfo.password
+            self.modifiedInfo.passWord = self.resetPasswordInfo.passWord
             //发送修改请求
             $.ajax({
               url: self.urlHeader + '/employee/change',
@@ -498,7 +502,7 @@
                 //更新curData
                 for (var i = 0; i < self.curData.length; i++) {
                   if (self.curData[i].id == self.modifiedInfo.id) {
-                    self.curData[i].password = self.modifiedInfo.password
+                    self.curData[i].passWord = self.modifiedInfo.passWord
                   }
                 }
                 self.modifiedInfo = {}
@@ -523,7 +527,7 @@
       //展示密码
       showPassword(index) {
         let self = this
-        this.$alert('该用户密码为' + self.curData[index].password, '查看密码', {
+        this.$alert('该用户密码为' + self.curData[index].passWord, '查看密码', {
           confirmButtonText: '确定'
         });
       },
@@ -603,7 +607,7 @@
           }
         }
         if (this.name.length == 0 && this.usrName.length == 0 && this.department.length == 0 && this.role.length == 0) {
-          this.$message('查询条件不能为空');
+          this.curData = this.employeeData
           return
         }
         //求四个集合的交集
@@ -702,6 +706,9 @@
         var result2 = intersection(resultDep, resultRole, 2, 3)
         var result = intersection(result1, result2, -1, -1)
         this.curData = result
+      },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
       }
     },
     mounted: function() {
