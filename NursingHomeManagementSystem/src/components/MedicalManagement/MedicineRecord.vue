@@ -47,8 +47,12 @@
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="日期">
-                      <el-input v-model="addMedicineRecordForm.date" size="small" placeholder="请输入">
-                      </el-input>
+                      <el-date-picker
+                        v-model="addMedicineRecordForm.date"
+                        type="date"
+                        placeholder="选择日期"
+                        value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>  
                     </el-form-item>
                   </el-col>                                  
                 </el-row> 
@@ -112,8 +116,12 @@
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="日期">
-                      <el-input v-model="updateMedicineRecordForm.date" size="small" placeholder="请输入">
-                      </el-input>
+                      <el-date-picker
+                        v-model="updateMedicineRecordForm.date"
+                        type="date"
+                        placeholder="选择日期"
+                        value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker> 
                     </el-form-item>
                   </el-col>                                  
                 </el-row> 
@@ -153,9 +161,14 @@
                         <el-input v-model="medicineRecordForm.name" size="small" placeholder="输入药品名称"></el-input>
                       </el-form-item>
                     </el-col>
-                    <el-col :span="7">
+                    <el-col :span="8">
                       <el-form-item label="日期">
-                        <el-input v-model="medicineRecordForm.date" size="small" placeholder="输入日期"></el-input>
+                        <el-date-picker
+                          v-model="medicineRecordForm.date"
+                          type="date"
+                          placeholder="选择日期"
+                          value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        </el-date-picker>                        
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
@@ -262,7 +275,7 @@ export default {
   },
     methods: {
       onSearch: function() {
-        if (this.tourRecordForm.date.length == 0 && this.tourRecordForm.name.length == 0) {
+        if (this.medicineRecordForm.date.length == 0 && this.medicineRecordForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -279,23 +292,13 @@ export default {
   
       },
       checkValid: function(val) {
-        if (this.tourRecordForm.name.length != 0) {
-          if (val.name.search(this.tourRecordForm.name) == -1) {
+        if (this.medicineRecordForm.medicineName.length != 0) {
+          if (val.medicineName.search(this.medicineRecordForm.medicineName) == -1) {
             return false
           }
         }
-        if (this.tourRecordForm.floor.length != 0) {
-          if (val.floor != this.tourRecordForm.floor) {
-            return false
-          }
-        } 
-        if (this.tourRecordForm.roomNumber.length != 0) {
-          if (val.roomNumber != this.tourRecordForm.roomNumber) {
-            return false
-          }
-        }  
-        if (this.tourRecordForm.bedNumber.length != 0) {
-          if (val.bedNumber != this.tourRecordForm.bedNumber) {
+        if (this.medicineRecordForm.date.length != 0) {
+          if (val.date != this.medicineRecordForm.date) {
             return false
           }
         }                          
@@ -315,6 +318,7 @@ export default {
           });
           return
         }
+
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',

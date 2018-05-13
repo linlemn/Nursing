@@ -110,12 +110,18 @@
                     </el-col>
                     <el-col :span="5">
                       <el-form-item label="时间">
-                        <el-input v-model="personalHygieneForm.time" size="small" placeholder="输入时间"></el-input>
-                      </el-form-item>
+                        <el-date-picker
+                          v-model="personalHygieneForm.time"
+                          type="date"
+                          placeholder="选择日期"
+                          value-format="yyyy-MM" format="yyyy-MM"
+                          size="small">                
+                        </el-date-picker>                         
+                      </el-form-item>                        
                     </el-col>
-                    <el-col :span="4">
+                    <el-col :span="3" :offset="1">
                       <el-form-item label="床号">
-                        <el-input v-model="personalHygieneForm.roomNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="personalHygieneForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -243,7 +249,9 @@
             label: "4楼"
           }
         ],
-        roomNos: [{
+        roomNos: [
+        ],
+        roomNo: [{
             value: "选项1",
             label: "全部"
           },
@@ -270,8 +278,7 @@
           {
             value: "选项7",
             label: "107"
-          }
-        ],
+          }],
         searchResults: [],
         middleUrl: "/hygiene",
         permanentResults: [],

@@ -101,7 +101,7 @@
           <el-col :span="24">
             <el-card>
               <div slot="header">
-                <el-form :inline="true" label-position="top" :model="bathingForm" label-width="70px">
+                <el-form :inline="true" label-position="left" :model="bathingForm" label-width="70px">
                   <el-row>
                     <el-col :span="4">
                       <el-form-item label="楼层">
@@ -119,24 +119,30 @@
                         </el-select>
                       </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="4">
                       <el-form-item label="姓名">
                         <el-input v-model="bathingForm.elderlyName" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
-                    <el-col :span="5">
-                      <el-form-item label="时间">
-                        <el-input v-model="bathingForm.time" size="small" placeholder="输入时间"></el-input>
-                      </el-form-item>
-                    </el-col>
                     <el-col :span="4">
+                      <el-form-item label="时间">
+                        <el-date-picker
+                          v-model="bathingForm.time"
+                          type="date"
+                          placeholder="选择日期"
+                          value-format="yyyy-MM" format="yyyy-MM"
+                          size="small">                
+                        </el-date-picker>                         
+                      </el-form-item>
+                    </el-col> 
+                    <el-col :span="4" :offset="2">
                       <el-form-item label="床号">
                         <el-input v-model="bathingForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
-                    </el-col>
+                    </el-col>                                       
                   </el-row>
                   <el-row>
-                    <el-col :span="4" :offset="9">
+                    <el-col :span="2" :offset="9">
                       <el-tooltip placement="top">
                         <div slot="content">
                           <h3>备注：</h3>
@@ -145,7 +151,7 @@
                         </div>
                         <el-button size="small" type="primary" @click="onSearch">查询</el-button>
                       </el-tooltip>
-                    </el-col>
+                    </el-col>                                
                   </el-row>
                 </el-form>
               </div>

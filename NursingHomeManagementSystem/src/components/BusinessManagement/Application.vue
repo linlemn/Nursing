@@ -18,7 +18,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
-                      <el-input v-model="applicationForm.birthDate" size="small"></el-input>
+                      <el-date-picker v-model="applicationForm.birthDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>
                     </el-form-item>
                   </el-col>
                   <el-col :span="5">
@@ -50,7 +51,10 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="政治面貌">
-                      <el-input v-model="applicationForm.politicalSide" size="small"></el-input>
+                      <el-select v-model="applicationForm.politicalSide" placeholder="请选择" size="small">
+                        <el-option v-for="item in politicalSides" :key="item.value" :label="item.label" :value="item.label">
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -187,8 +191,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="申请时间">
-                      <el-input v-model="applicationForm.applicantdate">
-                      </el-input>
+                      <el-date-picker v-model="applicationForm.applicantdate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                      
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -207,15 +211,15 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="时间">
-                      <el-input v-model="applicationForm.handlerDate">
-                      </el-input>
+                      <el-date-picker v-model="applicationForm.handlerDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>
                     </el-form-item>
                   </el-col>
                 </el-row>
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button @click="applicationFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="handleModifySubmit">提 交</el-button>
+                <el-button type="primary" @click="handleApplicationSubmit">提 交</el-button>
               </div>
             </el-dialog>
           </el-col>
@@ -231,7 +235,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
-                      <el-input v-model="modifyApplicationForm.birthDate" size="small"></el-input>
+                      <el-date-picker v-model="modifyApplicationForm.birthDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>
                     </el-form-item>
                   </el-col>
                   <el-col :span="5">
@@ -263,7 +268,10 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="政治面貌">
-                      <el-input v-model="modifyApplicationForm.politicalSide" size="small"></el-input>
+                      <el-select v-model="modifyApplicationForm.politicalSide" placeholder="请选择" size="small">
+                        <el-option v-for="item in politicalSides" :key="item.value" :label="item.label" :value="item.label">
+                        </el-option>
+                      </el-select>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -400,8 +408,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="申请时间">
-                      <el-input v-model="modifyApplicationForm.applicantdate">
-                      </el-input>
+                      <el-date-picker v-model="modifyApplicationForm.applicantdate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -420,8 +428,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="时间">
-                      <el-input v-model="modifyApplicationForm.handlerDate">
-                      </el-input>
+                      <el-date-picker v-model="modifyApplicationForm.handlerdate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -430,7 +438,7 @@
                 <el-button @click="modifyApplicationFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="handleModifySubmit">提 交</el-button>
               </div>
-            </el-dialog>            
+            </el-dialog>
           </el-col>
           <el-col :span="1" :offset="1">
             <el-button type="danger" plain size="small" @click="handleDelection">删除</el-button>
@@ -495,11 +503,11 @@
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
-                      <el-button
-                        size="mini"
-                        type="danger"
-                        @click="handleDelete(scope.row.id)">删除</el-button>
-                    </template>
+                        <el-button
+                          size="mini"
+                          type="danger"
+                          @click="handleDelete(scope.row.id)">删除</el-button>
+</template>
                     </el-table-column>                                                                            
                   </el-table>
                 </div>  
@@ -539,9 +547,6 @@
         }, {
           value: "选项2",
           label: "正常"
-        }, {
-          value: "选项3",
-          label: "删除"
         }],
         searchResult: [{
           id: "",
@@ -701,12 +706,29 @@
         permanentResults: [],
         idSelection: "",
         modifyApplicationFormVisible: false,
-        middleUrl: "/admissionApplication"
+        middleUrl: "/admissionApplication",
+        politicalSides: [{
+            value: "选项1",
+            label: "群众"
+          },
+          {
+            value: "选项2",
+            label: "少先队员"
+          },
+          {
+            value: "选项3",
+            label: "共青团员"
+          },
+          {
+            value: "选项4",
+            label: "中共党员"
+          },
+        ],
       }
     },
     methods: {
       onSearch: function() {
-        if (this.searchForm.name.length == 0 ) {
+        if (this.searchForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -726,15 +748,15 @@
       },
       handleDelection: function() {
         if (this.idSelection == "") {
-            this.$message({
-              message: '未选择删除对象！',
-              type: 'error',
-            });   
-            return       
+          this.$message({
+            message: '未选择删除对象！',
+            type: 'error',
+          });
+          return
         }
         this.handleDelete(this.idSelection)
       },
-      handleDelete: function(id) { 
+      handleDelete: function(id) {
         let self = this
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/delete',
@@ -758,12 +780,12 @@
             }
           },
           error: function() {
-              self.$message({
-                message: '删除失败，请检查网络',
-                type: 'error',
-              });           
+            self.$message({
+              message: '删除失败，请检查网络',
+              type: 'error',
+            });
           }
-        })        
+        })
       },
       handleApplicationSubmit: function() {
         let self = this
@@ -791,7 +813,9 @@
                 message: '提交成功',
                 type: 'success',
               });
-              self.applicationFormVisible = true
+              self.applicationFormVisible = false
+              self.illnessHistory = []
+              self.getAllRegistrationInfo()
             } else {
               self.$message({
                 message: '创建失败',
@@ -810,7 +834,7 @@
       getAllRegistrationInfo: function() {
         let self = this
         $.ajax({
-          url: self.urlHeader + self.middleUrl +'/findAll',
+          url: self.urlHeader + self.middleUrl + '/findAll',
           type: 'post',
           contentType: 'application/json;charset=UTF-8',
           data: JSON.stringify({
@@ -824,17 +848,17 @@
             }
           },
           error: function() {
-              self.$message({
-                message: '申请列表加载失败，请检查网络',
-                type: 'error',
-              });           
+            self.$message({
+              message: '申请列表加载失败，请检查网络',
+              type: 'error',
+            });
           }
-        })        
+        })
       },
       ableToModify: function() {
-        if (this.idSelection != "" ) {
+        if (this.idSelection != "") {
           for (var i in this.permanentResults) {
-            if (this.permanentResults[i].id == this.idSelection) {             
+            if (this.permanentResults[i].id == this.idSelection) {
               this.modifyApplicationFormVisible = true
               this.modifyApplicationForm = this.permanentResults[i]
             }
@@ -850,7 +874,7 @@
         let self = this
         console.log(self.modifyApplicationForm)
         var modifyAppForm = self.modifyApplicationForm
-        delete modifyAppForm["processStatus"]  
+        delete modifyAppForm["processStatus"]
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/change',
           type: 'post',
@@ -864,6 +888,7 @@
                 type: 'success',
               });
               self.modifyApplicationFormVisible = false
+              self.illnessHistory = []
             } else {
               self.$message({
                 message: '提交失败',
@@ -872,18 +897,18 @@
             }
           },
           error: function() {
-              self.$message({
-                message: '提交失败，请检查网络',
-                type: 'error',
-              });           
+            self.$message({
+              message: '提交失败，请检查网络',
+              type: 'error',
+            });
           }
-        })         
+        })
       }
-
+  
     },
     mounted: function() {
       this.getAllRegistrationInfo()
-    } 
+    }
   }
 </script>
 

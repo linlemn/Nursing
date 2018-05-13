@@ -527,10 +527,10 @@
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
-                            <el-button
-                              size="mini"
-                              type="danger"
-                              @click="handleDelete(scope.row.id)">删除</el-button>
+                      <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
                 </el-table>                
@@ -910,6 +910,7 @@
                 message: '删除成功',
                 type: 'success',
               });
+              this.getAllRecordInfo()
             } else {
               self.$message({
                 message: '删除失败',
@@ -925,6 +926,9 @@
           }
         })
       },
+      handleRemove: function() {
+
+      }
     },
     mounted: function() {
       this.getAllRecordInfo()

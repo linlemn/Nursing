@@ -4,8 +4,8 @@
             <el-header id="header">陈娟英敬老院
             </el-header>
             <el-container>
-                <el-aside :span="8">
-                    <el-menu :default-active="$route.path" style="text-align:left" unique-opened router>
+                <el-aside :span="8" style="background: #eeeeee">
+                    <el-menu :default-active="$route.path" style="text-align:left;background: #eeeeee" unique-opened router>
                         <el-menu-item  index="/Overview" v-if="menuItem['Overview']">
                             <i class="el-icon-view"></i>
                             <span slot="title">综合信息</span>
