@@ -4,11 +4,11 @@
       <el-header class="sub-header">
         <el-row>
           <el-col :span="6" :offset="9">
-            日常巡查
+            巡房记录
           </el-col>
           <el-col :span="1" :offset="3">
             <el-button type="success" plain size="small" @click="addTourRecordFormVisible = true">新增</el-button>
-            <el-dialog title="添加日常巡查" :visible.sync="addTourRecordFormVisible" width="80%" style="text-align: left">
+            <el-dialog title="添加巡房记录" :visible.sync="addTourRecordFormVisible" width="80%" style="text-align: left">
               <el-form label-width="160px" v-model="addTourRecordForm">
                 <el-row>
                   <el-col :span="8">
@@ -72,7 +72,7 @@
           </el-col>
           <el-col :span="1" :offset="1">
             <el-button type="primary" plain size="small" @click="ableToModify">修改</el-button>
-            <el-dialog title="修改日常巡查" :visible.sync="updateTourRecordFormVisible" width="80%" style="text-align: left">
+            <el-dialog title="修改巡房记录" :visible.sync="updateTourRecordFormVisible" width="80%" style="text-align: left">
               <el-form label-width="160px" v-model="updateTourRecordForm">
                 <el-row>
                   <el-col :span="8">
@@ -169,17 +169,17 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="tourRecordForm.bedNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input v-model="tourRecordForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
-                      <el-button size="small" type="primary">查询</el-button>
+                      <el-button size="small" type="primary" @click="onSearch">查询</el-button>
                     </el-col>
                   </el-row>
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResults" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -205,7 +205,9 @@
                               @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
-                </el-table>                
+                </el-table> 
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                                
               </div>
             </el-card>
           </el-col>
@@ -222,7 +224,7 @@
         tourRecordForm: {
           floor: "",
           roomNumber: "",
-          bedNo: "",
+          bedNumber: "",
           name: ""
         },
         storeys: [{
@@ -244,7 +246,7 @@
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -274,16 +276,45 @@
         searchResults: [],
         addTourRecordFormVisible: false,
         addTourRecordForm: {
+          doctor: "",
+          floor: "",
+          gender: "",
+          id: "",
+          latestTime: "",
           name: "",
+          nursingGrade: "",
+          roomNumber: "",
+          taboo: "",
         },
         updateTourRecordForm: {
-
+          doctor: "",
+          floor: "",
+          gender: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          nursingGrade: "",
+          roomNumber: "",
+          taboo: "",
+        },
+        emptyForm: {
+          doctor: "",
+          floor: "",
+          gender: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          nursingGrade: "",
+          roomNumber: "",
+          taboo: "",
         },
         updateTourRecordFormVisible: false,
         permanentResults: [],
         idSelection: "",
-        middleUrl: "/patrolRecord"
-  
+        middleUrl: "/patrolRecord",
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,   
       }
     },
     methods: {
@@ -321,8 +352,8 @@
             return false
           }
         }
-        if (this.tourRecordForm.bedNo.length != 0) {
-          if (val.bedNo != this.tourRecordForm.bedNo) {
+        if (this.tourRecordForm.bedNumber.length != 0) {
+          if (val.bedNumber != this.tourRecordForm.bedNumber) {
             return false
           }
         }
@@ -343,7 +374,7 @@
           return
         }
         var myDate = new Date()
-        self.addTourRecordForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()
+        self.addTourRecordForm.latestTime = myDate.getFullYear()+"-"+String(myDate.getMonth()+1)+"-"+myDate.getDate()
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
@@ -360,7 +391,7 @@
               });
               self.addTourRecordFormVisible = false
               self.getAllTourInfo()
-              self.addTourRecordForm = {name: "",}
+              self.addTourRecordForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -395,14 +426,11 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {
-        console.log(this.updateTourRecordForm);
         
         if (this.idSelection != "") {
           for (var i in this.permanentResults) {
@@ -460,6 +488,7 @@
           success: function(data) {
             self.searchResults = data.data
             self.permanentResults = data.data
+            console.log(self.searchResults)
           },
           error: function() {
             self.$message({
@@ -512,6 +541,9 @@
           }
         })
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },       
     },
     mounted: function() {
       this.getAllTourInfo()

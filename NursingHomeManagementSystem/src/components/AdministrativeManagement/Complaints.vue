@@ -409,6 +409,9 @@
         }
         this.curData = nameResult
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },      
     },
     mounted: function() {
       this.getAllComplaintsInfo(true)

@@ -18,7 +18,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期">
-                      <el-input v-model="addMedicalRecordForm.birthDate" size="small" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]"></el-input>
+                      <el-date-picker v-model="addMedicalRecordForm.birthDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
+                      </el-date-picker>                    
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
@@ -129,12 +130,14 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院日期">
-                      <el-input v-model="addMedicalRecordForm.hospitalizationDate" size="small"></el-input>
+                      <el-date-picker v-model="addMedicalRecordForm.hospitalizationDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出院日期">
-                      <el-input v-model="addMedicalRecordForm.dischargeDate" size="small"></el-input>
+                      <el-date-picker v-model="addMedicalRecordForm.dischargeDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
+                      </el-date-picker>                      
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -151,7 +154,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院后确诊日期">
-                      <el-input v-model="addMedicalRecordForm.confirmedDate" size="small"></el-input>
+                      <el-date-picker v-model="addMedicalRecordForm.confirmedDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -190,7 +194,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="转科时间">
-                      <el-input v-model="addMedicalRecordForm.transformDepartDate" size="small"></el-input>
+                      <el-date-picker v-model="addMedicalRecordForm.transformDepartDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]">
+                      </el-date-picker>                        
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -511,7 +516,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResult" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="searchResult.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -527,13 +532,15 @@
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
-                            <el-button
-                              size="mini"
-                              type="danger"
-                              @click="handleDelete(scope.row.id)">删除</el-button>
+                      <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
-                </el-table>                
+                </el-table>
+                <el-pagination small layout="prev, pager, next" :total="searchResult.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                                
               </div>
             </el-card>
           </el-col>
@@ -572,7 +579,7 @@
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -636,7 +643,42 @@
         addMedicalRecordForm: {
           name: "",
           gender: "",
+          floor: "",
+          roomNumber: "",
           birthDate: "",
+          maritalStatus: "",
+          age: "",
+          origin: "",
+          birthPlace: "",
+          accountAddress: "",
+          zipCodeAccount: "",
+          liveAddress: "",
+          zipCodeLive: "",
+          workUnit: "",
+          contact: "",
+          contactNumber: "",
+          contactAddress: "",
+          hospitalizationDate: "",
+          dischargeDate: "",
+          numberOfDaysInHospital: "",
+          hospitalizationCondition: "",
+          hospitalizationReason: "",
+          confirmedDate: "",
+          dischargeCondition: "",
+          hospitalizationDepartment: "",
+          hospitalizationSickroom: "",
+          transformDepartDate: "",
+          dischargeDepartment: "",
+          dischargeSickroom: "",
+          outpatientDiagnosis: "",
+          hospitalizationDiagnosis: "",
+        },
+        emptyForm: {
+          name: "",
+          gender: "",
+          birthDate: "",
+          floor: "",
+          roomNumber: "",          
           maritalStatus: "",
           age: "",
           origin: "",
@@ -670,6 +712,8 @@
           gender: "",
           birthDate: "",
           maritalStatus: "",
+          floor: "",
+          roomNumber: "",          
           age: "",
           origin: "",
           birthPlace: "",
@@ -699,11 +743,14 @@
         fileList: [],
         middleUrl: "/medicalRecord",
         idSelection: "",
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,        
       };
     },
     methods: {
       onSearch: function() {
-        if (this.medicalRecordForm.bedNumber.length == 0 && this.medicalRecordForm.name.length == 0 && his.medicalRecordForm.floor.length && his.medicalRecordForm.roomNumber.length) {
+        if (this.medicalRecordForm.bedNumber.length == 0 && this.medicalRecordForm.name.length == 0 && this.medicalRecordForm.floor.length == 0 && this.medicalRecordForm.roomNumber.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -712,11 +759,12 @@
         }
         var tempResults = []
         for (var i in this.permanentResults) {
+          console.log(this.checkValid(this.permanentResults[i]))
           if (this.checkValid(this.permanentResults[i])) {
             tempResults.push(this.permanentResults[i])
           }
         }
-        this.searchResults = tempResults
+        this.searchResult = tempResults
   
       },
       checkValid: function(val) {
@@ -762,7 +810,7 @@
       },
       handleAddSubmit: function() {
         let self = this
-        if (self.addMedicalRecordForm.name.length == 0 || self.addMedicalRecordForm.birthDate.length == 0 || self.addMedicalRecordForm.gender.length == 0) {
+        if (self.addMedicalRecordForm.name.length == 0 || self.addMedicalRecordForm.birthDate.length == 0 || self.addMedicalRecordForm.gender.length == 0 || self.addMedicalRecordForm.floor.length == 0 || self.addMedicalRecordForm.roomNumber.length == 0 ) {
           self.$message({
             message: '必填字段为空',
             type: 'error',
@@ -783,6 +831,7 @@
                 type: 'success',
               });
               self.addMedicalRecordFormVisible = false
+              self.addMedicalRecordForm = self.emptyForm
               self.getAllRecordInfo()
             } else {
               self.$message({
@@ -856,10 +905,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       getAllRecordInfo: function() {
@@ -910,6 +957,7 @@
                 message: '删除成功',
                 type: 'success',
               });
+              self.getAllRecordInfo()
             } else {
               self.$message({
                 message: '删除失败',
@@ -925,6 +973,12 @@
           }
         })
       },
+      handleRemove: function() {
+
+      },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },      
     },
     mounted: function() {
       this.getAllRecordInfo()

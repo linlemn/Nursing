@@ -215,7 +215,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResults" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -241,7 +241,9 @@
                               @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                   </el-table-column>                            
-                </el-table>                
+                </el-table> 
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                                
               </div>
             </el-card>
           </el-col>
@@ -280,7 +282,7 @@
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -309,13 +311,58 @@
         ],
         searchResults: [],
         addDailyCheckFormVisible: false,
-        addDailyCheckForm: {},
+        addDailyCheckForm: {
+          bloodSugarValue: "",
+          breathCondition: "",
+          diastolicPressure: "",
+          doctor: "",
+          floor: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolRecord: "",
+          pulse: "",
+          roomNumber: "",
+          systolicPressure: "",
+          temperature: "",
+        },
         updateDailyCheckFormVisible: false,
-        updateDailyCheckForm: {},
+        updateDailyCheckForm: {
+          bloodSugarValue: "",
+          breathCondition: "",
+          diastolicPressure: "",
+          doctor: "",
+          floor: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolRecord: "",
+          pulse: "",
+          roomNumber: "",
+          systolicPressure: "",
+          temperature: "",
+        },
+        emptyForm: {
+          bloodSugarValue: "",
+          breathCondition: "",
+          diastolicPressure: "",
+          doctor: "",
+          floor: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolRecord: "",
+          pulse: "",
+          roomNumber: "",
+          systolicPressure: "",
+          temperature: "",
+        },
         idSelection: "",
         permanentResults: [],
         middleUrl: "/dailyInspection",
-
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,  
       }
     },
     methods: {
@@ -353,8 +400,8 @@
             return false
           }
         }
-        if (this.dailyCheckForm.bedNo.length != 0) {
-          if (val.bedNo!= this.dailyCheckForm.bedNo) {
+        if (this.dailyCheckForm.bedN.length != 0) {
+          if (val.bedNumber!= this.dailyCheckForm.bedNumber) {
             return false
           }
         } 
@@ -373,7 +420,7 @@
           return
         }
         var myDate = new Date()
-        self.addDailyCheckForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()        
+        self.addDailyCheckForm.latestTime = myDate.getFullYear()+"-"+String(myDate.getMonth()+1)+"-"+myDate.getDate()        
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
@@ -389,6 +436,7 @@
               });
               self.addDailyCheckFormVisible = false
               self.getAllCheckInfo()
+              self.addDailyCheckForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -423,10 +471,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {
@@ -477,6 +523,7 @@
       },      
       getAllCheckInfo: function() {
         let self = this
+        
         $.ajax({
           url: self.urlHeader + self.middleUrl +'/findAll',
           type: 'post',
@@ -487,6 +534,7 @@
           success: function(data) {
             self.searchResults = data.data
             self.permanentResults = data.data
+            console.log(self.searchResults)
           },
           error: function() {
               self.$message({
@@ -538,9 +586,13 @@
           }
         })        
       }, 
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },       
     },
     mounted: function() {
       this.getAllCheckInfo()
+    
     }
   }
 </script>

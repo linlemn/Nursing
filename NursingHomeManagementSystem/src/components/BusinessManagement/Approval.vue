@@ -18,7 +18,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="出生日期">
-                      <el-input v-model="approvalForm.birthDate" size="small"></el-input>
+                      <el-date-picker v-model="approvalForm.birthDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
@@ -38,7 +39,10 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="政治面貌">
-                      <el-input v-model="approvalForm.politicalSide" size="small"></el-input>
+                      <el-select v-model="approvalForm.politicalSide" placeholder="请选择" size="small">
+                        <el-option v-for="item in politicalSides" :key="item.value" :label="item.label" :value="item.label">
+                        </el-option>
+                      </el-select>                      
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -67,7 +71,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入住时间">
-                      <el-input v-model="approvalForm.checkInDate" size="small"></el-input>
+                      <el-date-picker v-model="approvalForm.checkInDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                      
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -150,8 +155,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="申请时间">
-                      <el-input v-model="approvalForm.applicantDate">
-                      </el-input>
+                      <el-date-picker v-model="approvalForm.applicantDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                        
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -170,8 +175,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="时间">
-                      <el-input v-model="approvalForm.handlerDate">
-                      </el-input>
+                      <el-date-picker v-model="approvalForm.handlerdate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                        
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -184,8 +189,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="日期">
-                      <el-input v-model="approvalForm.assessmentDate">
-                      </el-input>
+                      <el-date-picker v-model="approvalForm.assessmentDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -204,8 +209,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="日期">
-                      <el-input v-model="approvalForm.deanSigDate">
-                      </el-input>
+                      <el-date-picker v-model="approvalForm.deanSigDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                        
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -228,7 +233,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="出生日期">
-                      <el-input v-model="updateApprovalForm.birthDate" size="small"></el-input>
+                      <el-date-picker v-model="updateApprovalForm.birthDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                        
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
@@ -248,7 +254,10 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="政治面貌">
-                      <el-input v-model="updateApprovalForm.politicalSide" size="small"></el-input>
+                      <el-select v-model="updateApprovalForm.politicalSide" placeholder="请选择" size="small">
+                        <el-option v-for="item in politicalSides" :key="item.value" :label="item.label" :value="item.label">
+                        </el-option>
+                      </el-select>                       
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -277,7 +286,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入住时间">
-                      <el-input v-model="updateApprovalForm.checkInDate" size="small"></el-input>
+                      <el-date-picker v-model="updateApprovalForm.checkInDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -360,8 +370,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="申请时间">
-                      <el-input v-model="updateApprovalForm.applicantDate">
-                      </el-input>
+                      <el-date-picker v-model="updateApprovalForm.applicantDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -380,8 +390,8 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="时间">
-                      <el-input v-model="updateApprovalForm.handlerDate">
-                      </el-input>
+                      <el-date-picker v-model="updateApprovalForm.handlerDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -394,8 +404,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="日期">
-                      <el-input v-model="updateApprovalForm.assessmentDate">
-                      </el-input>
+                      <el-date-picker v-model="updateApprovalForm.assessmentDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -414,8 +424,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="日期">
-                      <el-input v-model="updateApprovalForm.deanSigDate">
-                      </el-input>
+                      <el-date-picker v-model="updateApprovalForm.deanSigDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>                       
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -424,7 +434,7 @@
                 <el-button @click="updateApprovalFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="handleUpdateSubmit">提 交</el-button>
               </div>
-            </el-dialog>            
+            </el-dialog>
           </el-col>
           <el-col :span="1" :offset="1">
             <el-button type="danger" plain size="small" @click="handleDelection">删除</el-button>
@@ -468,7 +478,7 @@
                 </el-row>
               </div>
               <div>
-                <el-table :data="results" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="results.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名">
@@ -489,13 +499,15 @@
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
-                          <el-button
-                            size="mini"
-                            type="danger"
-                            @click="handleDelete(scope.row.id)">删除</el-button>
+                            <el-button
+                              size="mini"
+                              type="danger"
+                              @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                                                                            
                   </el-table>
+                  <el-pagination small layout="prev, pager, next" :total="results.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                  </el-pagination>                  
                 </div>  
               </el-card>
             </el-col>
@@ -505,12 +517,9 @@
  </div>
 </template>
 
-<script>
-  import Multiselect from "vue-multiselect";
-  
+<script> 
   export default {
     components: {
-      Multiselect
     },
     data() {
       return {
@@ -532,9 +541,6 @@
         }, {
           value: "选项2",
           label: "正常"
-        }, {
-          value: "选项3",
-          label: "删除"
         }],
         updateApprovalFormVisible: false,
         updateApprovalForm: {
@@ -604,6 +610,39 @@
           deanSignature: "",
           deanSigDate: "",
         },
+        emptyForm: {
+          name: "",
+          birthDate: "",
+          gender: "",
+          pension: "",
+          politicalSide: "",
+          idNumber: "",
+          homeAddress: "",
+          domicileLocation: "",
+          residenceCommitteeName: "",
+          checkInDate: "",
+          guarantorName1: "",
+          firstGuarantorRel: "",
+          guarantorAddress1: "",
+          guarantorZipCode1: "",
+          guarantorPhoneNumber1: "",
+          guarantorName2: "",
+          guarantorRelation2: "",
+          guarantorAddress2: "",
+          guarantorZipCode2: "",
+          guarantorPhoneNumber2: "",
+          applicationReason: "",
+          applicantSignature: "",
+          applicationDate: "",
+          medicalSuggestion: "",
+          handlerSignature: "",
+          handlerDate: "",
+          levelAssessmentHadler: "",
+          assessmentDate: "",
+          approval: "",
+          deanSignature: "",
+          deanSigDate: "",
+        },
         relationship: [{
           value: "选项1",
           label: "子女"
@@ -621,11 +660,31 @@
         permanentResults: [],
         middleUrl: "/admissionApproval",
         idSelcetion: "",
+        politicalSides: [{
+            value: "选项1",
+            label: "群众"
+          },
+          {
+            value: "选项2",
+            label: "少先队员"
+          },
+          {
+            value: "选项3",
+            label: "共青团员"
+          },
+          {
+            value: "选项4",
+            label: "中共党员"
+          },
+        ],
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,        
       };
     },
     methods: {
       onSearch: function() {
-        if (this.searchForm.name.length == 0 ) {
+        if (this.searchForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -634,8 +693,8 @@
           return
         }
         var tempResults = []
-        for (var i in this.permanentResults) {   
-             
+        for (var i in this.permanentResults) {
+  
           if (this.permanentResults[i].name.search(this.searchForm.name) != -1) {
             tempResults.push(this.permanentResults[i])
           }
@@ -647,14 +706,14 @@
       },
       handleDelection: function() {
         if (this.idSelection == "") {
-            this.$message({
-              message: '未选择删除对象！',
-              type: 'error',
-            });   
-            return       
+          this.$message({
+            message: '未选择删除对象！',
+            type: 'error',
+          });
+          return
         }
         this.handleDelete(this.idSelection)
-      },      
+      },
       handleDelete: function(id) {
         let self = this
         $.ajax({
@@ -671,8 +730,7 @@
                 type: 'success',
               });
               self.getAllApprovalInfo()
-            } 
-            else {
+            } else {
               self.$message({
                 message: '删除失败',
                 type: 'error',
@@ -680,12 +738,12 @@
             }
           },
           error: function() {
-              self.$message({
-                message: '删除失败，请检查网络',
-                type: 'error',
-              });           
+            self.$message({
+              message: '删除失败，请检查网络',
+              type: 'error',
+            });
           }
-        })         
+        })
       },
       handleAddSubmit: function() {
         let self = this
@@ -713,6 +771,7 @@
               self.permanentResults.push(data.data)
               self.results = self.permanentResults
               self.approvalFormVisible = false
+              self.approvalForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -726,12 +785,12 @@
             });
             console.log(err)
           }
-        })       
+        })
       },
       ableToModify: function() {
-        if (this.idSelection != "" ) {
+        if (this.idSelection != "") {
           for (var i in this.permanentResults) {
-            if (this.permanentResults[i].id == this.idSelection) {             
+            if (this.permanentResults[i].id == this.idSelection) {
               this.updateApprovalFormVisible = true
               this.updateApprovalForm = this.permanentResults[i]
             }
@@ -742,12 +801,12 @@
             type: 'error',
           });
         }
-      },      
+      },
       handleUpdateSubmit: function() {
         let self = this
         console.log(self.updateApprovalForm)
         var modifyAppForm = self.updateApprovalForm
-        delete modifyAppForm["processStatus"]  
+        delete modifyAppForm["processStatus"]
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/change',
           type: 'post',
@@ -761,6 +820,7 @@
                 type: 'success',
               });
               self.updateApprovalFormVisible = false
+              self.updateApprovalForm = self.emptyForm
             } else {
               self.$message({
                 message: '提交失败',
@@ -769,14 +829,14 @@
             }
           },
           error: function() {
-              self.$message({
-                message: '提交失败，请检查网络',
-                type: 'error',
-              });           
+            self.$message({
+              message: '提交失败，请检查网络',
+              type: 'error',
+            });
           }
-        })         
+        })
       },
-      getAllApprovalInfo: function() {       
+      getAllApprovalInfo: function() {
         let self = this
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/findAll',
@@ -800,11 +860,13 @@
           }
         })
       },
-
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },
     },
     mounted: function() {
       this.getAllApprovalInfo()
-    }    
+    }
   };
 </script>
 

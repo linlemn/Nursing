@@ -47,8 +47,12 @@
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="日期">
-                      <el-input v-model="addMedicineRecordForm.date" size="small" placeholder="请输入">
-                      </el-input>
+                      <el-date-picker
+                        v-model="addMedicineRecordForm.date"
+                        type="date"
+                        placeholder="选择日期"
+                        value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker>  
                     </el-form-item>
                   </el-col>                                  
                 </el-row> 
@@ -112,8 +116,12 @@
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="日期">
-                      <el-input v-model="updateMedicineRecordForm.date" size="small" placeholder="请输入">
-                      </el-input>
+                      <el-date-picker
+                        v-model="updateMedicineRecordForm.date"
+                        type="date"
+                        placeholder="选择日期"
+                        value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      </el-date-picker> 
                     </el-form-item>
                   </el-col>                                  
                 </el-row> 
@@ -153,9 +161,14 @@
                         <el-input v-model="medicineRecordForm.name" size="small" placeholder="输入药品名称"></el-input>
                       </el-form-item>
                     </el-col>
-                    <el-col :span="7">
+                    <el-col :span="8">
                       <el-form-item label="日期">
-                        <el-input v-model="medicineRecordForm.date" size="small" placeholder="输入日期"></el-input>
+                        <el-date-picker
+                          v-model="medicineRecordForm.date"
+                          type="date"
+                          placeholder="选择日期"
+                          value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        </el-date-picker>                        
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
@@ -223,7 +236,7 @@ export default {
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -252,8 +265,36 @@ export default {
         ],
         searchResults: [],
         addMedicineRecordFormVisible: false,
-        addMedicineRecordForm: {},
-        updateMedicineRecordForm: {},
+        addMedicineRecordForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",
+        },
+        updateMedicineRecordForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",          
+        },
+        emptyForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",           
+        },
         updateMedicineRecordFormVisible: false,
         middleUrl: "/drugAccess",
         idSelection: "",
@@ -262,7 +303,7 @@ export default {
   },
     methods: {
       onSearch: function() {
-        if (this.tourRecordForm.date.length == 0 && this.tourRecordForm.name.length == 0) {
+        if (this.medicineRecordForm.date.length == 0 && this.medicineRecordForm.name.length == 0) {
           this.$message({
             message: '查询关键词为空',
             type: 'error',
@@ -270,32 +311,27 @@ export default {
           this.results = this.permanentResults
         }
         var tempResults = []
+        var count = 0
         for (var i in this.permanentResults) {
           if (this.checkValid(this.permanentResults[i])) {
             tempResults.push(this.permanentResults[i])
           }
+          else {
+            count += 1
+          }
+          
         }
         this.searchResults = tempResults
   
       },
       checkValid: function(val) {
-        if (this.tourRecordForm.name.length != 0) {
-          if (val.name.search(this.tourRecordForm.name) == -1) {
+        if (this.medicineRecordForm.name.length != 0) {
+          if (val.medicineName.search(this.medicineRecordForm.name) == -1) {
             return false
           }
         }
-        if (this.tourRecordForm.floor.length != 0) {
-          if (val.floor != this.tourRecordForm.floor) {
-            return false
-          }
-        } 
-        if (this.tourRecordForm.roomNumber.length != 0) {
-          if (val.roomNumber != this.tourRecordForm.roomNumber) {
-            return false
-          }
-        }  
-        if (this.tourRecordForm.bedNumber.length != 0) {
-          if (val.bedNumber != this.tourRecordForm.bedNumber) {
+        if (this.medicineRecordForm.date.length != 0) {
+          if (val.date != this.medicineRecordForm.date) {
             return false
           }
         }                          
@@ -315,6 +351,7 @@ export default {
           });
           return
         }
+
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
@@ -331,7 +368,7 @@ export default {
               });
               self.addMedicineRecordFormVisible = false
               self.getAllMedicineInfo()
-              self.addMedicineRecordForm = {name: "",}
+              self.addMedicineRecordForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -366,10 +403,8 @@ export default {
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {  
@@ -429,6 +464,7 @@ export default {
           success: function(data) {
             self.searchResults = data.data
             self.permanentResults = data.data
+            console.log(self.permanentResults)
           },
           error: function() {
             self.$message({

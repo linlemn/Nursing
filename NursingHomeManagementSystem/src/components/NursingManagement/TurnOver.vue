@@ -62,7 +62,7 @@
             </el-dialog>
           </el-col>
           <el-col :span="1" :offset="1">
-            <el-button type="info" plain size="small">打印</el-button>
+            <el-button type="info" plain size="small" @click="handlePrint">打印</el-button>
           </el-col>
         </el-row>
       </el-header>
@@ -71,14 +71,14 @@
           <div slot="header">
             <el-form :inline="true" label-position="left" :model="turnOverForm" label-width="100px">
               <el-row>
-                <el-col :span="8">
+                <!-- <el-col :span="8">
                   <el-form-item label="楼层">
                     <el-select v-model="turnOverForm.floor" placeholder="请选择" size="small">
                       <el-option v-for="item in storeys" :key="item.value" :label="item.label" :value="item.label">
                       </el-option>
                     </el-select>
                   </el-form-item>
-                </el-col>
+                </el-col> -->
                 <el-col :span="8">
                   <el-form-item label="日期">
                     <el-date-picker v-model="turnOverForm.date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
@@ -102,7 +102,7 @@
             </el-form>
           </div>
           <div>
-            <el-table :data="searchResults" border style="width: 100%">
+            <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%">
               <el-table-column prop="id" label="序号" fixed>
               </el-table-column>
               <el-table-column prop="elderlyName" label="姓名" fixed>
@@ -127,6 +127,8 @@
               </el-table-column>
               <el-table-column label="签名" prop="signature"></el-table-column>
             </el-table>
+            <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+            </el-pagination>             
           </div>
         </el-card>
       </el-main>
@@ -172,8 +174,18 @@
           skinCondition: "",
           signature: ""
         },
+        emptyForm: {
+          date: "",
+          rollTime: "",
+          recumbentPosition: "",
+          skinCondition: "",
+          signature: ""
+        },
         rollOps: ["左", "右", "平"],
         skinOps: ["正常", "发红", "表皮破损", "溃烂"],
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,        
       };
     },
     methods: {
@@ -343,7 +355,8 @@
                 type: 'success',
               }); 
               self.getAllTurnInfo()   
-              self.addTodayFormVisible = false          
+              self.addTodayFormVisible = false  
+              self.addTodayForm = self.emptyForm        
             } else {
               self.$message({
                 message: '添加失败，请检查参数',
@@ -359,6 +372,31 @@
           }
         })        
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      }, 
+      handlePrint: function() {
+        // this.createTable()
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        // var newstr = document.all.item("print_table").innerHTML;
+        var newstr = "<table border=1><tr><th>序号</th><th>姓名</th><th>日期</th><th>翻身时间</th><th>卧位</th><th>皮肤状况</th><th>签名</th></tr>"
+        for (var i in this.searchResults) {
+          var str = "<tr><td>" + String(this.searchResults[i].id) + "</td>"
+          str += "<td>" + String(this.searchResults[i].elderlyName) + "</td>"
+          str += "<td>" + String(this.searchResults[i].date) + "</td>"
+          str += "<td>" + String(this.searchResults[i].recumbentPosition) + "</td>"
+          str += "<td>" + String(this.searchResults[i].skinCondition) + "</td>"
+          str += "<td>" + String(this.searchResults[i].signature) + "</td>"
+          newstr += str + "</tr>"         
+        }
+        newstr += "</table>"      
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        window.location.reload()
+    
+      },             
     },
     mounted: function() {
       this.getAllTurnInfo()
