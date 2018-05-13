@@ -8,10 +8,10 @@
             <h1 class="login-header" style="font-size: 36px; font-weight: 100; font-family: Helvetica Neue; margin-top:-10px; margin-bottom: 20px;">登录</h1>
           </div>
           <div style="margin-top:50px;margin-bottom:50px;">
-            <el-form label-position="left" :model="loginForm" label-width="100px">
+            <el-form label-position="left" :model="loginForm" label-width="100px" ref="login">
               <el-row>
                 <el-col :span="12" :offset="5">
-                  <el-form-item label="用户名：">
+                  <el-form-item label="用户名：" prop='username' :rules="[{ required: true, message: '用户名不能为空', trigger: 'change'}]">
                     <el-input prefix-icon="el-icon-service" v-model="loginForm.username">
                     </el-input>
                   </el-form-item>
@@ -19,8 +19,8 @@
               </el-row>
               <el-row>
                 <el-col :span="12" :offset="5">
-                  <el-form-item label="密码：">
-                    <el-input prefix-icon="el-icon-view" v-model="loginForm.password" type="password">
+                  <el-form-item label="密码：" prop='password' :rules="[{ required: true, message: '密码不能为空', trigger: 'change'}]">
+                    <el-input prefix-icon="el-icon-view" v-model="loginForm.password" type="password" @keyup.enter.native="login">
                     </el-input>
                   </el-form-item>
                 </el-col>
@@ -59,30 +59,39 @@
         document.cookie = "token=balabala; role=admin;expires=" + time.toGMTString();
         let self = this
         var url = this.urlHeader + '/statistics/login'
-        //发送修改请求
-        $.ajax({
-          url: url,
-          type: 'post',
-          crossDomain: true,
-          contentType: 'application/json;charset=UTF-8',
-          data: JSON.stringify({
-            userName: self.loginForm.username,
-            password: self.loginForm.password
-          }),
-          success: function(data) {
-            //登录成功之后存储token和role到cookie中
-            document.cookie = 'role=' + data.data.role
-            //动态生成路由
-            self.formRoute()
-            console.log(data)
-          },
-          error: function(err) {
-            self.$alert('请求数据失败，请检查网络', '失败', {
+        this.$refs['login'].validate((valid) => {
+          if (valid) {
+            //发送修改请求
+            $.ajax({
+              url: url,
+              type: 'post',
+              crossDomain: true,
+              contentType: 'application/json;charset=UTF-8',
+              data: JSON.stringify({
+                userName: self.loginForm.username,
+                password: self.loginForm.password
+              }),
+              success: function(data) {
+                //登录成功之后存储token和role到cookie中
+                document.cookie = 'role=' + data.data.role
+                //动态生成路由
+                self.formRoute()
+                console.log(data)
+              },
+              error: function(err) {
+                self.$alert('请求数据失败，请检查网络', '失败', {
+                  confirmButtonText: '确定'
+                });
+                console.log(err)
+              },
+            })
+          } else {
+            self.$alert('登录失败', '失败', {
               confirmButtonText: '确定'
             });
-            console.log(err)
-          },
-        })
+            return false;
+          }
+        });
       },
       formRoute() {
         if (document.cookie) { // 判断是否有token，有token就是登陆过了

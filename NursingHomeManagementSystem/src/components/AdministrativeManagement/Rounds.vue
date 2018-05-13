@@ -31,7 +31,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="处置意见" prop="lifeCareSuggestion" :rules="rule2">
+                    <el-form-item label="处置意见" prop="lifeCareSuggestion" >
                       <el-input type="textarea" v-model="newRoundsInfo.lifeCareSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
@@ -44,7 +44,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="处置意见" prop="medicalCareSuggestion" :rules="rule2">
+                    <el-form-item label="处置意见" prop="medicalCareSuggestion" >
                       <el-input type="textarea" v-model="newRoundsInfo.medicalCareSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
@@ -57,7 +57,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="处置意见" prop="logisticalSuggestion" :rules="rule2">
+                    <el-form-item label="处置意见" prop="logisticalSuggestion" >
                       <el-input type="textarea" v-model="newRoundsInfo.logisticalSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
@@ -70,7 +70,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="处置意见" prop="securitySuggestion" :rules="rule2">
+                    <el-form-item label="处置意见" prop="securitySuggestion">
                       <el-input type="textarea" v-model="newRoundsInfo.securitySuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
@@ -83,7 +83,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="处置意见" prop="suggestion" :rules="rule2">
+                    <el-form-item label="处置意见" prop="suggestion">
                       <el-input type="textarea" v-model="newRoundsInfo.suggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
@@ -112,7 +112,7 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="curData" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
+        <el-table :data="curData.slice((currentPage-1)*pagesize,currentPage*pagesize)" stripe style="width: 100%; text-align: left;" tooltip-effect="dark" @selection-change="handleSelectionChange">
           <el-table-column type="expand">
             <div slot-scope="props">
               <el-form label-position="left">
@@ -277,6 +277,8 @@
             </div>
           </el-table-column>
         </el-table>
+        <el-pagination small layout="prev, pager, next" :total="curData.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+        </el-pagination>
       </el-main>
     </el-container>
   </div>
@@ -319,11 +321,25 @@
           trigger: 'change'
         }],
         currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,
       }
     },
     methods: {
       handleNewRounds(formName) {
         let self = this
+        if(self.newRoundsInfo.lifeCareSuggestion) {
+          self.newRoundsInfo.lifeCareSuggestion = '无'
+        }
+        if(self.newRoundsInfo.medicalCareSuggestion) {
+          self.newRoundsInfo.medicalCareSuggestion = '无'
+        }
+        if(self.newRoundsInfo.logisticalSuggestion) {
+          self.newRoundsInfo.logisticalSuggestion = '无'
+        }
+        if(self.newRoundsInfo.securitySuggestion) {
+          self.newRoundsInfo.securitySuggestion = '无'
+        }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             //发送请求
@@ -533,11 +549,14 @@
           }
           console.log("!!")
         } else {
-          this.$message('查询条件不能为空');
+          this.curData = this.roundsData
           return
         }
         this.curData = nameResult
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      }
     },
     mounted: function() {
       this.getAllRoundsInfo(true)
