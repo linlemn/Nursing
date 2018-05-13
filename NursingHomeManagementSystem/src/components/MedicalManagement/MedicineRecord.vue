@@ -236,7 +236,7 @@ export default {
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -265,8 +265,36 @@ export default {
         ],
         searchResults: [],
         addMedicineRecordFormVisible: false,
-        addMedicineRecordForm: {},
-        updateMedicineRecordForm: {},
+        addMedicineRecordForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",
+        },
+        updateMedicineRecordForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",          
+        },
+        emptyForm: {
+          batchOrders: "",
+          date: "",
+          id: "",
+          medicineName: "",
+          note: "",
+          number: "",
+          retailOrders: "",
+          type: "",           
+        },
         updateMedicineRecordFormVisible: false,
         middleUrl: "/drugAccess",
         idSelection: "",
@@ -283,17 +311,22 @@ export default {
           this.results = this.permanentResults
         }
         var tempResults = []
+        var count = 0
         for (var i in this.permanentResults) {
           if (this.checkValid(this.permanentResults[i])) {
             tempResults.push(this.permanentResults[i])
           }
+          else {
+            count += 1
+          }
+          
         }
         this.searchResults = tempResults
   
       },
       checkValid: function(val) {
-        if (this.medicineRecordForm.medicineName.length != 0) {
-          if (val.medicineName.search(this.medicineRecordForm.medicineName) == -1) {
+        if (this.medicineRecordForm.name.length != 0) {
+          if (val.medicineName.search(this.medicineRecordForm.name) == -1) {
             return false
           }
         }
@@ -335,7 +368,7 @@ export default {
               });
               self.addMedicineRecordFormVisible = false
               self.getAllMedicineInfo()
-              self.addMedicineRecordForm = {name: "",}
+              self.addMedicineRecordForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -370,10 +403,8 @@ export default {
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {  
@@ -433,6 +464,7 @@ export default {
           success: function(data) {
             self.searchResults = data.data
             self.permanentResults = data.data
+            console.log(self.permanentResults)
           },
           error: function() {
             self.$message({

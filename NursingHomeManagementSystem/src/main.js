@@ -3,9 +3,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from "./router.js"
-import IEcharts from 'vue-echarts-v3/src/full.js';
+import IEcharts from 'vue-echarts-v3/src/full.js'
+import Print from 'print-js'
 
 Vue.use(ElementUI)
+
 Vue.component('i-echarts', IEcharts)
 
 new Vue({

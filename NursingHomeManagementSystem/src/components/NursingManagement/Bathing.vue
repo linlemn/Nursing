@@ -76,7 +76,7 @@
             </el-dialog>
           </el-col>          
           <el-col :span="1" :offset="1">
-            <el-button type="info" plain size="small">打印</el-button>
+            <el-button type="info" plain size="small" @click="handlePrint">打印</el-button>
           </el-col>
         </el-row>
       </el-header>
@@ -141,13 +141,14 @@
                   </el-row>
                 </el-form>
               </div>
+              <!--startprint-->
               <div>
-                <el-table :data="searchResults" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table id="print_div" :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="elderlyName" label="姓名" fixed>
                   </el-table-column>
-                  <el-table-column prop="gender" label="性别" fixed>
+                  <el-table-column prop="floor" label="楼层" fixed>
                   </el-table-column>
                   <el-table-column prop="dates0" label="1">
                   </el-table-column>
@@ -212,7 +213,10 @@
                   <el-table-column prop="dates30" label="31">
                   </el-table-column>
                 </el-table>
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                 
               </div>
+               <!--endprint-->
             </el-card>
           </el-col>
         </el-row>
@@ -222,6 +226,8 @@
 </template>
 
 <script>
+import Print from 'print-js'
+
   export default {
     data() {
       return {
@@ -249,11 +255,38 @@
             label: "4楼"
           }
         ],
-        roomNos: [
+        roomNos: [{
+            value: "选项1",
+            label: "101"
+          },
+          {
+            value: "选项2",
+            label: "102"
+          },
+          {
+            value: "选项3",
+            label: "103"
+          },
+          {
+            value: "选项4",
+            label: "104"
+          },
+          {
+            value: "选项5",
+            label: "105"
+          },
+          {
+            value: "选项6",
+            label: "106"
+          },
+          {
+            value: "选项7",
+            label: "107"
+          }
         ],
         roomNo: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -292,6 +325,15 @@
           roomNumber: "",
           elderlyName: "",
         },
+        emptyForm: {
+          completedDate: "",
+          year: "",
+          month: "",
+          time: "",
+          floor: "",
+          roomNumber: "",
+          elderlyName: "",
+        },
         modifyTodayFormVisible: false,
         modifyTodayForm: {
           completedDate: "",
@@ -307,6 +349,9 @@
         todayHygiene: [],
         date: "",
         isAdd: false,
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,         
       };
     },
     methods: {
@@ -326,6 +371,11 @@
                 let completedDate = self.searchResults[i].completedDate
                 if (completedDate != null) {                                   
                   self.searchResults[i].dates = completedDate.split(",")
+                  for (var j=0; j<32; j++) {
+                    if (self.searchResults[i].dates[j] == undefined) {
+                      self.searchResults[i].dates[j] = ""
+                    }
+                  }
                   self.searchResults[i].dates0 = self.searchResults[i].dates[0]
                   self.searchResults[i].dates1 = self.searchResults[i].dates[1]
                   self.searchResults[i].dates2 = self.searchResults[i].dates[2]
@@ -394,10 +444,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1;
-            this.roomNos[i].label = val + "0" + a;
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       onSearch: function() {
@@ -439,7 +487,7 @@
           }
         }
         if (this.personalHygieneForm.bedNumber.length != 0) {
-          if (val.bedNo != this.personalHygieneForm.bedNo) {
+          if (val.bedNumber != this.personalHygieneForm.bedNumber) {
             return false;
           }
         }
@@ -503,9 +551,9 @@
         }
         
   
-        if (this.addTodayForm.elderlyName.length == 0) {
+        if (this.addTodayForm.elderlyName.length == 0 || self.addToday.roomNumber == "全部") {
           this.$message({
-            message: "输入关键词为空",
+            message: "输入关键词错误",
             type: "error"
           });
           return;
@@ -534,6 +582,7 @@
                 self.todayHygiene = []
                 self.date = ""
                 self.addTodayFormVisible = false
+                self.addTodayForm = self.emptyForm
                 self.getAllHygieneInfo()
               } else {
                 self.$message({
@@ -599,7 +648,65 @@
               });
             }
           })        
-      }
+      },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      }, 
+      handlePrint: function() {
+        // this.createTable()
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        // var newstr = document.all.item("print_table").innerHTML;
+        var newstr = "<table border=1><tr><th>序号</th><th>姓名</th><th>楼层</th>"
+        for (var i = 0; i<32; i++) {
+          newstr += "<th>" + String(i) + "</th>"
+        }
+        newstr += "</tr>"
+        for (var i in this.searchResults) {
+          var str = "<tr><td>" + String(this.searchResults[i].id) + "</td>"
+          str += "<td>" + String(this.searchResults[i].elderlyName) + "</td>"
+          str += "<td>" + String(this.searchResults[i].floor) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates0) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates1) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates2) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates3) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates4) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates5) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates6) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates7) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates8) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates9) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates10) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates11) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates12) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates13) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates14) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates15) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates16) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates17) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates18) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates19) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates20) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates21) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates22) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates23) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates24) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates25) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates26) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates27) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates28) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates29) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates30) + "</td>"
+          str += "<td>" + String(this.searchResults[i].dates31) + "</td>"
+          newstr += str + "</tr>"         
+        }
+        newstr += "</table>"      
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+    
+      },     
     },
     mounted: function() {
       this.getAllHygieneInfo();

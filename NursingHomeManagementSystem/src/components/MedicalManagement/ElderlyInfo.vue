@@ -52,7 +52,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResults" border style="width: 100%">
+                <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="floor" label="楼层">
@@ -67,13 +67,15 @@
                   </el-table-column>
                   <el-table-column label="操作" fixed="right">
                     <template slot-scope="scope">
-                          <el-button
-                            size="mini"
-                            type="danger"
-                            @click="showInfo(scope.row.id)">查看</el-button>
+                            <el-button
+                              size="mini"
+                              type="danger"
+                              @click="showInfo(scope.row.id)">查看</el-button>
                     </template>
                   </el-table-column>                                                                                              
-                </el-table> 
+                </el-table>
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                  
                 <el-dialog title="老人信息" :visible.sync="elderlyInfoVisible" width="80%" style="text-align: left">
                           <el-form :model="searchResult" label-width="100px">
                             <el-row>
@@ -319,7 +321,7 @@
                               </el-col>                            
                             </el-row>                                                                                        
                           </el-form>                          
-                </el-dialog>                                
+                </el-dialog>                                  
               </div>
             </el-card>
           </el-col>
@@ -360,7 +362,7 @@
         permanentResults: [],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -390,6 +392,9 @@
         middleUrl: "/admissionApplication",
         elderlyInfoVisible: false,
         searchResult: {},
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,         
       };
     },
     methods: {
@@ -432,10 +437,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       showInfo: function(val) {
@@ -445,7 +448,10 @@
             this.elderlyInfoVisible = true
           }
         }
-      }
+      },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },
     },
     mounted: function() {
       this.getAllElderlyInfo()

@@ -478,7 +478,7 @@
                 </el-row>
               </div>
               <div>
-                <el-table :data="results" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="results.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名">
@@ -503,9 +503,11 @@
                               size="mini"
                               type="danger"
                               @click="handleDelete(scope.row.id)">删除</el-button>
-</template>
+                    </template>
                     </el-table-column>                                                                            
                   </el-table>
+                  <el-pagination small layout="prev, pager, next" :total="results.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                  </el-pagination>                  
                 </div>  
               </el-card>
             </el-col>
@@ -515,12 +517,9 @@
  </div>
 </template>
 
-<script>
-  import Multiselect from "vue-multiselect";
-  
+<script> 
   export default {
     components: {
-      Multiselect
     },
     data() {
       return {
@@ -542,9 +541,6 @@
         }, {
           value: "选项2",
           label: "正常"
-        }, {
-          value: "选项3",
-          label: "删除"
         }],
         updateApprovalFormVisible: false,
         updateApprovalForm: {
@@ -681,6 +677,9 @@
             label: "中共党员"
           },
         ],
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,        
       };
     },
     methods: {
@@ -861,7 +860,9 @@
           }
         })
       },
-  
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },
     },
     mounted: function() {
       this.getAllApprovalInfo()

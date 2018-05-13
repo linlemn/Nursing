@@ -169,7 +169,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResults" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -192,7 +192,9 @@
                               @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
-                </el-table>                
+                </el-table> 
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                                
               </div>
             </el-card>
           </el-col>
@@ -209,7 +211,7 @@
         dailyInspectionForm: {
           floor: "",
           roomNumber: "",
-          bedNo: "",
+          bedNumber: "",
           name: ""
         },
         storeys: [{
@@ -231,7 +233,7 @@
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -260,13 +262,49 @@
         ],
         searchResults: [],
         addDailyInspectionFormVisible: false,
-        addDailyInspectionForm: {},
-        updateDailyInspectionForm:{},
+        addDailyInspectionForm: {
+          doctor: "",
+          floor: "",
+          gender: "",
+          highPriority: "",
+          highPrrty: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolContent: "",
+          roomNumber: "",
+        },
+        updateDailyInspectionForm:{
+          doctor: "",
+          floor: "",
+          gender: "",
+          highPriority: "",
+          highPrrty: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolContent: "",
+          roomNumber: "",
+        },
+        emptyForm: {
+          doctor: "",
+          floor: "",
+          gender: "",
+          highPriority: "",
+          highPrrty: "",
+          id: "",
+          latestTime: "",
+          name: "",
+          patrolContent: "",
+          roomNumber: "",
+        },
         updateDailyInspectionFormVisible: false,
         middleUrl: "/dailyPatrol",
         permanentResults: [],
         idSelection: "",
-
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20, 
       }
     },
     methods: {
@@ -304,8 +342,8 @@
             return false
           }
         }
-        if (this.dailyInspectionForm.bedNo.length != 0) {
-          if (val.bedNo!= this.dailyInspectionForm.bedNo) {
+        if (this.dailyInspectionForm.bedNumber.length != 0) {
+          if (val.bedNumber!= this.dailyInspectionForm.bedNumber) {
             return false
           }
         } 
@@ -324,7 +362,7 @@
           return
         }
         var myDate = new Date()
-        self.addDailyInspectionForm.latestTime = myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate()        
+        self.addDailyInspectionForm.latestTime = myDate.getFullYear()+"-"+String(myDate.getMonth()+1)+"-"+myDate.getDate()        
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
@@ -340,7 +378,7 @@
               });
               self.addDailyInspectionFormVisible = false
               self.getAllInspectionInfo()
-              self.addDailyInspectionForm = {}
+              self.addDailyInspectionForm = self.emptyForm
             } else {
               self.$message({
                 message: '创建失败',
@@ -375,10 +413,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {
@@ -436,6 +472,7 @@
             id: '1'
           }),
           success: function(data) {
+            console.log(data)
             self.searchResults = data.data
             self.permanentResults = data.data
           },
@@ -490,6 +527,9 @@
           }
         })
       },
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },      
     },
     mounted: function() {
       this.getAllInspectionInfo()

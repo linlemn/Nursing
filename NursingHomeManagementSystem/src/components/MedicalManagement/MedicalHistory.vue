@@ -73,8 +73,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="诊断日期">
-                      <el-input v-model="addMedicalHistoryForm.diagnosisDate" size="small" placeholder="输入日期">
-                      </el-input>
+                    <el-date-picker v-model="addMedicalHistoryForm.diagnosisDate" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
+                    </el-date-picker>                      
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -152,8 +152,8 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="诊断日期">
-                      <el-input v-model="updateMedicalHistoryForm.diagnosisDate" size="small" placeholder="输入日期">
-                      </el-input>
+                    <el-date-picker v-model="updateMedicalHistoryForm.diagnosisDate" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd">
+                    </el-date-picker>                      
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -209,7 +209,7 @@
                 </el-form>
               </div>
               <div>
-                <el-table :data="searchResults" border style="width: 100%" highlight-current-row @current-change="handleSelection">
+                <el-table :data="searchResults.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%" highlight-current-row @current-change="handleSelection">
                   <el-table-column prop="id" label="序号" fixed>
                   </el-table-column>
                   <el-table-column prop="name" label="姓名" fixed>
@@ -223,7 +223,7 @@
                   <el-table-column prop="age" label="年龄"></el-table-column>
                   <el-table-column prop="marritalStatus" label="婚姻情况">
                   </el-table-column>
-                  <el-table-column prop="historyStatus" label="病史情况">
+                  <el-table-column prop="medicalHistoryRecord" label="病史情况">
                   </el-table-column>
                   <el-table-column prop="diagnosisDate" label="诊断时间">
                   </el-table-column>
@@ -235,7 +235,9 @@
                               @click="handleDelete(scope.row.id)">删除</el-button>
                     </template>
                     </el-table-column>                            
-                </el-table>                
+                </el-table>
+                <el-pagination small layout="prev, pager, next" :total="searchResults.length" :page-size="pagesize" @current-change="handleCurrentChange" :current-page="currentPage">
+                </el-pagination>                                  
               </div>
             </el-card>
           </el-col>
@@ -274,7 +276,7 @@
         ],
         roomNos: [{
             value: "选项1",
-            label: "全部"
+            label: "101"
           },
           {
             value: "选项2",
@@ -303,13 +305,50 @@
         ],
         searchResults: [],
         addMedicalHistoryFormVisible: false,
-        addMedicalHistoryForm: {},
+        addMedicalHistoryForm: {
+          age: "",
+          diagnosisDate: "",
+          floor: "",
+          gender: "",
+          id: "",
+          maritalStatus: "",
+          medicalHistoryRecord: "",
+          name: "",
+          otherIllness: "",
+          roomNumber: "",
+        },
         updateMedicalHistoryFormVisible: false,
-        updateMedicalHistoryForm: {},
+        updateMedicalHistoryForm: {
+          age: "",
+          diagnosisDate: "",
+          floor: "",
+          gender: "",
+          id: "",
+          maritalStatus: "",
+          medicalHistoryRecord: "",
+          name: "",
+          otherIllness: "",
+          roomNumber: "",
+        },
+        emptyForm: {
+          age: "",
+          diagnosisDate: "",
+          floor: "",
+          gender: "",
+          id: "",
+          maritalStatus: "",
+          medicalHistoryRecord: "",
+          name: "",
+          otherIllness: "",
+          roomNumber: "",
+        },
         middleUrl: "/medicalHistory",
         permanentResults: [],
         illnessHistory: [],
         idSelection: "",
+        currentClick: -1,
+        currentPage: 1,
+        pagesize: 20,        
       }
     },
     methods: {
@@ -359,10 +398,10 @@
       handleAddSubmit: function() {
         let self = this
         for (var i in self.illnessHistory) {
-          self.addMedicalHistoryForm.illnessHistory += " "
-          self.addMedicalHistoryForm.illnessHistory += String(self.illnessHistory[i])
-        } 
-        self.illnessHistory = []       
+          if (self.illnessHistory[i] != undefined){
+            self.addMedicalHistoryForm.medicalHistoryRecord += String(self.illnessHistory[i]) + " "
+          }
+        }     
         if (self.addMedicalHistoryForm.name.length == 0) {
           self.$message({
             message: '必填字段为空',
@@ -384,6 +423,8 @@
                 type: 'success',
               });
               self.addMedicalHistoryFormVisible = false
+              self.addMedicalHistoryForm = self.emptyForm
+              self.illnessHistory = []
               self.getAllHistoryInfo()
             } else {
               self.$message({
@@ -419,10 +460,8 @@
       },
       changeRoomNo: function(val) {
         for (var i in this.roomNos) {
-          if (i != 0) {
-            var a = parseInt(i) + 1
-            this.roomNos[i].label = val + "0" + a
-          }
+          var a = parseInt(i) + 1
+          this.roomNos[i].label = val + "0" + a
         }
       },
       ableToModify: function() {
@@ -432,6 +471,10 @@
             if (this.permanentResults[i].id == this.idSelection) {             
               this.updateMedicalHistoryFormVisible = true
               this.updateMedicalHistoryForm = this.permanentResults[i]
+              var illness = this.updateMedicalHistoryForm.medicalHistoryRecord.split(' ')
+              for (var i in illness) {
+                this.illnessHistory.push(illness[i])
+              }
             }
           }
         } else {
@@ -481,6 +524,7 @@
             id: '1'
           }),
           success: function(data) {
+            console.log(data)
             self.searchResults = data.data
             self.permanentResults = data.data
           },
@@ -533,7 +577,10 @@
               });           
           }
         })        
-      },            
+      }, 
+      handleCurrentChange(currentPage) {
+        this.currentPage = currentPage
+      },                  
     },
     mounted: function() {
       this.getAllHistoryInfo()
