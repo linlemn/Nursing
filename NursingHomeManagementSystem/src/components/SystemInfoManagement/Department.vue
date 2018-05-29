@@ -13,12 +13,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="部门编号" prop="departmentNumber">
-                      <el-input v-model="newDepInfo.departmentNumber" placeholder="请输入部门编号"></el-input>
+                      <el-input clearable v-model="newDepInfo.departmentNumber" placeholder="请输入部门编号"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="部门名称" prop="departmentName" :rules="[{ required: true, message: '部门名称不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDepInfo.departmentName" placeholder="请输入部门名称"></el-input>
+                      <el-input clearable v-model="newDepInfo.departmentName" placeholder="请输入部门名称"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -29,7 +29,7 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newDepInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newDepInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newDepFormVisible = false">取 消</el-button>
@@ -44,7 +44,7 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-input v-model="queryName" placeholder="请输入部门名称"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入部门名称"></el-input>
           </el-col>
           <el-col :span="8">
             <el-select class="widen" v-model="queryState" placeholder="请选择状态">
@@ -79,12 +79,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="部门编号">
-                        <el-input v-model="modifiedInfo.departmentNumber" :placeholder="modifiedInfo.departmentNumber"></el-input>
+                        <el-input clearable v-model="modifiedInfo.departmentNumber" :placeholder="modifiedInfo.departmentNumber"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="部门名称">
-                        <el-input v-model="modifiedInfo.departmentName" :placeholder="modifiedInfo.departmentName"></el-input>
+                        <el-input clearable v-model="modifiedInfo.departmentName" :placeholder="modifiedInfo.departmentName"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -95,7 +95,7 @@
                     </el-select>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>

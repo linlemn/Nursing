@@ -13,12 +13,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="护工名称" prop="nurseName" :rules="[{ required: true, message: '护工名称不能为空', trigger: 'change'}]">
-                      <el-input v-model="newNurseBedInfo.nurseName" placeholder="请输入护工名称"></el-input>
+                      <el-input clearable v-model="newNurseBedInfo.nurseName" placeholder="请输入护工名称"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="IC卡号" prop="iCNumber">
-                      <el-input v-model="newNurseBedInfo.iCNumber" placeholder="请输入IC卡号"></el-input>
+                      <el-input clearable v-model="newNurseBedInfo.iCNumber" placeholder="请输入IC卡号"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -41,7 +41,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="床位号" prop="bedNumber">
-                  <el-input v-model="newNurseBedInfo.bedNumber" placeholder="请输入床位号"></el-input>
+                  <el-input clearable v-model="newNurseBedInfo.bedNumber" placeholder="请输入床位号"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newNurseBedFormVisible = false">取 消</el-button>
@@ -56,10 +56,10 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="5">
-            <el-input v-model="queryName" placeholder="请输入护工名称"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入护工名称"></el-input>
           </el-col>
           <el-col :span="5">
-            <el-input v-model="queryICCard" placeholder="请输入IC卡号"></el-input>
+            <el-input clearable v-model="queryICCard" placeholder="请输入IC卡号"></el-input>
           </el-col>
           <el-col :span="5">
             <el-select class="widen" v-model="queryUserType" placeholder="请选择用户类型">
@@ -68,7 +68,7 @@
             </el-select>
           </el-col>
           <el-col :span="5">
-            <el-input v-model="queryBedNum" placeholder="请输入床位号"></el-input>
+            <el-input clearable v-model="queryBedNum" placeholder="请输入床位号"></el-input>
           </el-col>
           <el-col :span="4">
             <el-button @click="query">查询</el-button>
@@ -99,12 +99,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="护工名称">
-                        <el-input v-model="modifiedInfo.nurseName" :placeholder="modifiedInfo.nurseName"></el-input>
+                        <el-input clearable v-model="modifiedInfo.nurseName" :placeholder="modifiedInfo.nurseName"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="IC卡号">
-                        <el-input v-model="modifiedInfo.iCNumber" :placeholder="modifiedInfo.iCNumber"></el-input>
+                        <el-input clearable v-model="modifiedInfo.iCNumber" :placeholder="modifiedInfo.iCNumber"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -127,7 +127,7 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="床位号" prop="bedNumber">
-                    <el-input v-model="modifiedInfo.bedNumber" :placeholder="modifiedInfo.bedNumber"></el-input>
+                    <el-input clearable v-model="modifiedInfo.bedNumber" :placeholder="modifiedInfo.bedNumber"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>

@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="查房人" prop="checkPerson" :rules="[{ required: true, message: '查房人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newRoundsInfo.checkPerson" placeholder="请输入查房人"></el-input>
+                      <el-input clearable v-model="newRoundsInfo.checkPerson" placeholder="请输入查房人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -27,12 +27,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="lifeCareSituation" :rules="rule1">
-                      <el-input type="textarea" v-model="newRoundsInfo.lifeCareSituation" placeholder="请输入情况摘要"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.lifeCareSituation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="处置意见" prop="lifeCareSuggestion" >
-                      <el-input type="textarea" v-model="newRoundsInfo.lifeCareSuggestion" placeholder="请输入处置意见"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.lifeCareSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -40,12 +40,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="medicalCareSituation" :rules="rule1">
-                      <el-input type="textarea" v-model="newRoundsInfo.medicalCareSituation" placeholder="请输入情况摘要"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.medicalCareSituation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="处置意见" prop="medicalCareSuggestion" >
-                      <el-input type="textarea" v-model="newRoundsInfo.medicalCareSuggestion" placeholder="请输入处置意见"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.medicalCareSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -53,12 +53,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="logisticalSituation" :rules="rule1">
-                      <el-input type="textarea" v-model="newRoundsInfo.logisticalSituation" placeholder="请输入情况摘要"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.logisticalSituation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="处置意见" prop="logisticalSuggestion" >
-                      <el-input type="textarea" v-model="newRoundsInfo.logisticalSuggestion" placeholder="请输入处置意见"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.logisticalSuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -66,12 +66,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="securitySituation" :rules="rule1">
-                      <el-input type="textarea" v-model="newRoundsInfo.securitySituation" placeholder="请输入情况摘要"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.securitySituation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="处置意见" prop="securitySuggestion">
-                      <el-input type="textarea" v-model="newRoundsInfo.securitySuggestion" placeholder="请输入处置意见"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.securitySuggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -79,17 +79,17 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="situation" :rules="rule1">
-                      <el-input type="textarea" v-model="newRoundsInfo.situation" placeholder="请输入情况摘要"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.situation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="处置意见" prop="suggestion">
-                      <el-input type="textarea" v-model="newRoundsInfo.suggestion" placeholder="请输入处置意见"></el-input>
+                      <el-input clearable type="textarea" v-model="newRoundsInfo.suggestion" placeholder="请输入处置意见"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newRoundsInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newRoundsInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newRoundsFormVisible = false">取 消</el-button>
@@ -104,7 +104,7 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-input v-model="queryName" placeholder="请输入查房人"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入查房人"></el-input>
           </el-col>
           <el-col :span="4">
             <el-button @click="query">查询</el-button>
@@ -189,7 +189,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="查房人" prop="checkPerson">
-                        <el-input v-model="modifiedInfo.checkPerson" :placeholder="modifiedInfo.checkPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.checkPerson" :placeholder="modifiedInfo.checkPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -203,12 +203,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="情况摘要" prop="lifeCareSituation">
-                        <el-input type="textarea" v-model="modifiedInfo.lifeCareSituation" :placeholder="modifiedInfo.lifeCareSituation"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.lifeCareSituation" :placeholder="modifiedInfo.lifeCareSituation"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="处置意见" prop="lifeCareSuggestion">
-                        <el-input type="textarea" v-model="modifiedInfo.lifeCareSuggestion" :placeholder="modifiedInfo.lifeCareSuggestion"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.lifeCareSuggestion" :placeholder="modifiedInfo.lifeCareSuggestion"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -216,12 +216,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="情况摘要" prop="medicalCareSituation">
-                        <el-input type="textarea" v-model="modifiedInfo.medicalCareSituation" :placeholder="modifiedInfo.medicalCareSituation"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.medicalCareSituation" :placeholder="modifiedInfo.medicalCareSituation"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="处置意见" prop="medicalCareSuggestion">
-                        <el-input type="textarea" v-model="modifiedInfo.lifeCareSuggestion" :placeholder="modifiedInfo.lifeCareSuggestion"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.lifeCareSuggestion" :placeholder="modifiedInfo.lifeCareSuggestion"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -229,12 +229,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="情况摘要" prop="logisticalSituation">
-                        <el-input type="textarea" v-model="modifiedInfo.logisticalSituation" :placeholder="modifiedInfo.logisticalSituation"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.logisticalSituation" :placeholder="modifiedInfo.logisticalSituation"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="处置意见" prop="logisticalSuggestion">
-                        <el-input type="textarea" v-model="modifiedInfo.logisticalSuggestion" :placeholder="modifiedInfo.logisticalSuggestion"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.logisticalSuggestion" :placeholder="modifiedInfo.logisticalSuggestion"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -242,12 +242,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="情况摘要" prop="securitySituation">
-                        <el-input type="textarea" v-model="modifiedInfo.securitySituation" :placeholder="modifiedInfo.securitySituation"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.securitySituation" :placeholder="modifiedInfo.securitySituation"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="处置意见" prop="securitySuggestion">
-                        <el-input type="textarea" v-model="modifiedInfo.securitySuggestion" :placeholder="modifiedInfo.securitySuggestion"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.securitySuggestion" :placeholder="modifiedInfo.securitySuggestion"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -255,17 +255,17 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="情况摘要" prop="situation">
-                        <el-input type="textarea" v-model="modifiedInfo.situation" :placeholder="modifiedInfo.situation"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.situation" :placeholder="modifiedInfo.situation"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="处置意见" prop="suggestion">
-                        <el-input type="textarea" v-model="modifiedInfo.suggestion" :modifiedInfo="newRoundsInfo.suggestion"></el-input>
+                        <el-input clearable type="textarea" v-model="modifiedInfo.suggestion" :modifiedInfo="newRoundsInfo.suggestion"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-form-item label="备注" prop="notes">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="newRoundsFormVisible = false">取 消</el-button>

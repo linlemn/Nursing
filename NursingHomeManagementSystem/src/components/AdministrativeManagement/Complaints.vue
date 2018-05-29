@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="反馈送达人" prop="diliveredPerson" :rules="[{ required: true, message: '反馈送达人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.diliveredPerson" placeholder="请输入反馈送达人"></el-input>
+                      <el-input v-model="newComplaintsInfo.diliveredPerson" placeholder="请输入反馈送达人" clearable></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -26,19 +26,19 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="执行部门" prop="executiveDepartment" :rules="[{ required: true, message: '执行部门不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.executiveDepartment" placeholder="请输入执行部门"></el-input>
+                      <el-input v-model="newComplaintsInfo.executiveDepartment" placeholder="请输入执行部门" clearable></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="反馈接收人" prop="feedbackRecipient" :rules="[{ required: true, message: '反馈接收人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.feedbackRecipient" placeholder="请输入反馈接收人"></el-input>
+                      <el-input v-model="newComplaintsInfo.feedbackRecipient" placeholder="请输入反馈接收人" clearable></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="院长" prop="dean" :rules="[{ required: true, message: '院长不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.dean" placeholder="请输入院长"></el-input>
+                      <el-input v-model="newComplaintsInfo.dean" placeholder="请输入院长" clearable></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -49,13 +49,13 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="所提意见或建议" prop="suggestion" :rules="[{ required: true, message: '意见或建议不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newComplaintsInfo.suggestion" placeholder="请输入意见或建议"></el-input>
+                  <el-input type="textarea" v-model="newComplaintsInfo.suggestion" placeholder="请输入意见或建议" clearable></el-input>
                 </el-form-item>
                 <el-form-item label="采取措施" prop="solution" :rules="[{ required: true, message: '采取措施不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newComplaintsInfo.solution" placeholder="请输入采取措施"></el-input>
+                  <el-input type="textarea" v-model="newComplaintsInfo.solution" placeholder="请输入采取措施" clearable></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newComplaintsInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input type="textarea" v-model="newComplaintsInfo.notes" placeholder="请输入备注" clearable></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newErrorFormVisible = false">取 消</el-button>
@@ -70,7 +70,7 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-input v-model="queryName" placeholder="请输入反馈接收人"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入反馈接收人"></el-input>
           </el-col>
           <el-col :span="4">
             <el-button @click="query">查询</el-button>
@@ -109,7 +109,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="反馈送达人">
-                        <el-input v-model="modifiedInfo.diliveredPerson" :placeholder="modifiedInfo.diliveredPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.diliveredPerson" :placeholder="modifiedInfo.diliveredPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -120,27 +120,27 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="所提意见或建议">
-                    <el-input type="textarea" v-model="modifiedInfo.suggestion" :placeholder="modifiedInfo.suggestion"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.suggestion" :placeholder="modifiedInfo.suggestion"></el-input>
                   </el-form-item>
                   <el-form-item label="采取措施">
-                    <el-input type="textarea" v-model="modifiedInfo.solution" :placeholder="modifiedInfo.solution"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.solution" :placeholder="modifiedInfo.solution"></el-input>
                   </el-form-item>
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="执行部门">
-                        <el-input v-model="modifiedInfo.executiveDepartment" :placeholder="modifiedInfo.executiveDepartment"></el-input>
+                        <el-input clearable v-model="modifiedInfo.executiveDepartment" :placeholder="modifiedInfo.executiveDepartment"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="反馈接收人">
-                        <el-input v-model="modifiedInfo.feedbackRecipient" :placeholder="modifiedInfo.feedbackRecipient"></el-input>
+                        <el-input clearable v-model="modifiedInfo.feedbackRecipient" :placeholder="modifiedInfo.feedbackRecipient"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="院长">
-                        <el-input v-model="modifiedInfo.dean" :placeholder="modifiedInfo.dean"></el-input>
+                        <el-input clearable v-model="modifiedInfo.dean" :placeholder="modifiedInfo.dean"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -151,7 +151,7 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>

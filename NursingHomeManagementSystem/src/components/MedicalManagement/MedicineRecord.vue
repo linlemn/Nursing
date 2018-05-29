@@ -13,13 +13,13 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="药名">
-                      <el-input v-model="addMedicineRecordForm.medicineName" size="small" placeholder="输入药名">
+                      <el-input clearable v-model="addMedicineRecordForm.medicineName" size="small" placeholder="输入药名">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="数量">
-                      <el-input v-model="addMedicineRecordForm.number" size="small" placeholder="输入数量">
+                      <el-input clearable v-model="addMedicineRecordForm.number" size="small" placeholder="输入数量">
                       </el-input>
                     </el-form-item>
                   </el-col>                                  
@@ -27,13 +27,13 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="批单">
-                      <el-input v-model="addMedicineRecordForm.batchOrders" size="small" placeholder="请输入">
+                      <el-input clearable v-model="addMedicineRecordForm.batchOrders" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="零单">
-                      <el-input v-model="addMedicineRecordForm.retailOrders" size="small" placeholder="请输入">
+                      <el-input clearable v-model="addMedicineRecordForm.retailOrders" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>                                  
@@ -41,7 +41,7 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="类型">
-                      <el-input v-model="addMedicineRecordForm.type" size="small" placeholder="请输入">
+                      <el-input clearable v-model="addMedicineRecordForm.type" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -59,7 +59,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="备注">
-                      <el-input
+                      <el-input clearable
                           type="textarea"
                           :autosize="{ minRows: 5, maxRows: 6}"
                           placeholder="请输入内容"
@@ -82,13 +82,13 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="药名">
-                      <el-input v-model="updateMedicineRecordForm.medicineName" size="small" placeholder="输入药名">
+                      <el-input clearable v-model="updateMedicineRecordForm.medicineName" size="small" placeholder="输入药名">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="数量">
-                      <el-input v-model="updateMedicineRecordForm.number" size="small" placeholder="输入数量">
+                      <el-input clearable v-model="updateMedicineRecordForm.number" size="small" placeholder="输入数量">
                       </el-input>
                     </el-form-item>
                   </el-col>                                  
@@ -96,13 +96,13 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="批单">
-                      <el-input v-model="updateMedicineRecordForm.batchOrders" size="small" placeholder="请输入">
+                      <el-input clearable v-model="updateMedicineRecordForm.batchOrders" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="10">
                     <el-form-item label="零单">
-                      <el-input v-model="updateMedicineRecordForm.retailOrders" size="small" placeholder="请输入">
+                      <el-input clearable v-model="updateMedicineRecordForm.retailOrders" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>                                  
@@ -110,7 +110,7 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="类型">
-                      <el-input v-model="updateMedicineRecordForm.type" size="small" placeholder="请输入">
+                      <el-input clearable v-model="updateMedicineRecordForm.type" size="small" placeholder="请输入">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -128,7 +128,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="备注">
-                      <el-input
+                      <el-input clearable
                           type="textarea"
                           :autosize="{ minRows: 5, maxRows: 6}"
                           placeholder="请输入内容"
@@ -158,7 +158,7 @@
                   <el-row>
                     <el-col :span="7">
                       <el-form-item label="药品名称">
-                        <el-input v-model="medicineRecordForm.name" size="small" placeholder="输入药品名称"></el-input>
+                        <el-input clearable v-model="medicineRecordForm.name" size="small" placeholder="输入药品名称"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">

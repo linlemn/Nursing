@@ -13,24 +13,24 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '员工姓名不能为空', trigger: 'change'}]">
-                      <el-input v-model="newEmployeeInfo.name" placeholder="请输入员工姓名"></el-input>
+                      <el-input clearable v-model="newEmployeeInfo.name" placeholder="请输入员工姓名"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="IC卡号" prop="iCCard">
-                      <el-input v-model="newEmployeeInfo.iCCard" placeholder="请输入IC卡号"></el-input>
+                      <el-input clearable v-model="newEmployeeInfo.iCCard" placeholder="请输入IC卡号"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="密码" type="password" prop="passWord" :rules="passWordRule">
-                      <el-input type="password" v-model="newEmployeeInfo.passWord" placeholder="请输入密码"></el-input>
+                      <el-input clearable type="password" v-model="newEmployeeInfo.passWord" placeholder="请输入密码"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="确认密码" type="password" prop="checkPass" :rules="checkPassRule">
-                      <el-input type="password" v-model="newEmployeeInfo.checkPass" placeholder="确认密码"></el-input>
+                      <el-input clearable type="password" v-model="newEmployeeInfo.checkPass" placeholder="确认密码"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -59,7 +59,7 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newEmployeeInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newEmployeeInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <!-- <div slot="footer" class="dialog-footer"> -->
@@ -76,10 +76,10 @@
         </el-row class="header-row">
         <el-row type="flex" justify="space-around">
           <el-col :span="6">
-            <el-input v-model="usrName" placeholder="请输入用户名" clearable></el-input>
+            <el-input clearable v-model="usrName" placeholder="请输入用户名" clearable></el-input>
           </el-col>
           <el-col :span="6">
-            <el-input v-model="name" placeholder="请输入姓名" clearable></el-input>
+            <el-input clearable v-model="name" placeholder="请输入姓名" clearable></el-input>
           </el-col>
           <el-col :span="4">
             <el-select class="widen" v-model="role" placeholder="请选择角色" clearable>
@@ -126,12 +126,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="姓名">
-                        <el-input v-model="modifiedInfo.name" :placeholder="modifiedInfo.name"></el-input>
+                        <el-input clearable v-model="modifiedInfo.name" :placeholder="modifiedInfo.name"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="IC卡号">
-                        <el-input v-model="modifiedInfo.iCCard" :placeholder="modifiedInfo.iCCard"></el-input>
+                        <el-input clearable v-model="modifiedInfo.iCCard" :placeholder="modifiedInfo.iCCard"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -154,7 +154,7 @@
                     </el-select>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -167,10 +167,10 @@
               <el-dialog title="重置密码" :visible.sync="resetFormVisible">
                 <el-form :model="resetPasswordInfo" ref="resetPasswordInfo">
                   <el-form-item label="新的密码" type="password" prop="passWord" :rules="resetPasswordRule">
-                    <el-input type="password" v-model="resetPasswordInfo.passWord" placeholder="请输入密码"></el-input>
+                    <el-input clearable type="password" v-model="resetPasswordInfo.passWord" placeholder="请输入密码"></el-input>
                   </el-form-item>
                   <el-form-item label="确认密码" type="password" prop="checkPass" :rules="resetCheckPassRule">
-                    <el-input type="password" v-model="resetPasswordInfo.checkPass" placeholder="确认密码"></el-input>
+                    <el-input clearable type="password" v-model="resetPasswordInfo.checkPass" placeholder="确认密码"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="resetFormVisible = false">取 消</el-button>

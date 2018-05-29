@@ -13,7 +13,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="approvalForm.name" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.name" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -34,7 +34,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="退休金及收入">
-                      <el-input v-model="approvalForm.pension" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.pension" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -47,26 +47,26 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="身份证号">
-                      <el-input v-model="approvalForm.idNumber" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.idNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="家庭住址">
-                      <el-input v-model="approvalForm.homeAddress" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.homeAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="户籍所在地">
-                      <el-input v-model="approvalForm.domicileLocation" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.domicileLocation" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="户籍所在地居委会名称">
-                      <el-input v-model="approvalForm.residenceCommitteeName" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.residenceCommitteeName" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -79,7 +79,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第一担保人姓名">
-                      <el-input v-model="approvalForm.guarantorName1" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorName1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -92,26 +92,26 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第一担保人地址">
-                      <el-input v-model="approvalForm.guarantorAddress1" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorAddress1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第一担保人地址邮编">
-                      <el-input v-model="approvalForm.guarantorZipCode1" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorZipCode1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第一担保人电话">
-                      <el-input v-model="approvalForm.guarantorPhoneNumber1" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorPhoneNumber1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第二担保人姓名">
-                      <el-input v-model="approvalForm.guarantorName2" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorName2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -124,32 +124,32 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第二担保人地址">
-                      <el-input v-model="approvalForm.guarantorAddress2" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorAddress2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第二担保人地址邮编">
-                      <el-input v-model="approvalForm.guarantorZipCode2" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorZipCode2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第二担保人电话">
-                      <el-input v-model="approvalForm.guarantorPhoneNumber2" size="small"></el-input>
+                      <el-input clearable v-model="approvalForm.guarantorPhoneNumber2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="申请入住原因">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="approvalForm.applicationReason">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="approvalForm.applicationReason">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="申请人签名">
-                      <el-input v-model="approvalForm.applicantSignature">
+                      <el-input clearable v-model="approvalForm.applicantSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -163,13 +163,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="体检及家访意见">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="approvalForm.medicalSuggestion">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="approvalForm.medicalSuggestion">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="经办人签名">
-                      <el-input v-model="approvalForm.handlerSignature">
+                      <el-input clearable v-model="approvalForm.handlerSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -183,7 +183,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="护理级别评估责任人">
-                      <el-input v-model="approvalForm.levelAssessmentHadler">
+                      <el-input clearable v-model="approvalForm.levelAssessmentHadler">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -195,7 +195,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="审批">
-                      <el-input v-model="approvalForm.approval">
+                      <el-input clearable v-model="approvalForm.approval">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -203,7 +203,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="院长签名">
-                      <el-input v-model="approvalForm.deanSignature">
+                      <el-input clearable v-model="approvalForm.deanSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -228,7 +228,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateApprovalForm.name" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.name" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -249,7 +249,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="退休金及收入">
-                      <el-input v-model="updateApprovalForm.pension" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.pension" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -262,26 +262,26 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="身份证号">
-                      <el-input v-model="updateApprovalForm.idNumber" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.idNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="家庭住址">
-                      <el-input v-model="updateApprovalForm.homeAddress" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.homeAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="户籍所在地">
-                      <el-input v-model="updateApprovalForm.domicileLocation" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.domicileLocation" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="户籍所在地居委会名称">
-                      <el-input v-model="updateApprovalForm.residenceCommitteeName" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.residenceCommitteeName" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -294,7 +294,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第一担保人姓名">
-                      <el-input v-model="updateApprovalForm.guarantorName1" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorName1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -307,26 +307,26 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第一担保人地址">
-                      <el-input v-model="updateApprovalForm.guarantorAddress1" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorAddress1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第一担保人地址邮编">
-                      <el-input v-model="updateApprovalForm.guarantorZipCode1" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorZipCode1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第一担保人电话">
-                      <el-input v-model="updateApprovalForm.guarantorPhoneNumber1" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorPhoneNumber1" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第二担保人姓名">
-                      <el-input v-model="updateApprovalForm.guarantorName2" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorName2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
@@ -339,32 +339,32 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第二担保人地址">
-                      <el-input v-model="updateApprovalForm.guarantorAddress2" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorAddress2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="第二担保人地址邮编">
-                      <el-input v-model="updateApprovalForm.guarantorZipCode2" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorZipCode2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="第二担保人电话">
-                      <el-input v-model="updateApprovalForm.guarantorPhoneNumber2" size="small"></el-input>
+                      <el-input clearable v-model="updateApprovalForm.guarantorPhoneNumber2" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="申请入住原因">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateApprovalForm.applicationReason">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateApprovalForm.applicationReason">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="申请人签名">
-                      <el-input v-model="updateApprovalForm.applicantSignature">
+                      <el-input clearable v-model="updateApprovalForm.applicantSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -378,13 +378,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="体检及家访意见">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateApprovalForm.medicalSuggestion">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateApprovalForm.medicalSuggestion">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="经办人签名">
-                      <el-input v-model="updateApprovalForm.handlerSignature">
+                      <el-input clearable v-model="updateApprovalForm.handlerSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -398,7 +398,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="护理级别评估责任人">
-                      <el-input v-model="updateApprovalForm.levelAssessmentHadler">
+                      <el-input clearable v-model="updateApprovalForm.levelAssessmentHadler">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -410,7 +410,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="审批">
-                      <el-input v-model="updateApprovalForm.approval">
+                      <el-input clearable v-model="updateApprovalForm.approval">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -418,7 +418,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="院长签名">
-                      <el-input v-model="updateApprovalForm.deanSignature">
+                      <el-input clearable v-model="updateApprovalForm.deanSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -450,7 +450,7 @@
                   <el-form :inline="true" :model="searchForm" label-width="70px">
                     <el-col :span="7">
                       <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                        <el-input v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
+                        <el-input clearable v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">

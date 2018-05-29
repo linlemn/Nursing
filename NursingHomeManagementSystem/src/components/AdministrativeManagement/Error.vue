@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="差错情况" prop="errorSituation" :rules="[{ required: true, message: '差错情况不能为空', trigger: 'change'}]">
-                      <el-input v-model="newErrorInfo.errorSituation" placeholder="请输入差错情况"></el-input>
+                      <el-input clearable v-model="newErrorInfo.errorSituation" placeholder="请输入差错情况"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -24,13 +24,13 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="负责人" prop="handingPerson" :rules="[{ required: true, message: '负责人不能为空', trigger: 'change'}]">
-                  <el-input v-model="newErrorInfo.handingPerson" placeholder="请输入负责人姓名"></el-input>
+                  <el-input clearable v-model="newErrorInfo.handingPerson" placeholder="请输入负责人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="整改措施" prop="correctiveAction" :rules="[{ required: true, message: '整改措施不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newErrorInfo.correctiveAction" placeholder="请输入整改措施"></el-input>
+                  <el-input clearable type="textarea" v-model="newErrorInfo.correctiveAction" placeholder="请输入整改措施"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newErrorInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newErrorInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newErrorFormVisible = false">取 消</el-button>
@@ -85,7 +85,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="负责人">
-                        <el-input v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -106,13 +106,13 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="差错情况">
-                    <el-input v-model="modifiedInfo.errorSituation" :placeholder="modifiedInfo.errorSituation"></el-input>
+                    <el-input clearable v-model="modifiedInfo.errorSituation" :placeholder="modifiedInfo.errorSituation"></el-input>
                   </el-form-item>
                   <el-form-item label="整改措施">
-                    <el-input type="textarea" v-model="modifiedInfo.correctiveAction" :placeholder="modifiedInfo.correctiveAction"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.correctiveAction" :placeholder="modifiedInfo.correctiveAction"></el-input>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>

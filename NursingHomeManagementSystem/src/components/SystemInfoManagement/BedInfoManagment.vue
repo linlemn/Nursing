@@ -31,7 +31,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="床位编号" prop="bedNumber" :rules="[{ required: true, message: '床位编号不能为空', trigger: 'change'}]">
-                      <el-input v-model="newBedInfo.bedNumber" placeholder="床位格式，如05-501-01"></el-input>
+                      <el-input clearable v-model="newBedInfo.bedNumber" placeholder="床位格式，如05-501-01"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -44,7 +44,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="铃号" prop="ringNumber">
-                  <el-input v-model="newBedInfo.ringNumber" placeholder="请输入铃号"></el-input>
+                  <el-input clearable v-model="newBedInfo.ringNumber" placeholder="请输入铃号"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newBedFormVisible = false">取 消</el-button>
@@ -99,19 +99,19 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="楼层">
-                        <el-input v-model="modifiedInfo.floor" :placeholder="modifiedInfo.floor"></el-input>
+                        <el-input clearable v-model="modifiedInfo.floor" :placeholder="modifiedInfo.floor"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="房间号">
-                        <el-input v-model="modifiedInfo.roomNumber" :placeholder="modifiedInfo.roomNumber"></el-input>
+                        <el-input clearable v-model="modifiedInfo.roomNumber" :placeholder="modifiedInfo.roomNumber"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="床位编号" prop="bedNumber">
-                        <el-input v-model="modifiedInfo.bedNumber" :placeholder="modifiedInfo.bedNumber"></el-input>
+                        <el-input clearable v-model="modifiedInfo.bedNumber" :placeholder="modifiedInfo.bedNumber"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -124,7 +124,7 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="铃号" prop="ringNumber">
-                    <el-input v-model="modifiedInfo.ringNumber" :placeholder="modifiedInfo.ringNumber"></el-input>
+                    <el-input clearable v-model="modifiedInfo.ringNumber" :placeholder="modifiedInfo.ringNumber"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>
@@ -358,6 +358,7 @@
             }
             self.bedData = data.data
             self.loading = false
+            console.log(data)
           },
           error: function() {
             self.$confirm('床位加载失败，请检查网络', '失败', {

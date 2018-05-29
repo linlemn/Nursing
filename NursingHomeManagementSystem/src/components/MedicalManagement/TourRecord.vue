@@ -29,7 +29,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="addTourRecordForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="addTourRecordForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -50,7 +50,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="主治医师">
-                      <el-input v-model="addTourRecordForm.doctor" size="small" placeholder="输入主治医师">
+                      <el-input clearable v-model="addTourRecordForm.doctor" size="small" placeholder="输入主治医师">
                       </el-input>
                     </el-form-item>
                   </el-col>                  
@@ -58,7 +58,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="禁忌">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addTourRecordForm.taboo">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addTourRecordForm.taboo">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -93,7 +93,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateTourRecordForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="updateTourRecordForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -114,7 +114,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="主治医师">
-                      <el-input v-model="updateTourRecordForm.doctor" size="small" placeholder="输入主治医师">
+                      <el-input clearable v-model="updateTourRecordForm.doctor" size="small" placeholder="输入主治医师">
                       </el-input>
                     </el-form-item>
                   </el-col>                   
@@ -122,7 +122,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="禁忌">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateTourRecordForm.taboo">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateTourRecordForm.taboo">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -164,12 +164,12 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="姓名">
-                        <el-input v-model="tourRecordForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="tourRecordForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="tourRecordForm.bedNumber" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="tourRecordForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">

@@ -13,7 +13,7 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="姓名：">
-                      <el-input v-model="addTodayForm.elderlyName" size="small"></el-input>
+                      <el-input clearable v-model="addTodayForm.elderlyName" size="small"></el-input>
                     </el-form-item>
                   </el-col>                  
                   <el-col :span="13">
@@ -50,7 +50,7 @@
                 <el-row>
                   <el-col :span="10">
                     <el-form-item label="签名：">
-                      <el-input v-model="addTodayForm.signature" size="small"></el-input>
+                      <el-input clearable v-model="addTodayForm.signature" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>

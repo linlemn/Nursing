@@ -29,7 +29,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="addMedicalHistoryForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="addMedicalHistoryForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -67,7 +67,7 @@
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="其他疾病">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalHistoryForm.otherIllness">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalHistoryForm.otherIllness">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -108,7 +108,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateMedicalHistoryForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="updateMedicalHistoryForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -146,7 +146,7 @@
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="其他疾病">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalHistoryForm.otherIllness">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalHistoryForm.otherIllness">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -194,12 +194,12 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="姓名">
-                        <el-input v-model="medicalHistoryForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="medicalHistoryForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="medicalHistoryForm.bedNumber" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="medicalHistoryForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">

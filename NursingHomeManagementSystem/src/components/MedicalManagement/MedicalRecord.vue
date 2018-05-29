@@ -13,7 +13,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="addMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -65,65 +65,65 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="年龄">
-                      <el-input v-model="addMedicalRecordForm.age" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.age" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="国籍">
-                      <el-input v-model="addMedicalRecordForm.origin" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.origin" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生地">
-                      <el-input v-model="addMedicalRecordForm.birthPlace" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.birthPlace" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="户口地址">
-                      <el-input v-model="addMedicalRecordForm.accountAddress" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.accountAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="addMedicalRecordForm.zipCodeAccount" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.zipCodeAccount" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="居住地址">
-                      <el-input v-model="addMedicalRecordForm.liveAddress" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.liveAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="addMedicalRecordForm.zipCodeLive" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.zipCodeLive" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="工作单位">
-                      <el-input v-model="addMedicalRecordForm.workUnit" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.workUnit" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="联系人">
-                      <el-input v-model="addMedicalRecordForm.contact" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.contact" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="联系人电话">
-                      <el-input v-model="addMedicalRecordForm.contactNumber" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.contactNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="联系人地址">
-                      <el-input v-model="addMedicalRecordForm.contactAddress" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.contactAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -142,14 +142,14 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="实际住院天数">
-                      <el-input v-model="addMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院原因">
-                      <el-input v-model="addMedicalRecordForm.hospitalizationReason" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.hospitalizationReason" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -184,12 +184,12 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院科别">
-                      <el-input v-model="addMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="addMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -202,25 +202,25 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="出院科别">
-                      <el-input v-model="addMedicalRecordForm.dischargeDepartment" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.dischargeDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="addMedicalRecordForm.dischargeSickroom" size="small"></el-input>
+                      <el-input clearable v-model="addMedicalRecordForm.dischargeSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="门（急）诊诊断">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalRecordForm.outpatientDiagnosis">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalRecordForm.outpatientDiagnosis">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院诊断">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalRecordForm.hospitalizationDiagnosis">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addMedicalRecordForm.hospitalizationDiagnosis">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -248,12 +248,12 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.name" size="small" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生日期">
-                      <el-input v-model="updateMedicalRecordForm.birthDate" size="small" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.birthDate" size="small" :rules="[{ required: true, message: '出生日期不能为空', trigger: 'change'}]"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="6">
@@ -299,94 +299,94 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="年龄">
-                      <el-input v-model="updateMedicalRecordForm.age" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.age" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="国籍">
-                      <el-input v-model="updateMedicalRecordForm.origin" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.origin" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出生地">
-                      <el-input v-model="updateMedicalRecordForm.birthPlace" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.birthPlace" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="户口地址">
-                      <el-input v-model="updateMedicalRecordForm.accountAddress" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.accountAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="updateMedicalRecordForm.zipCodeAccount" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.zipCodeAccount" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="居住地址">
-                      <el-input v-model="updateMedicalRecordForm.liveAddress" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.liveAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="邮政编码">
-                      <el-input v-model="updateMedicalRecordForm.zipCodeLive" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.zipCodeLive" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="工作单位">
-                      <el-input v-model="updateMedicalRecordForm.workUnit" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.workUnit" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="联系人">
-                      <el-input v-model="updateMedicalRecordForm.contact" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.contact" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="联系人电话">
-                      <el-input v-model="updateMedicalRecordForm.contactNumber" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.contactNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="16">
                     <el-form-item label="联系人地址">
-                      <el-input v-model="updateMedicalRecordForm.contactAddress" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.contactAddress" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院日期">
-                      <el-input v-model="updateMedicalRecordForm.hospitalizationDate" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.hospitalizationDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="出院日期">
-                      <el-input v-model="updateMedicalRecordForm.dischargeDate" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.dischargeDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="实际住院天数">
-                      <el-input v-model="updateMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.numberOfDaysInHospital" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院原因">
-                      <el-input v-model="updateMedicalRecordForm.hospitalizationReason" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.hospitalizationReason" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院后确诊日期">
-                      <el-input v-model="updateMedicalRecordForm.confirmedDate" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.confirmedDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -415,42 +415,42 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="入院科别">
-                      <el-input v-model="updateMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.hospitalizationDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="updateMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.hospitalizationSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="转科时间">
-                      <el-input v-model="updateMedicalRecordForm.transformDepartDate" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.transformDepartDate" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="出院科别">
-                      <el-input v-model="updateMedicalRecordForm.dischargeDepartment" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.dischargeDepartment" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="病室">
-                      <el-input v-model="updateMedicalRecordForm.dischargeSickroom" size="small"></el-input>
+                      <el-input clearable v-model="updateMedicalRecordForm.dischargeSickroom" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="门（急）诊诊断">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalRecordForm.outpatientDiagnosis">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalRecordForm.outpatientDiagnosis">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="入院诊断">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalRecordForm.hospitalizationDiagnosis">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateMedicalRecordForm.hospitalizationDiagnosis">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -501,12 +501,12 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="姓名">
-                        <el-input v-model="medicalRecordForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="medicalRecordForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="medicalRecordForm.bedNumber" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="medicalRecordForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">

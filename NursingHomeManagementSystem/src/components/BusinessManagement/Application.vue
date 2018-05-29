@@ -13,7 +13,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                      <el-input v-model="applicationForm.name" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.name" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -34,17 +34,17 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="籍贯">
-                      <el-input v-model="applicationForm.origin" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.origin" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="民族">
-                      <el-input v-model="applicationForm.national" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.national" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="身份证号">
-                      <el-input v-model="applicationForm.idNumber" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.idNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -59,7 +59,7 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="社保卡号">
-                      <el-input v-model="applicationForm.ssCardNumber" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.ssCardNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -98,21 +98,21 @@
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="户口地址">
-                      <el-input v-model="applicationForm.domicilePlace" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.domicilePlace" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="现居住地址">
-                      <el-input v-model="applicationForm.address" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.address" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="代理人姓名">
-                      <el-input v-model="applicationForm.agent" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.agent" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7" :offset="1">
@@ -124,19 +124,19 @@
                   </el-col>
                   <el-col :span="6" :offset="1">
                     <el-form-item label="代理人电话">
-                      <el-input v-model="applicationForm.agentPhoneNumber" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.agentPhoneNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="14">
                     <el-form-item label="代理人地址">
-                      <el-input v-model="applicationForm.agentAddress"></el-input>
+                      <el-input clearable v-model="applicationForm.agentAddress"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7" :offset="2">
                     <el-form-item label="邮编">
-                      <el-input v-model="applicationForm.zipCode" size="small"></el-input>
+                      <el-input clearable v-model="applicationForm.zipCode" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -171,7 +171,7 @@
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="其他疾病">
-                      <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容" v-model="applicationForm.otherIllness">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容" v-model="applicationForm.otherIllness">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -179,13 +179,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="申请入住原因">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="applicationForm.applicationReason">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="applicationForm.applicationReason">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="申请人签名">
-                      <el-input v-model="applicationForm.applicantSignature">
+                      <el-input clearable v-model="applicationForm.applicantSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -199,13 +199,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="院方意见">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="applicationForm.opinionOfHospital">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="applicationForm.opinionOfHospital">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="负责人签名">
-                      <el-input v-model="applicationForm.handlerSignature">
+                      <el-input clearable v-model="applicationForm.handlerSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -230,7 +230,7 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                      <el-input v-model="modifyApplicationForm.name" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.name" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
@@ -251,17 +251,17 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="籍贯">
-                      <el-input v-model="modifyApplicationForm.origin" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.origin" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="民族">
-                      <el-input v-model="modifyApplicationForm.national" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.national" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="身份证号">
-                      <el-input v-model="modifyApplicationForm.idNumber" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.idNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -276,7 +276,7 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="社保卡号">
-                      <el-input v-model="modifyApplicationForm.ssCardNumber" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.ssCardNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -315,21 +315,21 @@
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="户口地址">
-                      <el-input v-model="modifyApplicationForm.domicilePlace" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.domicilePlace" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="现居住地址">
-                      <el-input v-model="modifyApplicationForm.address" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.address" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="代理人姓名">
-                      <el-input v-model="modifyApplicationForm.agent" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.agent" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7" :offset="1">
@@ -341,19 +341,19 @@
                   </el-col>
                   <el-col :span="6" :offset="1">
                     <el-form-item label="代理人电话">
-                      <el-input v-model="modifyApplicationForm.agentPhoneNumber" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.agentPhoneNumber" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="14">
                     <el-form-item label="代理人地址">
-                      <el-input v-model="modifyApplicationForm.agentAddress"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.agentAddress"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="7" :offset="2">
                     <el-form-item label="邮编">
-                      <el-input v-model="modifyApplicationForm.zipCode" size="small"></el-input>
+                      <el-input clearable v-model="modifyApplicationForm.zipCode" size="small"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -388,7 +388,7 @@
                 <el-row>
                   <el-col :span="23">
                     <el-form-item label="其他疾病">
-                      <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容" v-model="modifyApplicationForm.otherIllness">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容" v-model="modifyApplicationForm.otherIllness">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -396,13 +396,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="申请入住原因">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="modifyApplicationForm.applicationReason">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="modifyApplicationForm.applicationReason">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="申请人签名">
-                      <el-input v-model="modifyApplicationForm.applicantSignature">
+                      <el-input clearable v-model="modifyApplicationForm.applicantSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -416,13 +416,13 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="院方意见">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="modifyApplicationForm.opinionOfHospital">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="modifyApplicationForm.opinionOfHospital">
                       </el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="负责人签名">
-                      <el-input v-model="modifyApplicationForm.handlerSignature">
+                      <el-input clearable v-model="modifyApplicationForm.handlerSignature">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -454,7 +454,7 @@
                   <el-form :inline="true" :model="searchForm" label-width="70px">
                     <el-col :span="7">
                       <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                        <el-input v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
+                        <el-input clearable v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
@@ -772,7 +772,7 @@
           }),
           success: function(data) {
             console.log(data)
-            if (data.data != null) {
+            if (data[200] = "操作成功") {
               self.$message({
                 message: '删除成功',
                 type: 'success',

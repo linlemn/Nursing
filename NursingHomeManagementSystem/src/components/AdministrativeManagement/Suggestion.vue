@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="开箱人" prop="unpackingPerson" :rules="[{ required: true, message: '开箱人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newSuggestionInfo.unpackingPerson" placeholder="请输入开箱人"></el-input>
+                      <el-input clearable v-model="newSuggestionInfo.unpackingPerson" placeholder="请输入开箱人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -24,16 +24,16 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="意见数" prop="suggestionNum" :rules="[{ required: true, message: '意见数不能为空', trigger: 'change'}]">
-                  <el-input v-model="newSuggestionInfo.suggestionNum" placeholder="请输入意见数"></el-input>
+                  <el-input clearable v-model="newSuggestionInfo.suggestionNum" placeholder="请输入意见数"></el-input>
                 </el-form-item>
                 <el-form-item label="意见内容" prop="suggestionContent" :rules="[{ required: true, message: '意见内容不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newSuggestionInfo.suggestionContent" placeholder="请输入意见内容"></el-input>
+                  <el-input clearable type="textarea" v-model="newSuggestionInfo.suggestionContent" placeholder="请输入意见内容"></el-input>
                 </el-form-item>
                 <el-form-item label="意见处理反馈" prop="processFeedback">
-                  <el-input type="textarea" v-model="newSuggestionInfo.processFeedback" placeholder="请输入意见处理反馈"></el-input>
+                  <el-input clearable type="textarea" v-model="newSuggestionInfo.processFeedback" placeholder="请输入意见处理反馈"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newSuggestionInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newSuggestionInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newErrorFormVisible = false">取 消</el-button>
@@ -48,7 +48,7 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-input v-model="queryName" placeholder="请输入开箱人"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入开箱人"></el-input>
           </el-col>
           <el-col :span="4">
             <el-button @click="query">查询</el-button>
@@ -81,7 +81,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="开箱人">
-                        <el-input v-model="modifiedInfo.unpackingPerson" :placeholder="modifiedInfo.unpackingPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.unpackingPerson" :placeholder="modifiedInfo.unpackingPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -92,16 +92,16 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="意见内容">
-                    <el-input v-model="modifiedInfo.suggestionContent" :placeholder="modifiedInfo.suggestionContent"></el-input>
+                    <el-input clearable v-model="modifiedInfo.suggestionContent" :placeholder="modifiedInfo.suggestionContent"></el-input>
                   </el-form-item>
                   <el-form-item label="反馈">
-                    <el-input v-model="modifiedInfo.processFeedback" :placeholder="modifiedInfo.processFeedback"></el-input>
+                    <el-input clearable v-model="modifiedInfo.processFeedback" :placeholder="modifiedInfo.processFeedback"></el-input>
                   </el-form-item>
                   <el-form-item label="意见数">
-                    <el-input v-model="modifiedInfo.suggestionNum" :placeholder="modifiedInfo.suggestionNum"></el-input>
+                    <el-input clearable v-model="modifiedInfo.suggestionNum" :placeholder="modifiedInfo.suggestionNum"></el-input>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>

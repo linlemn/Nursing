@@ -13,7 +13,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                        <el-input v-model="registrationForm.name" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.name" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -50,31 +50,31 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input size="small" v-model="registrationForm.bedNumber" placeholder="未分配"></el-input>
+                        <el-input clearable size="small" v-model="registrationForm.bedNumber" placeholder="未分配"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="年龄">
-                        <el-input size="small" v-model="registrationForm.age"></el-input>
+                        <el-input clearable size="small" v-model="registrationForm.age"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="籍贯">
-                        <el-input size="small" v-model="registrationForm.origin"></el-input>
+                        <el-input clearable size="small" v-model="registrationForm.origin"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="户籍地">
-                        <el-input size="small" v-model="registrationForm.domicilePlace"></el-input>
+                        <el-input clearable size="small" v-model="registrationForm.domicilePlace"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="身份证号">
-                        <el-input v-model="registrationForm.idNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.idNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -87,7 +87,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="民族">
-                        <el-input v-model="registrationForm.national" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.national" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -107,7 +107,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="社保卡号">
-                        <el-input v-model="registrationForm.ssCardNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.ssCardNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="10">
@@ -131,7 +131,7 @@
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="代理人">
-                        <el-input v-model="registrationForm.agent" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.agent" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
@@ -146,48 +146,48 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="代理人电话">
-                        <el-input v-model="registrationForm.agentPhoneNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.agentPhoneNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="代理人地址">
-                        <el-input v-model="registrationForm.agentAddress"></el-input>
+                        <el-input clearable v-model="registrationForm.agentAddress"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="邮编">
-                        <el-input v-model="registrationForm.zipCode" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.zipCode" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="地址">
-                        <el-input v-model="registrationForm.address" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.address" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="电话">
-                        <el-input v-model="registrationForm.phoneNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.phoneNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="工作单位">
-                        <el-input v-model="registrationForm.workUnit" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.workUnit" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="职务">
-                        <el-input v-model="registrationForm.position" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.position" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="禁忌药物">
-                        <el-input v-model="registrationForm.tabooDrugs" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.tabooDrugs" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -202,14 +202,14 @@
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="禁忌食物">
-                        <el-input v-model="registrationForm.tabooFood" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.tabooFood" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="饮食类型">
-                        <el-input v-model="registrationForm.dietType" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.dietType" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -222,7 +222,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="住宅电话">
-                        <el-input v-model="registrationForm.homePhone" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.homePhone" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -237,7 +237,7 @@
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="是否是外网预约">
-                        <el-input v-model="registrationForm.onlineAppointment" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.onlineAppointment" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
@@ -250,7 +250,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="预约编号">
-                        <el-input v-model="registrationForm.appointNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.appointNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -261,31 +261,31 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="在院编号">
-                        <el-input v-model="registrationForm.courtNumber" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.courtNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="与院状态">
-                        <el-input v-model="registrationForm.hospitalized" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.hospitalized" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="养老补助">
-                        <el-input v-model="registrationForm.pensionBenefits" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.pensionBenefits" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="养老金收入">
-                        <el-input v-model="registrationForm.pensionIncome" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.pensionIncome" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="老人类型">
-                        <el-input v-model="registrationForm.elderlyType" size="small"></el-input>
+                        <el-input clearable v-model="registrationForm.elderlyType" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -310,7 +310,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                        <el-input v-model="updateRegistrationForm.name" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.name" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -347,31 +347,31 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input size="small" v-model="updateRegistrationForm.bedNumber" placeholder="未分配"></el-input>
+                        <el-input clearable size="small" v-model="updateRegistrationForm.bedNumber" placeholder="未分配"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="年龄">
-                        <el-input size="small" v-model="updateRegistrationForm.age"></el-input>
+                        <el-input clearable size="small" v-model="updateRegistrationForm.age"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="籍贯">
-                        <el-input size="small" v-model="updateRegistrationForm.origin"></el-input>
+                        <el-input clearable size="small" v-model="updateRegistrationForm.origin"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="户籍地">
-                        <el-input size="small" v-model="updateRegistrationForm.domicilePlace"></el-input>
+                        <el-input clearable size="small" v-model="updateRegistrationForm.domicilePlace"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="身份证号">
-                        <el-input v-model="updateRegistrationForm.idNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.idNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -384,7 +384,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="民族">
-                        <el-input v-model="updateRegistrationForm.national" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.national" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -404,7 +404,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="社保卡号">
-                        <el-input v-model="updateRegistrationForm.ssCardNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.ssCardNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="10">
@@ -428,7 +428,7 @@
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="代理人">
-                        <el-input v-model="updateRegistrationForm.agent" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.agent" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
@@ -443,48 +443,48 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="代理人电话">
-                        <el-input v-model="updateRegistrationForm.agentPhoneNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.agentPhoneNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="代理人地址">
-                        <el-input v-model="updateRegistrationForm.agentAddress"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.agentAddress"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="邮编">
-                        <el-input v-model="updateRegistrationForm.zipCode" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.zipCode" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="地址">
-                        <el-input v-model="updateRegistrationForm.address" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.address" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="电话">
-                        <el-input v-model="updateRegistrationForm.phoneNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.phoneNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="工作单位">
-                        <el-input v-model="updateRegistrationForm.workUnit" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.workUnit" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="职务">
-                        <el-input v-model="updateRegistrationForm.position" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.position" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="禁忌药物">
-                        <el-input v-model="updateRegistrationForm.tabooDrugs" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.tabooDrugs" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -499,14 +499,14 @@
                     </el-col>
                     <el-col :span="13">
                       <el-form-item label="禁忌食物">
-                        <el-input v-model="updateRegistrationForm.tabooFood" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.tabooFood" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="饮食类型">
-                        <el-input v-model="updateRegistrationForm.dietType" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.dietType" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -519,7 +519,7 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="住宅电话">
-                        <el-input v-model="updateRegistrationForm.homePhone" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.homePhone" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -534,7 +534,7 @@
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="是否是外网预约">
-                        <el-input v-model="updateRegistrationForm.onlineAppointment" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.onlineAppointment" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
@@ -547,7 +547,7 @@
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="预约编号">
-                        <el-input v-model="updateRegistrationForm.appointNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.appointNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -558,31 +558,31 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="在院编号">
-                        <el-input v-model="updateRegistrationForm.courtNumber" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.courtNumber" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="与院状态">
-                        <el-input v-model="updateRegistrationForm.hospitalized" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.hospitalized" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
                       <el-form-item label="养老补助">
-                        <el-input v-model="updateRegistrationForm.pensionBenefits" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.pensionBenefits" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="养老金收入">
-                        <el-input v-model="updateRegistrationForm.pensionIncome" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.pensionIncome" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col :span="8">
                       <el-form-item label="老人类型">
-                        <el-input v-model="updateRegistrationForm.elderlyType" size="small"></el-input>
+                        <el-input clearable v-model="updateRegistrationForm.elderlyType" size="small"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="8">
@@ -614,7 +614,7 @@
                     <el-row>
                       <el-col :span="6">
                         <el-form-item label="姓名" :rules="[{ required: true, message: '姓名不能为空', trigger: 'change'}]">
-                          <el-input v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
+                          <el-input clearable v-model="searchForm.name" placeholder="请输入姓名" size="small"></el-input>
                         </el-form-item>
                       </el-col>
                       <el-col :span="6">
@@ -1178,6 +1178,15 @@
         this.handleDelete(this.idSelection)
       },
       handleDelete: function(id) {
+        for (var i in this.permanentResults) {
+          if (id == this.permanentResults[i].id && this.permanentResults[i].processStatus == "入住审批") {
+            this.$message({
+              message: '请在入住审批页面删除该对象',
+              type: 'error',
+            }); 
+            return         
+          }
+        }
         let self = this
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/delete',
@@ -1193,6 +1202,8 @@
                 message: '删除成功',
                 type: 'success',
               });
+              self.results = []
+              self.permanentResults = []
               self.getAllInfo()
             } else {
               self.$message({
@@ -1254,6 +1265,8 @@
                 type: 'success'
               });
               self.registrationForm = self.emptyForm
+              self.results = []
+              self.permanentResults = []
               self.registrationFormVisible = false
               self.getAllInfo()
             } else {
@@ -1314,6 +1327,8 @@
                 type: 'success',
               });
               self.updateRegistrationFormVisible = false
+              self.results = []
+              self.permanentResults = []
               self.getAllInfo()
             } else {
               self.$message({
@@ -1389,7 +1404,6 @@
       },
       getAllInfo: function() {
         let self = this
-        self.results = []
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/findAll',
           type: 'post',
@@ -1398,8 +1412,6 @@
             id: '1'
           }),
           success: function(data) {
-            self.results = []
-            self.permanentResults = []
             if (data.data.length != 0) {
               self.registrationResults = data.data
               for (var i in self.registrationResults) {
@@ -1444,8 +1456,7 @@
 
     },
     mounted: function() {
-      this.getAllInfo()
-      
+      this.getAllInfo()    
     }
   }
 </script>

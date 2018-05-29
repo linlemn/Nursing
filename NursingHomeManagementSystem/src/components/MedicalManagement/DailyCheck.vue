@@ -29,7 +29,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="addDailyCheckForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="addDailyCheckForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -37,46 +37,46 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="体温">
-                      <el-input v-model="addDailyCheckForm.temperature" size="small" placeholder="℃"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.temperature" size="small" placeholder="℃"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="呼吸">
-                      <el-input v-model="addDailyCheckForm.breathCondition" size="small" placeholder="次/分"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.breathCondition" size="small" placeholder="次/分"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="脉搏">
-                      <el-input v-model="addDailyCheckForm.pulse" size="small" placeholder="次/分"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.pulse" size="small" placeholder="次/分"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="血糖值">
-                      <el-input v-model="addDailyCheckForm.bloodSugarValue" size="small" placeholder="mol"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.bloodSugarValue" size="small" placeholder="mol"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="收缩压">
-                      <el-input v-model="addDailyCheckForm.systolicPressure" size="small" placeholder="mmhg"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.systolicPressure" size="small" placeholder="mmhg"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="舒张压">
-                      <el-input v-model="addDailyCheckForm.diastolicPressure" size="small" placeholder="mmhg"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.diastolicPressure" size="small" placeholder="mmhg"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="主治医师">
-                      <el-input v-model="addDailyCheckForm.doctor" size="small"></el-input>
+                      <el-input clearable v-model="addDailyCheckForm.doctor" size="small"></el-input>
                     </el-form-item>
                   </el-col>                  
                   <el-col :span="12">
                     <el-form-item label="巡房记录">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyCheckForm.patrolRecord">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyCheckForm.patrolRecord">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -111,7 +111,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateDailyCheckForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="updateDailyCheckForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -119,46 +119,46 @@
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="体温">
-                      <el-input v-model="updateDailyCheckForm.temperature" size="small" placeholder="℃"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.temperature" size="small" placeholder="℃"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="呼吸">
-                      <el-input v-model="updateDailyCheckForm.breathCondition" size="small" placeholder="次/分"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.breathCondition" size="small" placeholder="次/分"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="脉搏">
-                      <el-input v-model="updateDailyCheckForm.pulse" size="small" placeholder="次/分"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.pulse" size="small" placeholder="次/分"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="血糖值">
-                      <el-input v-model="updateDailyCheckForm.bloodSugarValue" size="small" placeholder="mol"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.bloodSugarValue" size="small" placeholder="mol"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="收缩压">
-                      <el-input v-model="updateDailyCheckForm.systolicPressure" size="small" placeholder="mmhg"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.systolicPressure" size="small" placeholder="mmhg"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="舒张压">
-                      <el-input v-model="updateDailyCheckForm.diastolicPressure" size="small" placeholder="mmhg"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.diastolicPressure" size="small" placeholder="mmhg"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col :span="8">
                     <el-form-item label="主治医师">
-                      <el-input v-model="updateDailyCheckForm.doctor" size="small"></el-input>
+                      <el-input clearable v-model="updateDailyCheckForm.doctor" size="small"></el-input>
                     </el-form-item>
                   </el-col>                  
                   <el-col :span="12">
                     <el-form-item label="巡房记录">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyCheckForm.patrolRecord">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyCheckForm.patrolRecord">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -200,12 +200,12 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="姓名">
-                        <el-input v-model="dailyCheckForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="dailyCheckForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="dailyCheckForm.roomNumber" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="dailyCheckForm.roomNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">

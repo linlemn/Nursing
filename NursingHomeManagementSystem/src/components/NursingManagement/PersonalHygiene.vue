@@ -29,7 +29,7 @@
                   </el-col>
                   <el-col :span="8">
                     <el-form-item label="姓名">
-                      <el-input v-model="addTodayForm.elderlyName" size="small" placeholder="输入姓名"></el-input>
+                      <el-input clearable v-model="addTodayForm.elderlyName" size="small" placeholder="输入姓名"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>                
@@ -121,7 +121,7 @@
                     </el-col>
                     <el-col :span="4">
                       <el-form-item label="姓名">
-                        <el-input v-model="bathingForm.elderlyName" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="bathingForm.elderlyName" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="4">
@@ -137,7 +137,7 @@
                     </el-col> 
                     <el-col :span="4" :offset="2">
                       <el-form-item label="床号">
-                        <el-input v-model="bathingForm.bedNumber" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="bathingForm.bedNumber" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>                                       
                   </el-row>

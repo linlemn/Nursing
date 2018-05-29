@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="捐赠人" prop="donor" :rules="[{ required: true, message: '捐赠人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDonationInfo.donor" placeholder="请输入捐赠人姓名"></el-input>
+                      <el-input clearable v-model="newDonationInfo.donor" placeholder="请输入捐赠人姓名"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -28,7 +28,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="经办人" prop="handingPerson" :rules="[{ required: true, message: '经办人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDonationInfo.handingPerson" placeholder="请输入经办人姓名"></el-input>
+                      <el-input clearable v-model="newDonationInfo.handingPerson" placeholder="请输入经办人姓名"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -39,13 +39,13 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="捐赠内容" prop="content" :rules="[{required: true, message: '捐赠内容不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newDonationInfo.content" placeholder="请输入捐赠内容"></el-input>
+                  <el-input clearable type="textarea" v-model="newDonationInfo.content" placeholder="请输入捐赠内容"></el-input>
                 </el-form-item>
                 <el-form-item label="处置意见" prop="dispositionOfOpinions" :rules="[{required: true, message: '捐赠内容不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newDonationInfo.dispositionOfOpinions" placeholder="请输入处置意见"></el-input>
+                  <el-input clearable type="textarea" v-model="newDonationInfo.dispositionOfOpinions" placeholder="请输入处置意见"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newDonationInfo.password" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newDonationInfo.password" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newDonationFormVisible = false">取 消</el-button>
@@ -119,7 +119,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="经办人">
-                        <el-input v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -132,13 +132,13 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="捐赠内容">
-                    <el-input type="textarea" v-model="modifiedInfo.content" :placeholder="modifiedInfo.content"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.content" :placeholder="modifiedInfo.content"></el-input>
                   </el-form-item>
                   <el-form-item label="处置意见">
-                    <el-input type="textarea" v-model="modifiedInfo.dispositionOfOpinions" :placeholder="modifiedInfo.dispositionOfOpinions"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.dispositionOfOpinions" :placeholder="modifiedInfo.dispositionOfOpinions"></el-input>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">

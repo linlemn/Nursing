@@ -29,7 +29,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="addDailyInspectionForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="addDailyInspectionForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -45,7 +45,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="主治医师">
-                      <el-input v-model="addDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
+                      <el-input clearable v-model="addDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
                       </el-input>
                     </el-form-item>
                   </el-col>                  
@@ -53,7 +53,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="巡查内容">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyInspectionForm.patrolContent">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="addDailyInspectionForm.patrolContent">
                       </el-input>
                     </el-form-item>
                   </el-col>                  
@@ -88,7 +88,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="姓名">
-                      <el-input v-model="updateDailyInspectionForm.name" size="small" placeholder="输入姓名">
+                      <el-input clearable v-model="updateDailyInspectionForm.name" size="small" placeholder="输入姓名">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -104,7 +104,7 @@
                   </el-col>
                   <el-col :span="7">
                     <el-form-item label="主治医师">
-                      <el-input v-model="updateDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
+                      <el-input clearable v-model="updateDailyInspectionForm.doctor" size="small" placeholder="输入主治医师">
                       </el-input>
                     </el-form-item>
                   </el-col>
@@ -112,7 +112,7 @@
                 <el-row>
                   <el-col :span="15">
                     <el-form-item label="巡查内容">
-                      <el-input type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyInspectionForm.patrolContent">
+                      <el-input clearable type="textarea" :autosize="{ minRows: 5, maxRows: 6}" placeholder="请输入内容" v-model="updateDailyInspectionForm.patrolContent">
                       </el-input>
                     </el-form-item>
                   </el-col>                  
@@ -154,12 +154,12 @@
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="姓名">
-                        <el-input v-model="dailyInspectionForm.name" size="small" placeholder="输入姓名"></el-input>
+                        <el-input clearable v-model="dailyInspectionForm.name" size="small" placeholder="输入姓名"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="7">
                       <el-form-item label="床号">
-                        <el-input v-model="dailyInspectionForm.roomNo" size="small" placeholder="输入床号"></el-input>
+                        <el-input clearable v-model="dailyInspectionForm.roomNo" size="small" placeholder="输入床号"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="2">
