@@ -13,12 +13,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="反馈送达人" prop="diliveredPerson" :rules="[{ required: true, message: '反馈送达人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.diliveredPerson" placeholder="请输入反馈送达人" clearable></el-input>
+                      <el-input clearable v-model="newComplaintsInfo.diliveredPerson" placeholder="请输入反馈送达人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="送达日期" prop="diliveredDate" :rules="[{ required: true, message: '送达日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newComplaintsInfo.diliveredDate" type="date" placeholder="选择送达日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newComplaintsInfo.diliveredDate" type="date" placeholder="选择送达日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
@@ -26,36 +26,36 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="执行部门" prop="executiveDepartment" :rules="[{ required: true, message: '执行部门不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.executiveDepartment" placeholder="请输入执行部门" clearable></el-input>
+                      <el-input clearable v-model="newComplaintsInfo.executiveDepartment" placeholder="请输入执行部门"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="反馈接收人" prop="feedbackRecipient" :rules="[{ required: true, message: '反馈接收人不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.feedbackRecipient" placeholder="请输入反馈接收人" clearable></el-input>
+                      <el-input clearable v-model="newComplaintsInfo.feedbackRecipient" placeholder="请输入反馈接收人"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="院长" prop="dean" :rules="[{ required: true, message: '院长不能为空', trigger: 'change'}]">
-                      <el-input v-model="newComplaintsInfo.dean" placeholder="请输入院长" clearable></el-input>
+                      <el-input clearable v-model="newComplaintsInfo.dean" placeholder="请输入院长"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="送达日期" prop="date" :rules="[{ required: true, message: '日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newComplaintsInfo.date" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newComplaintsInfo.date" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item label="所提意见或建议" prop="suggestion" :rules="[{ required: true, message: '意见或建议不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newComplaintsInfo.suggestion" placeholder="请输入意见或建议" clearable></el-input>
+                  <el-input clearable type="textarea" v-model="newComplaintsInfo.suggestion" placeholder="请输入意见或建议"></el-input>
                 </el-form-item>
                 <el-form-item label="采取措施" prop="solution" :rules="[{ required: true, message: '采取措施不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newComplaintsInfo.solution" placeholder="请输入采取措施" clearable></el-input>
+                  <el-input clearable type="textarea" v-model="newComplaintsInfo.solution" placeholder="请输入采取措施"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newComplaintsInfo.notes" placeholder="请输入备注" clearable></el-input>
+                  <el-input  clearable type="textarea" v-model="newComplaintsInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newErrorFormVisible = false">取 消</el-button>
@@ -145,7 +145,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="日期">
-                        <el-date-picker class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        <el-date-picker clearable class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                         </el-date-picker>
                       </el-form-item>
                     </el-col>
@@ -399,7 +399,7 @@
         var nameResult = []
         if (this.queryName) {
           for (var complaint in this.complaintsData) {
-            if (this.complaintsData[complaint].feedbackRecipient == this.queryName) {
+            if (this.complaintsData[complaint].feedbackRecipient.indexOf(this.queryName)) {
               nameResult.push(this.complaintsData[complaint])
             }
           }

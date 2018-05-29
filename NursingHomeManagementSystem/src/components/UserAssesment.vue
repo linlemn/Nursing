@@ -1,17 +1,17 @@
 <template>
     <div>
-        <el-container>
+        <el-container id="el-container">
             <el-header id="header">
                 <el-col :span="8">
                     陈娟英敬老院
                 </el-col>
-                <el-col :span="4" :push="14">
-                    <el-button size="small" @click="toLogin()">注销</el-button>
+                <el-col style="color:4ecca3" :span="4" :push="14">
+                    <el-button style="color:4ecca3" type="text" size="medium" @click="toLogin()">注销</el-button>
                 </el-col>
             </el-header>
             <el-container>
                 <el-aside :span="8">
-                    <el-menu :default-active="$route.path" style="text-align:left" unique-opened router>
+                    <el-menu id="menu" :default-active="$route.path" style="text-align:left" unique-opened router background-color="#393e46" text-color="#fff" active-text-color="#4ecca3">
                         <el-menu-item index="/Overview" v-if="menuItem['Overview']">
                             <i class="el-icon-view"></i>
                             <span slot="title">综合信息</span>
@@ -81,11 +81,12 @@
                             <el-menu-item index="/SystemInfo/Role">角色管理</el-menu-item>
                             <el-menu-item index="/SystemInfo/Department">部门管理</el-menu-item>
                             <el-menu-item index="/SystemInfo/BedInfoManagment">床位信息管理</el-menu-item>
+                            <el-menu-item index="/SystemInfo/FloorAndRoomNoManagement">楼层信息管理</el-menu-item>
                             <el-menu-item index="/SystemInfo/CarerOfBedManagement">护工管理床位</el-menu-item>
                         </el-submenu>
                     </el-menu>
                 </el-aside>
-                <el-main :span="16">
+                <el-main :span="16" id="el-main">
                     <router-view name="main"></router-view>
                 </el-main>
             </el-container>
@@ -144,18 +145,26 @@
         text-align: center;
     }
     #header {
-        color: #616161;
+        color: #fff;
         font-size: 24px;
         font-family: Helvetica Neue, sans-serif;
         font-weight: 900;
         text-align: left;
     }
     .el-header {
-        background-color: #b3c0d1;
-        color: #333;
+        background-color: #323643;
+        color: #616161;
         line-height: 60px;
     }
-    .el-aside {
-        color: #333;
+    #menu{
+        height: 100%
+    }
+    .el-main {
+        /* background-color:#eeeeee; */
+    }
+    #el-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
     }
 </style>

@@ -35,6 +35,7 @@ import bedInfoManagment from "./components/SystemInfoManagement/BedInfoManagment
 import carerOfBedManagement from "./components/SystemInfoManagement/CarerOfBedManagement.vue";
 import department from "./components/SystemInfoManagement/Department.vue";
 import role from "./components/SystemInfoManagement/role.vue";
+import floorManagement from './components/SystemInfoManagement/FloorAndRoomNoManagement.vue'
 
 
 // 要告诉 vue 使用 vueRouter
@@ -205,7 +206,11 @@ const asyncRouterMap = [
                 components: { main: carerOfBedManagement },
                 meta: { role: ['系统管理员'] }, //页面需要的权限
             },
-
+            {
+                path: systemInfoRoute + "/FloorAndRoomNoManagement",
+                components: { main: floorManagement },
+                meta: { role: ['系统管理员'] }, //页面需要的权限
+            },
         ]
     },
     { path: '*', redirect: '/404', hidden: true }
@@ -324,6 +329,10 @@ const routes = [
             {
                 path: systemInfoRoute + "/CarerOfBedManagement",
                 components: { main: carerOfBedManagement }
+            },
+            {
+                path: systemInfoRoute + "/FloorAndRoomNoManagement",
+                components: { main: floorManagement }
             },
         ],
     },

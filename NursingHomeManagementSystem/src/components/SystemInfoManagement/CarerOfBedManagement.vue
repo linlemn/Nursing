@@ -25,7 +25,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="用户类型" prop="userType">
-                      <el-select class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
+                      <el-select clearable class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
                         <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -33,7 +33,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="部门名称" prop="departmentName">
-                      <el-select class="widen" v-model="modifiedInfo.departmentName" placeholder="请选择部门名称">
+                      <el-select clearable class="widen" v-model="modifiedInfo.departmentName" placeholder="请选择部门名称">
                         <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -62,7 +62,7 @@
             <el-input clearable v-model="queryICCard" placeholder="请输入IC卡号"></el-input>
           </el-col>
           <el-col :span="5">
-            <el-select class="widen" v-model="queryUserType" placeholder="请选择用户类型">
+            <el-select clearable class="widen" v-model="queryUserType" placeholder="请选择用户类型">
               <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -111,7 +111,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="用户类型" prop="userType">
-                        <el-select class="widen" v-model="modifiedInfo.userType" :placeholder="modifiedInfo.userType">
+                        <el-select clearable class="widen" v-model="modifiedInfo.userType" :placeholder="modifiedInfo.userType">
                           <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -119,7 +119,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="部门名称" prop="departmentName">
-                        <el-select class="widen" v-model="modifiedInfo.departmentName" :placeholder="modifiedInfo.departmentName">
+                        <el-select clearable class="widen" v-model="modifiedInfo.departmentName" :placeholder="modifiedInfo.departmentName">
                           <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -176,7 +176,7 @@
         curData: [],
         currentClick: -1,
         userTypeOption: ['系统用户', '普通用户'],
-        departmentOption: ['护工一楼', '护工二楼', '护工三楼', '行政'],
+        departmentOption: [],
         currentPage: 1,
         pagesize: 20,
       }
@@ -387,7 +387,7 @@
         var resultUserType = []
         var resultBedNum = []
         var flags = [false, false, false, false]
-        if (this.queryName.length != 0) {
+        if (this.queryName) {
           flags[0] = true
           for (var emp in this.nurseBedData) {
             if (this.nurseBedData[emp].nurseName.indexOf(this.queryName) != -1) {
@@ -395,7 +395,7 @@
             }
           }
         }
-        if (this.queryICCard.length != 0) {
+        if (this.queryICCard) {
           flags[1] = true
           for (var emp in this.nurseBedData) {
             if (this.nurseBedData[emp].iCNumber.indexOf(this.queryICCard) != -1) {
@@ -403,7 +403,7 @@
             }
           }
         }
-        if (this.queryUserType.length != 0) {
+        if (this.queryUserType) {
           flags[2] = true
           for (var emp in this.nurseBedData) {
             if (this.nurseBedData[emp].userType == this.queryUserType) {
@@ -411,7 +411,7 @@
             }
           }
         }
-        if (this.queryBedNum.length != 0) {
+        if (this.queryBedNum) {
           flags[3] = true
           for (var emp in this.nurseBedData) {
             if (this.nurseBedData[emp].bedNumber.indexOf(this.queryBedNum) != -1) {
@@ -419,7 +419,7 @@
             }
           }
         }
-        if (this.queryName.length == 0 && this.queryICCard.length == 0 && this.queryUserType.length == 0 && this.queryBedNum.length == 0) {
+        if (!this.queryName && !this.queryICCard && !this.queryUserType && !this.queryBedNum) {
           this.curData = this.nurseBedData
           return
         }
@@ -522,10 +522,44 @@
       },
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage
+      },
+      getDep() {
+        let self = this
+        $.ajax({
+          // url: self.urlHeader + '/employee/findAll',
+          url: 'http://101.132.142.238:12222/department/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            //解析返回的data
+            var depData = data.data
+            for (let i = 0; i < depData.length; i++) {
+              self.departmentOption.push(depData[i].departmentName)
+            }
+          },
+          error: function() {
+            self.$confirm('部门加载失败，请检查网络', '失败', {
+              confirmButtonText: '重新加载',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              self.getDep()
+            }).catch(() => {
+              self.$message({
+                type: 'info',
+                message: '取消加载'
+              });
+            });
+          }
+        })
       }
     },
     mounted: function() {
       this.getAllNurseBedInfo(true)
+      this.getDep()
     }
   }
 </script>

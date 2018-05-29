@@ -18,7 +18,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="查房日期" prop="date" :rules="[{ required: true, message: '查房日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newRoundsInfo.date" type="date" placeholder="选择查房日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newRoundsInfo.date" type="date" placeholder="选择查房日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
@@ -40,7 +40,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="情况摘要" prop="medicalCareSituation" :rules="rule1">
-                      <el-input clearable type="textarea" v-model="newRoundsInfo.medicalCareSituation" placeholder="请输入情况摘要"></el-input>
+                      <el-input  clearable type="textarea" v-model="newRoundsInfo.medicalCareSituation" placeholder="请输入情况摘要"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
@@ -194,7 +194,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="查房日期" prop="date">
-                        <el-date-picker class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        <el-date-picker clearable class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                         </el-date-picker>
                       </el-form-item>
                     </el-col>
@@ -543,7 +543,7 @@
         if (this.queryName) {
           
           for (var round in this.roundsData) {
-            if (this.roundsData[round].checkPerson == this.queryName) {
+            if (this.roundsData[round].checkPerson.indexOf(this.queryName)) {
               nameResult.push(this.roundsData[round])
             }
           }

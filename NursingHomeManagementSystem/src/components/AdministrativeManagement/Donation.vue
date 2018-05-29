@@ -18,7 +18,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="捐赠分类" prop="classification" :rules="[{ required: true, message: '捐赠分类不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newDonationInfo.classification" placeholder="请选择捐赠分类">
+                      <el-select clearable class="widen" v-model="newDonationInfo.classification" placeholder="请选择捐赠分类">
                         <el-option v-for="item in sortOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -33,7 +33,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="日期" prop="date" :rules="[{ required: true, message: '日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newDonationInfo.date" type="date" placeholder="请选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newDonationInfo.date" type="date" placeholder="请选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
@@ -59,12 +59,12 @@
           </el-col>
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
-          <el-col :span="8">
-            <el-date-picker class="date-widen" v-model="queryDate" type="date" placeholder="请选择日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+          <el-col :span="10">
+            <el-date-picker unlink-panels type="daterange" clearable class="date-widen" v-model="queryDate" start-placeholder="请选择开始日期" end-placeholder="请选择结束日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
             </el-date-picker>
           </el-col>
-          <el-col :span="8">
-            <el-select class="widen" v-model="queryState" placeholder="请选择状态">
+          <el-col :span="10">
+            <el-select clearable class="widen" v-model="queryState" placeholder="请选择状态">
               <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -104,12 +104,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="捐赠人">
-                        <el-input v-model="modifiedInfo.donor" :placeholder="modifiedInfo.donor"></el-input>
+                        <el-input clearable v-model="modifiedInfo.donor" :placeholder="modifiedInfo.donor"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="状态">
-                        <el-select class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
+                        <el-select clearable class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
                           <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -124,7 +124,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="捐赠分类">
-                        <el-select class="widen" v-model="modifiedInfo.classification" :placeholder="modifiedInfo.classification">
+                        <el-select clearable class="widen" v-model="modifiedInfo.classification" :placeholder="modifiedInfo.classification">
                           <el-option v-for="item in sortOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -406,23 +406,23 @@
         var stateResult = []
         var dateResult = []
         var flags = [false, false]
-        if (this.queryState.length != 0) {
+        if (this.queryState) {
           flags[0] = true
           for (var don in this.donationData) {
-            if (this.donationData[don].state == this.queryState) {
+            if (this.donationData[don].state.indexOf(this.queryState)) {
               stateResult.push(this.donationData[don])
             }
           }
         }
-        if (this.queryDate.length != 0) {
+        if (this.queryDate) {
           flags[1] = true
           for (var don in this.donationData) {
-            if (this.donationData[don].date == this.queryDate) {
+            if (this.donationData[don].date >= this.queryDate[0] && this.donationData[don].date <= this.queryDate[1]) {
               dateResult.push(this.donationData[don])
             }
           }
         }
-        if (this.queryDate.length == 0 && this.queryState.length == 0) {
+        if (!this.queryDate && !this.queryState) {
           this.curData = this.donationData
           return
         }

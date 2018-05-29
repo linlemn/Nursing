@@ -72,6 +72,11 @@
                 password: self.loginForm.password
               }),
               success: function(data) {
+                if (data['400']) {
+                  self.$alert('登录失败，请确认账号和密码', '失败', {
+                    confirmButtonText: '确定'
+                  });
+                }
                 //登录成功之后存储token和role到cookie中
                 document.cookie = 'role=' + data.data.role
                 //动态生成路由
@@ -79,7 +84,7 @@
                 console.log(data)
               },
               error: function(err) {
-                self.$alert('请求数据失败，请检查网络', '失败', {
+                self.$alert('登录失败，请确认账号和密码', '失败', {
                   confirmButtonText: '确定'
                 });
                 console.log(err)
@@ -112,7 +117,7 @@
           this.$router.push('/')
           // next('/'); // 否则全部重定向到登录页
         }
-      },      
+      },
     },
   }
 </script>

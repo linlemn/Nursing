@@ -13,15 +13,15 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="楼层" prop="floor" :rules="[{ required: true, message: '楼层不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newBedInfo.floor" placeholder="请选择楼层">
-                        <el-option v-for="item in floorOption" :key="item" :label="item" :value="item">
+                      <el-select clearable class="widen" v-model="newBedInfo.floor" placeholder="请选择楼层">
+                        <el-option v-for="item in getFloorOption(true)" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
                     </el-form-item>
                   </el-col>
                   <el-col v-if="whetherChooseFloor()" :span="12">
                     <el-form-item label="房间号" prop="roomNumber" :rules="[{ required: true, message: '房间号不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newBedInfo.roomNumber" placeholder="请选择房间号">
+                      <el-select clearable class="widen" v-model="newBedInfo.roomNumber" placeholder="请选择房间号">
                         <el-option v-for="item in getRoomNumOption(true)" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -36,7 +36,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="是否空置" prop="isEmpty">
-                      <el-select class="widen" v-model="newBedInfo.isEmpty" placeholder="请选择空置状态" :rules="[{ required: true, message: '空置状态不能为空', trigger: 'change'}]">
+                      <el-select clearable class="widen" v-model="newBedInfo.isEmpty" placeholder="请选择空置状态" :rules="[{ required: true, message: '空置状态不能为空', trigger: 'change'}]">
                         <el-option v-for="item in emptyOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -59,14 +59,14 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-select class="widen" v-model="queryFloor" placeholder="请选择楼层">
-              <el-option v-for="item in floorOption" :key="item" :label="item" :value="item">
+            <el-select clearable class="widen" v-model="queryFloor" placeholder="请选择楼层">
+              <el-option v-for="item in getFloorOption()" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="8">
-            <el-select class="widen" v-model="queryRoomNum" placeholder="请选择房间号">
-              <el-option v-for="item in getRoomNumOption(false)" :key="item" :label="item" :value="item">
+            <el-select clearable class="widen" v-model="queryRoomNum" placeholder="请选择房间号">
+              <el-option v-for="item in getRoomNumOption()" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
           </el-col>
@@ -99,12 +99,18 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="楼层">
-                        <el-input clearable v-model="modifiedInfo.floor" :placeholder="modifiedInfo.floor"></el-input>
+                        <el-select clearable class="widen" v-model="modifiedInfo.floor" :placeholder="modifiedInfo.floor">
+                          <el-option v-for="item in getFloorOption(true)" :key="item" :label="item" :value="item">
+                          </el-option>
+                        </el-select>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="房间号">
-                        <el-input clearable v-model="modifiedInfo.roomNumber" :placeholder="modifiedInfo.roomNumber"></el-input>
+                        <el-select clearable class="widen" v-model="modifiedInfo.roomNumber" :placeholder="modifiedInfo.roomNumber">
+                          <el-option v-for="item in getRoomNumOption(true)" :key="item" :label="item" :value="item">
+                          </el-option>
+                        </el-select>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -116,7 +122,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="是否空置" prop="isEmpty" :rules="[{ required: true, message: '空置状态不能为空', trigger: 'change'}]">
-                        <el-select class="widen" v-model="modifiedInfo.isEmpty" :placeholder="modifiedInfo.isEmpty">
+                        <el-select clearable class="widen" v-model="modifiedInfo.isEmpty" :placeholder="modifiedInfo.isEmpty">
                           <el-option v-for="item in emptyOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -164,7 +170,6 @@
           ringNumber: '',
         },
         modifiedFormVisible: false,
-        floorOption: ['1楼', '2楼', '3楼', '4楼', '5楼'],
         queryFloor: '',
         queryRoomNum: '',
         loading: true,
@@ -174,6 +179,7 @@
         emptyOption: ['空置', '已住人'],
         currentPage: 1,
         pagesize: 20,
+        floorAndRoomNum: [],
       }
     },
     methods: {
@@ -352,11 +358,19 @@
             id: '1'
           }),
           success: function(data) {
+            var info = []
+            for (var i in data.data) {
+              if (data.data[i].bedNumber !== 'FloorInfo') {
+                info.push(data.data[i])
+              } else {
+                self.floorAndRoomNum.push(data.data[i])
+              }
+            }
             //解析返回的data
             if (flag) {
-              self.curData = data.data
+              self.curData = info
             }
-            self.bedData = data.data
+            self.bedData = info
             self.loading = false
             console.log(data)
           },
@@ -455,19 +469,52 @@
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage
       },
-      //获取房间号选项
-      getRoomNumOption(flag) {
-        var option = []
+      //   获取楼层选项
+      getFloorOption(flag) {
+        var floorOption = []
         if (flag) {
-          for (var i = 1; i < 10; i++) {
-            option.push(this.newBedInfo.floor[0] + '0' + i)
+          for (var i in this.floorAndRoomNum) {
+            if ($.inArray(this.floorAndRoomNum[i].floor, floorOption) === -1) {
+              floorOption.push(this.floorAndRoomNum[i].floor)
+            }
           }
         } else {
-          for (var i = 1; i < 10; i++) {
-            option.push(this.queryFloor[0] + '0' + i)
+          for (var i in this.bedData) {
+            if ($.inArray(this.bedData[i].floor, floorOption) === -1) {
+              floorOption.push(this.bedData[i].floor)
+            }
           }
         }
-        return option
+        return floorOption
+      },
+      //获取房间号选项
+      getRoomNumOption(flag) {
+        // 获取全部房间号
+        if (flag) {
+          if (this.whetherChooseFloor()) {
+            var option = []
+            for (var i in this.floorAndRoomNum) {
+              if (this.floorAndRoomNum[i].floor == this.newBedInfo.floor) {
+                option.push(this.floorAndRoomNum[i].roomNumber)
+              }
+            }
+            return option
+          } else {
+            return []
+          }
+        } else {
+          if (this.queryFloor) {
+            var option = []
+            for (var i in this.bedData) {
+              if (this.bedData[i].floor == this.queryFloor) {
+                option.push(this.bedData[i].roomNumber)
+              }
+            }
+            return option
+          } else {
+            return []
+          }
+        }
       },
       //是否选择房间号
       whetherChooseFloor() {

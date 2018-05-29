@@ -23,7 +23,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="状态" prop="state" :rules="[{ required: true, message: '状态不能为空', trigger: 'change'}]">
-                  <el-select class="widen" v-model="newRoleInfo.state" placeholder="请选择状态">
+                  <el-select  clearable class="widen" v-model="newRoleInfo.state" placeholder="请选择状态">
                     <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
                     </el-option>
                   </el-select>
@@ -47,7 +47,7 @@
             <el-input clearable v-model="queryName" placeholder="请输入角色名称"></el-input>
           </el-col>
           <el-col :span="8">
-            <el-select class="widen" v-model="queryState" placeholder="请选择状态">
+            <el-select clearable class="widen" v-model="queryState" placeholder="请选择状态">
               <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -89,7 +89,7 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="状态">
-                    <el-select class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
+                    <el-select clearable class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
                       <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
@@ -360,7 +360,7 @@
           console.log(this.queryName)
           flags[1] = true
           for (var err in this.roleData) {
-            if (this.roleData[err].date == this.queryName) {
+            if (this.roleData[err].date.indexOf(this.queryName)) {
               nameResult.push(this.roleData[err])
             }
           }

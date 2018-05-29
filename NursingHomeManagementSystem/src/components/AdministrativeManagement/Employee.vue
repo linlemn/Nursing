@@ -37,7 +37,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="角色" prop="role" :rules="[{ required: true, message: '员工角色不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色" clearable>
+                      <el-select clearable class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -45,7 +45,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="部门" prop="department" :rules="[{ required: true, message: '员工部门不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色" clearable>
+                      <el-select clearable class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -53,7 +53,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="用户类型" prop="userType" :rules="[{ required: true, message: '用户类型不能为空', trigger: 'change'}]">
-                  <el-select class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型" clearable>
+                  <el-select clearable class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型" clearable>
                     <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                     </el-option>
                   </el-select>
@@ -82,13 +82,13 @@
             <el-input clearable v-model="name" placeholder="请输入姓名" clearable></el-input>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="role" placeholder="请选择角色" clearable>
+            <el-select clearable class="widen" v-model="role" placeholder="请选择角色" clearable>
               <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="department" placeholder="请选择部门" clearable>
+            <el-select clearable class="widen" v-model="department" placeholder="请选择部门" clearable>
               <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -136,19 +136,19 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="角色">
-                    <el-select class="widen" v-model="modifiedInfo.role" placeholder="请选择角色">
+                    <el-select clearable class="widen" v-model="modifiedInfo.role" placeholder="请选择角色">
                       <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item label="用户类型">
-                    <el-select class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
+                    <el-select clearable class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
                       <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item label="部门">
-                    <el-select class="widen" v-model="modifiedInfo.department" placeholder="请选择部门">
+                    <el-select clearable class="widen" v-model="modifiedInfo.department" placeholder="请选择部门">
                       <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
@@ -574,7 +574,7 @@
         var resultDep = []
         var resultRole = []
         var flags = [false, false, false, false]
-        if (this.name.length != 0) {
+        if (this.name.length) {
           flags[0] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].name.indexOf(this.name) != -1) {
@@ -582,7 +582,7 @@
             }
           }
         }
-        if (this.usrName.length != 0) {
+        if (this.usrName) {
           flags[1] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].userName.indexOf(this.usrName) != -1) {
@@ -590,7 +590,7 @@
             }
           }
         }
-        if (this.department.length != 0) {
+        if (this.department) {
           flags[2] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].department.indexOf(this.department) != -1) {
@@ -598,7 +598,7 @@
             }
           }
         }
-        if (this.role.length != 0) {
+        if (this.role) {
           flags[3] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].role.indexOf(this.role) != -1) {
@@ -606,7 +606,7 @@
             }
           }
         }
-        if (this.name.length == 0 && this.usrName.length == 0 && this.department.length == 0 && this.role.length == 0) {
+        if (!this.name && !this.usrName && !this.department && !this.role) {
           this.curData = this.employeeData
           return
         }

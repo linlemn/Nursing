@@ -18,7 +18,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="开箱日期" prop="unpackingDate" :rules="[{ required: true, message: '开箱日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newSuggestionInfo.unpackingDate" type="date" placeholder="选择开箱日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newSuggestionInfo.unpackingDate" type="date" placeholder="选择开箱日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
@@ -86,7 +86,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="开箱日期">
-                        <el-date-picker class="date-widen" v-model="modifiedInfo.unpackingDate" type="date" :placeholder="modifiedInfo.unpackingDate" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        <el-date-picker clearable class="date-widen" v-model="modifiedInfo.unpackingDate" type="date" :placeholder="modifiedInfo.unpackingDate" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                         </el-date-picker>
                       </el-form-item>
                     </el-col>
@@ -95,13 +95,13 @@
                     <el-input clearable v-model="modifiedInfo.suggestionContent" :placeholder="modifiedInfo.suggestionContent"></el-input>
                   </el-form-item>
                   <el-form-item label="反馈">
-                    <el-input clearable v-model="modifiedInfo.processFeedback" :placeholder="modifiedInfo.processFeedback"></el-input>
+                    <el-input  clearable v-model="modifiedInfo.processFeedback" :placeholder="modifiedInfo.processFeedback"></el-input>
                   </el-form-item>
                   <el-form-item label="意见数">
-                    <el-input clearable v-model="modifiedInfo.suggestionNum" :placeholder="modifiedInfo.suggestionNum"></el-input>
+                    <el-input  clearable v-model="modifiedInfo.suggestionNum" :placeholder="modifiedInfo.suggestionNum"></el-input>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input  clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>
@@ -349,7 +349,7 @@
         var nameResult = []
         if (this.queryName) {
           for (var suggestion in this.suggestionData) {
-            if (this.suggestionData[suggestion].unpackingPerson == this.queryName) {
+            if (this.suggestionData[suggestion].unpackingPerson.indexOf(this.queryName)) {
               nameResult.push(this.suggestionData[suggestion])
             }
           }
