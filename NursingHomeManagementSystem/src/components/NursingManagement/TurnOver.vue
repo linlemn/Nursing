@@ -244,21 +244,71 @@
           }
         })
       },
+       getFloorOption() {
+        this.storeys = []
+        var count = 0
+        var floorOption = []
+        for (var i in this.floorData) {
+          if ($.inArray(this.floorData[i].floor, floorOption) === -1) {
+            floorOption.push(this.floorData[i].floor)
+            count += 1
+            this.storeys.push({value: "选项" + String(count), label: this.floorData[i].floor})
+          }
+        } 
+        console.log(this.storeys)       
+      },
       storeyChange: function(val) {
-        switch (val) {
-          case "1楼":
-            this.changeRoomNo(1)
-            break;
-          case "2楼":
-            this.changeRoomNo(2)
-            break;
-          case "3楼":
-            this.changeRoomNo(3)
-            break;
-          case "4楼":
-            this.changeRoomNo(4)
-            break;
+        this.changeRoomNo(val)
+        console.log(val)
+      },
+      changeRoomNo: function(val) {
+        this.roomNos = []
+        var count = 0
+        for (var i in this.floorData) {
+          if (this.floorData[i].floor == val) {
+            count += 1
+            this.roomNos.push({value: "选项" + String(count), label: String(this.floorData[i].roomNumber)})
+          }
         }
+        console.log(this.roomNos)        
+      },      
+      getAllFloorInfo(flag) {
+        let self = this
+        //获取所有员工信息
+        $.ajax({
+          // url: self.urlHeader + '/employee/findAll',
+          url: 'http://101.132.142.238:12222/bedInfo/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            var info = []
+            for (var i in data.data) {
+              if (data.data[i].bedNumber === 'FloorInfo') {
+                info.push(data.data[i])
+              }
+            }
+            //解析返回的data
+            self.floorData = info
+            self.getFloorOption()
+          },
+          error: function() {
+            self.$confirm('房间号加载失败，请检查网络', '失败', {
+              confirmButtonText: '重新加载',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              self.getAllFloorInfo(flag)
+            }).catch(() => {
+              self.$message({
+                type: 'info',
+                message: '取消加载'
+              });
+            });
+          }
+        })
       },
       onSearch: function() {
         console.log(this.turnOverForm)
@@ -400,6 +450,7 @@
     },
     mounted: function() {
       this.getAllTurnInfo()
+      this.getAllFloorInfo()
     }
   };
 </script>

@@ -217,52 +217,8 @@ export default {
           date: "",
           name: ""
         },
-        storeys: [{
-            value: "选项1",
-            label: "1楼"
-          },
-          {
-            value: "选项2",
-            label: "2楼"
-          },
-          {
-            value: "选项3",
-            label: "3楼"
-          },
-          {
-            value: "选项4",
-            label: "4楼"
-          }
-        ],
-        roomNos: [{
-            value: "选项1",
-            label: "101"
-          },
-          {
-            value: "选项2",
-            label: "102"
-          },
-          {
-            value: "选项3",
-            label: "103"
-          },
-          {
-            value: "选项4",
-            label: "104"
-          },
-          {
-            value: "选项5",
-            label: "105"
-          },
-          {
-            value: "选项6",
-            label: "106"
-          },
-          {
-            value: "选项7",
-            label: "107"
-          }
-        ],
+        storeys: [],
+        roomNos: [],
         searchResults: [],
         addMedicineRecordFormVisible: false,
         addMedicineRecordForm: {
@@ -344,14 +300,14 @@ export default {
       },
       handleAddSubmit: function() {
         let self = this
-        if (self.addMedicineRecordForm.medicineName.length == 0) {
+        console.log(self.addMedicineRecordForm)
+        if (self.addMedicineRecordForm.medicineName.length == 0 || self.addMedicineRecordForm.date.length == 0) {
           self.$message({
             message: '必填字段为空',
             type: 'error',
           });
           return
-        }
-
+        }        
         //发送请求
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/create',
@@ -360,7 +316,7 @@ export default {
           data: JSON.stringify(self.addMedicineRecordForm),
           success: function(data) {
             //解析返回的data
-            console.log(data)
+            // console.log(data)
             if (data.data != null) {
               self.$message({
                 message: '提交成功',
@@ -380,32 +336,72 @@ export default {
             self.$alert('创建失败', '失败', {
               confirmButtonText: '确定'
             });
-            console.log(err)
+            // console.log(err)
           }
         })
       },
+      getFloorOption() {
+        this.storeys = []
+        var count = 0
+        var floorOption = []
+        for (var i in this.floorData) {
+          if ($.inArray(this.floorData[i].floor, floorOption) === -1) {
+            floorOption.push(this.floorData[i].floor)
+            count += 1
+            this.storeys.push({value: "选项" + String(count), label: this.floorData[i].floor})
+          }
+        }    
+      },
       storeyChange: function(val) {
-        switch (val) {
-          case "1楼":
-            this.changeRoomNo(1)
-            break;
-          case "2楼":
-            this.changeRoomNo(2)
-            break;
-          case "3楼":
-            this.changeRoomNo(3)
-            break;
-          case "4楼":
-            this.changeRoomNo(4)
-            break;
-        }
-  
+        this.changeRoomNo(val)
       },
       changeRoomNo: function(val) {
-        for (var i in this.roomNos) {
-          var a = parseInt(i) + 1
-          this.roomNos[i].label = val + "0" + a
-        }
+        this.roomNos = []
+        var count = 0
+        for (var i in this.floorData) {
+          if (this.floorData[i].floor == val) {
+            count += 1
+            this.roomNos.push({value: "选项" + String(count), label: String(this.floorData[i].roomNumber)})
+          }
+        }      
+      },      
+      getAllFloorInfo(flag) {
+        let self = this
+        //获取所有员工信息
+        $.ajax({
+          // url: self.urlHeader + '/employee/findAll',
+          url: 'http://101.132.142.238:12222/bedInfo/findAll',
+          type: 'post',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            id: '1'
+          }),
+          success: function(data) {
+            var info = []
+            for (var i in data.data) {
+              if (data.data[i].bedNumber === 'FloorInfo') {
+                info.push(data.data[i])
+              }
+            }
+            //解析返回的data
+            self.floorData = info
+            self.getFloorOption()
+          },
+          error: function() {
+            self.$confirm('房间号加载失败，请检查网络', '失败', {
+              confirmButtonText: '重新加载',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              self.getAllFloorInfo(flag)
+            }).catch(() => {
+              self.$message({
+                type: 'info',
+                message: '取消加载'
+              });
+            });
+          }
+        })
       },
       ableToModify: function() {  
         if (this.idSelection != "") {
@@ -424,6 +420,13 @@ export default {
       },
       handleModifySubmit: function() {
         let self = this
+        if (self.updateMedicineRecordForm.date == "" || self.updateMedicineRecordForm.date == undefined) {
+          self.$message({
+            message: '必填字段为空',
+            type: 'error',
+          });
+          return                    
+        }
         $.ajax({
           url: self.urlHeader + self.middleUrl + '/change',
           type: 'post',
@@ -520,6 +523,7 @@ export default {
     },
     mounted: function() {
       this.getAllMedicineInfo()
+      this.getAllFloorInfo()
     }
 }
 </script>
