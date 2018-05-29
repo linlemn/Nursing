@@ -13,7 +13,7 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="行政部门" prop="executiveDepatment" :rules="[{ required: true, message: '行政部门不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newDutyInfo.executiveDepatment" placeholder="请输入行政部门">
+                      <el-select clearable class="widen" v-model="newDutyInfo.executiveDepatment" placeholder="请输入行政部门">
                         <el-option v-for="item in departments" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -21,7 +21,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="医务部门" prop="medicalDepatment" :rules="[{ required: true, message: '医疗部门不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newDutyInfo.medicalDepatment" placeholder="请输入医疗部门">
+                      <el-select clearable class="widen" v-model="newDutyInfo.medicalDepatment" placeholder="请输入医疗部门">
                         <el-option v-for="item in departments" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -31,12 +31,12 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="门卫" prop="guard" :rules="[{ required: true, message: '门卫不能为空', trigger: 'change'}]">
-                      <el-input v-model="newDutyInfo.guard" placeholder="请输入门卫"></el-input>
+                      <el-input clearable v-model="newDutyInfo.guard" placeholder="请输入门卫"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="天气" prop="weather">
-                      <el-select class="widen" v-model="newDutyInfo.weather" placeholder="请选择天气">
+                      <el-select clearable class="widen" v-model="newDutyInfo.weather" placeholder="请选择天气">
                         <el-option v-for="item in weatherOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -44,43 +44,43 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="值班日期" prop="date" :rules="[{ required: true, message: '值班日期不能为空', trigger: 'change'}]">
-                  <el-date-picker class="date-widen" v-model="newDutyInfo.date" type="date" placeholder="选择值班日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                  <el-date-picker clearable class="date-widen" v-model="newDutyInfo.date" type="date" placeholder="选择值班日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                   </el-date-picker>
                 </el-form-item>
                 <el-form-item>日班值班情况记录</el-form-item>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="值班人" prop="dayShiftPerson">
-                      <el-input v-model="newDutyInfo.dayShiftPerson" placeholder="请输入日班值班人"></el-input>
+                      <el-input clearable v-model="newDutyInfo.dayShiftPerson" placeholder="请输入日班值班人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="值班情况" prop="dayShiftSituation">
-                      <el-input v-model="newDutyInfo.dayShiftSituation" placeholder="请输入日班值班情况"></el-input>
+                      <el-input clearable v-model="newDutyInfo.dayShiftSituation" placeholder="请输入日班值班情况"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item label="处置意见" prop="dayHandleComments">
-                  <el-input type="textarea" v-model="newDutyInfo.dayShiftSituation" placeholder="请输入日班值班处置意见"></el-input>
+                  <el-input clearable type="textarea" v-model="newDutyInfo.dayShiftSituation" placeholder="请输入日班值班处置意见"></el-input>
                 </el-form-item>
                 <el-form-item>夜班值班情况记录</el-form-item>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="值班人" prop="nightShiftPerson">
-                      <el-input v-model="newDutyInfo.nightShiftPerson" placeholder="请输入夜班值班人"></el-input>
+                      <el-input clearable v-model="newDutyInfo.nightShiftPerson" placeholder="请输入夜班值班人"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="值班情况" prop="nightShiftSituation">
-                      <el-input v-model="newDutyInfo.nightShiftSituation" placeholder="请输入夜班值班情况"></el-input>
+                      <el-input clearable v-model="newDutyInfo.nightShiftSituation" placeholder="请输入夜班值班情况"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item label="处置意见" prop="nightHandleComments">
-                  <el-input type="textarea" v-model="newDutyInfo.nightShiftSituation" placeholder="请输入夜班值班处置意见"></el-input>
+                  <el-input clearable type="textarea" v-model="newDutyInfo.nightShiftSituation" placeholder="请输入夜班值班处置意见"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newDutyInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newDutyInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newDutyFormVisible = false">取 消</el-button>
@@ -95,7 +95,7 @@
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
           <el-col :span="8">
-            <el-input v-model="queryName" placeholder="请输入值班人"></el-input>
+            <el-input clearable v-model="queryName" placeholder="请输入值班人"></el-input>
           </el-col>
           <el-col :span="4">
             <el-button @click="query">查询</el-button>
@@ -168,7 +168,7 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="行政部门" prop="executiveDepatment">
-                        <el-select class="widen" v-model="modifiedInfo.executiveDepatment" :placeholder="modifiedInfo.executiveDepatment">
+                        <el-select clearable class="widen" v-model="modifiedInfo.executiveDepatment" :placeholder="modifiedInfo.executiveDepatment">
                           <el-option v-for="item in departments" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -176,7 +176,7 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="医疗部门" prop="medicalDepatment">
-                        <el-select class="widen" v-model="modifiedInfo.medicalDepatment" :placeholder="modifiedInfo.medicalDepatment">
+                        <el-select clearable class="widen" v-model="modifiedInfo.medicalDepatment" :placeholder="modifiedInfo.medicalDepatment">
                           <el-option v-for="item in departments" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -186,12 +186,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="门卫" prop="guard">
-                        <el-input v-model="modifiedInfo.guard" :placeholder="modifiedInfo.guard"></el-input>
+                        <el-input clearable v-model="modifiedInfo.guard" :placeholder="modifiedInfo.guard"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="天气" prop="weather">
-                        <el-select class="widen" v-model="modifiedInfo.weather" :placeholder="modifiedInfo.weather">
+                        <el-select clearable class="widen" v-model="modifiedInfo.weather" :placeholder="modifiedInfo.weather">
                           <el-option v-for="item in weatherOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -199,43 +199,43 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="值班日期" prop="date">
-                    <el-date-picker class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                    <el-date-picker clearable class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                     </el-date-picker>
                   </el-form-item>
                   <el-form-item>日班值班情况记录</el-form-item>
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="值班人" prop="dayShiftPerson">
-                        <el-input v-model="modifiedInfo.dayShiftPerson" :placeholder="modifiedInfo.dayShiftPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.dayShiftPerson" :placeholder="modifiedInfo.dayShiftPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="值班情况" prop="dayShiftSituation">
-                        <el-input v-model="modifiedInfo.dayShiftSituation" :placeholder="modifiedInfo.dayShiftSituation"></el-input>
+                        <el-input clearable v-model="modifiedInfo.dayShiftSituation" :placeholder="modifiedInfo.dayShiftSituation"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-form-item label="处置意见" prop="dayHandleComments">
-                    <el-input type="textarea" v-model="modifiedInfo.dayShiftSituation" :placeholder="modifiedInfo.dayHandleComments"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.dayShiftSituation" :placeholder="modifiedInfo.dayHandleComments"></el-input>
                   </el-form-item>
                   <el-form-item>夜班值班情况记录</el-form-item>
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="值班人" prop="nightShiftPerson">
-                        <el-input v-model="modifiedInfo.nightShiftPerson" :placeholder="modifiedInfo.nightShiftPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.nightShiftPerson" :placeholder="modifiedInfo.nightShiftPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="值班情况" prop="nightShiftSituation">
-                        <el-input v-model="modifiedInfo.nightShiftSituation" :placeholder="modifiedInfo.nightShiftSituation"></el-input>
+                        <el-input clearable v-model="modifiedInfo.nightShiftSituation" :placeholder="modifiedInfo.nightShiftSituation"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-form-item label="处置意见" prop="nightHandleComments">
-                    <el-input type="textarea" v-model="modifiedInfo.nightHandleComments" :placeholder="modifiedInfo.nightHandleComments"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.nightHandleComments" :placeholder="modifiedInfo.nightHandleComments"></el-input>
                   </el-form-item>
                   <el-form-item label="备注" prop="notes">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="newDutyFormVisible = false">取 消</el-button>
@@ -489,7 +489,7 @@
         var nameResult = []
         if (this.queryName) {
           for (var duty in this.dutyData) {
-            if (this.dutyData[duty].nightShiftPerson == this.queryName || this.dutyData[duty].dayShiftPerson == this.queryName) {
+            if (this.dutyData[duty].nightShiftPerson.indexOf(this.queryName) || this.dutyData[duty].dayShiftPerson.indexOf(this.queryName)) {
               nameResult.push(this.dutyData[duty])
             }
           }

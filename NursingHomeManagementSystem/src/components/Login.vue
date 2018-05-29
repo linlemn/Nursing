@@ -12,7 +12,7 @@
               <el-row>
                 <el-col :span="12" :offset="5">
                   <el-form-item label="用户名：" prop='username' :rules="[{ required: true, message: '用户名不能为空', trigger: 'change'}]">
-                    <el-input prefix-icon="el-icon-service" v-model="loginForm.username">
+                    <el-input clearable prefix-icon="el-icon-service" v-model="loginForm.username">
                     </el-input>
                   </el-form-item>
                 </el-col>
@@ -20,7 +20,7 @@
               <el-row>
                 <el-col :span="12" :offset="5">
                   <el-form-item label="密码：" prop='password' :rules="[{ required: true, message: '密码不能为空', trigger: 'change'}]">
-                    <el-input prefix-icon="el-icon-view" v-model="loginForm.password" type="password" @keyup.enter.native="login">
+                    <el-input clearable prefix-icon="el-icon-view" v-model="loginForm.password" type="password" @keyup.enter.native="login">
                     </el-input>
                   </el-form-item>
                 </el-col>
@@ -72,6 +72,11 @@
                 password: self.loginForm.password
               }),
               success: function(data) {
+                if (data['400']) {
+                  self.$alert('登录失败，请确认账号和密码', '失败', {
+                    confirmButtonText: '确定'
+                  });
+                }
                 //登录成功之后存储token和role到cookie中
                 document.cookie = 'role=' + data.data.role
                 //动态生成路由
@@ -79,7 +84,7 @@
                 console.log(data)
               },
               error: function(err) {
-                self.$alert('请求数据失败，请检查网络', '失败', {
+                self.$alert('登录失败，请确认账号和密码', '失败', {
                   confirmButtonText: '确定'
                 });
                 console.log(err)
@@ -112,7 +117,7 @@
           this.$router.push('/')
           // next('/'); // 否则全部重定向到登录页
         }
-      },      
+      },
     },
   }
 </script>

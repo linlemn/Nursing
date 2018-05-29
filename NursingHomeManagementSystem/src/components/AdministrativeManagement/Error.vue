@@ -13,24 +13,24 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="差错情况" prop="errorSituation" :rules="[{ required: true, message: '差错情况不能为空', trigger: 'change'}]">
-                      <el-input v-model="newErrorInfo.errorSituation" placeholder="请输入差错情况"></el-input>
+                      <el-input clearable v-model="newErrorInfo.errorSituation" placeholder="请输入差错情况"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="登记日期" prop="date" :rules="[{ required: true, message: '登记日期不能为空', trigger: 'change'}]">
-                      <el-date-picker class="date-widen" v-model="newErrorInfo.date" type="date" placeholder="选择登记日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                      <el-date-picker clearable class="date-widen" v-model="newErrorInfo.date" type="date" placeholder="选择登记日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                       </el-date-picker>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-form-item label="负责人" prop="handingPerson" :rules="[{ required: true, message: '负责人不能为空', trigger: 'change'}]">
-                  <el-input v-model="newErrorInfo.handingPerson" placeholder="请输入负责人姓名"></el-input>
+                  <el-input clearable v-model="newErrorInfo.handingPerson" placeholder="请输入负责人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="整改措施" prop="correctiveAction" :rules="[{ required: true, message: '整改措施不能为空', trigger: 'change'}]">
-                  <el-input type="textarea" v-model="newErrorInfo.correctiveAction" placeholder="请输入整改措施"></el-input>
+                  <el-input clearable type="textarea" v-model="newErrorInfo.correctiveAction" placeholder="请输入整改措施"></el-input>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newErrorInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newErrorInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button @click="newErrorFormVisible = false">取 消</el-button>
@@ -44,12 +44,12 @@
           </el-col>
         </el-row>
         <el-row type="flex" justify="start" :gutter="20">
-          <el-col :span="8">
-            <el-date-picker class="date-widen" v-model="queryDate" type="date" placeholder="请选择登记日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+          <el-col :span="10">
+            <el-date-picker unlink-panels type="daterange" clearable class="date-widen" v-model="queryDate" start-placeholder="请选择开始日期" end-placeholder="请选择结束日期" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
             </el-date-picker>
           </el-col>
-          <el-col :span="8">
-            <el-select class="widen" v-model="queryState" placeholder="请选择状态">
+          <el-col :span="10">
+            <el-select clearable class="widen" v-model="queryState" placeholder="请选择状态">
               <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -85,12 +85,12 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="负责人">
-                        <el-input v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
+                        <el-input clearable v-model="modifiedInfo.handingPerson" :placeholder="modifiedInfo.handingPerson"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="登记日期">
-                        <el-date-picker class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
+                        <el-date-picker clearable class="date-widen" v-model="modifiedInfo.date" type="date" :placeholder="modifiedInfo.date" value-format="yyyy-MM-dd" format="yyyy-MM-dd">
                         </el-date-picker>
                       </el-form-item>
                     </el-col>
@@ -98,7 +98,7 @@
                   <el-row :gutter="10">
                     <el-col>
                       <el-form-item label="状态">
-                        <el-select class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
+                        <el-select clearable class="widen" v-model="modifiedInfo.state" :placeholder="modifiedInfo.state">
                           <el-option v-for="item in stateOption" :key="item" :label="item" :value="item">
                           </el-option>
                         </el-select>
@@ -106,13 +106,13 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="差错情况">
-                    <el-input v-model="modifiedInfo.errorSituation" :placeholder="modifiedInfo.errorSituation"></el-input>
+                    <el-input clearable v-model="modifiedInfo.errorSituation" :placeholder="modifiedInfo.errorSituation"></el-input>
                   </el-form-item>
                   <el-form-item label="整改措施">
-                    <el-input type="textarea" v-model="modifiedInfo.correctiveAction" :placeholder="modifiedInfo.correctiveAction"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.correctiveAction" :placeholder="modifiedInfo.correctiveAction"></el-input>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="modifiedFormVisible = false">取 消</el-button>
@@ -374,7 +374,7 @@
         if (this.queryState) {
           flags[0] = true
           for (var err in this.errorData) {
-            if (this.errorData[err].state == this.queryState) {
+            if (this.errorData[err].state.indexOf(this.queryState)) {
               stateResult.push(this.errorData[err])
             }
           }
@@ -383,7 +383,7 @@
           console.log(this.queryDate)
           flags[1] = true
           for (var err in this.errorData) {
-            if (this.errorData[err].date == this.queryDate) {
+            if (this.errorData[err].date >= this.queryDate[0] && this.errorData[err].date <= this.queryDate[1]) {
               dateResult.push(this.errorData[err])
             }
           }

@@ -13,31 +13,31 @@
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="姓名" prop="name" :rules="[{ required: true, message: '员工姓名不能为空', trigger: 'change'}]">
-                      <el-input v-model="newEmployeeInfo.name" placeholder="请输入员工姓名"></el-input>
+                      <el-input clearable v-model="newEmployeeInfo.name" placeholder="请输入员工姓名"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="IC卡号" prop="iCCard">
-                      <el-input v-model="newEmployeeInfo.iCCard" placeholder="请输入IC卡号"></el-input>
+                      <el-input clearable v-model="newEmployeeInfo.iCCard" placeholder="请输入IC卡号"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="密码" type="password" prop="passWord" :rules="passWordRule">
-                      <el-input type="password" v-model="newEmployeeInfo.passWord" placeholder="请输入密码"></el-input>
+                      <el-input clearable type="password" v-model="newEmployeeInfo.passWord" placeholder="请输入密码"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="确认密码" type="password" prop="checkPass" :rules="checkPassRule">
-                      <el-input type="password" v-model="newEmployeeInfo.checkPass" placeholder="确认密码"></el-input>
+                      <el-input clearable type="password" v-model="newEmployeeInfo.checkPass" placeholder="确认密码"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="10">
                   <el-col :span="12">
                     <el-form-item label="角色" prop="role" :rules="[{ required: true, message: '员工角色不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色" clearable>
+                      <el-select clearable class="widen" v-model="newEmployeeInfo.role" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -45,7 +45,7 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="部门" prop="department" :rules="[{ required: true, message: '员工部门不能为空', trigger: 'change'}]">
-                      <el-select class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色" clearable>
+                      <el-select clearable class="widen" v-model="newEmployeeInfo.department" placeholder="请选择员工角色" clearable>
                         <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                         </el-option>
                       </el-select>
@@ -53,13 +53,13 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="用户类型" prop="userType" :rules="[{ required: true, message: '用户类型不能为空', trigger: 'change'}]">
-                  <el-select class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型" clearable>
+                  <el-select clearable class="widen" v-model="newEmployeeInfo.userType" placeholder="请选择用户类型" clearable>
                     <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                     </el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="备注" prop="notes">
-                  <el-input type="textarea" v-model="newEmployeeInfo.notes" placeholder="请输入备注"></el-input>
+                  <el-input clearable type="textarea" v-model="newEmployeeInfo.notes" placeholder="请输入备注"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <!-- <div slot="footer" class="dialog-footer"> -->
@@ -76,19 +76,19 @@
         </el-row class="header-row">
         <el-row type="flex" justify="space-around">
           <el-col :span="6">
-            <el-input v-model="usrName" placeholder="请输入用户名" clearable></el-input>
+            <el-input clearable v-model="usrName" placeholder="请输入用户名" clearable></el-input>
           </el-col>
           <el-col :span="6">
-            <el-input v-model="name" placeholder="请输入姓名" clearable></el-input>
+            <el-input clearable v-model="name" placeholder="请输入姓名" clearable></el-input>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="role" placeholder="请选择角色" clearable>
+            <el-select clearable class="widen" v-model="role" placeholder="请选择角色" clearable>
               <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="4">
-            <el-select class="widen" v-model="department" placeholder="请选择部门" clearable>
+            <el-select clearable class="widen" v-model="department" placeholder="请选择部门" clearable>
               <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
               </el-option>
             </el-select>
@@ -126,35 +126,35 @@
                   <el-row :gutter="10">
                     <el-col :span="12">
                       <el-form-item label="姓名">
-                        <el-input v-model="modifiedInfo.name" :placeholder="modifiedInfo.name"></el-input>
+                        <el-input clearable v-model="modifiedInfo.name" :placeholder="modifiedInfo.name"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="IC卡号">
-                        <el-input v-model="modifiedInfo.iCCard" :placeholder="modifiedInfo.iCCard"></el-input>
+                        <el-input clearable v-model="modifiedInfo.iCCard" :placeholder="modifiedInfo.iCCard"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-form-item label="角色">
-                    <el-select class="widen" v-model="modifiedInfo.role" placeholder="请选择角色">
+                    <el-select clearable class="widen" v-model="modifiedInfo.role" placeholder="请选择角色">
                       <el-option v-for="item in roleOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item label="用户类型">
-                    <el-select class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
+                    <el-select clearable class="widen" v-model="modifiedInfo.userType" placeholder="请选择用户类型">
                       <el-option v-for="item in userTypeOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item label="部门">
-                    <el-select class="widen" v-model="modifiedInfo.department" placeholder="请选择部门">
+                    <el-select clearable class="widen" v-model="modifiedInfo.department" placeholder="请选择部门">
                       <el-option v-for="item in departmentOption" :key="item" :label="item" :value="item">
                       </el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item label="备注">
-                    <el-input type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
+                    <el-input clearable type="textarea" v-model="modifiedInfo.notes" :placeholder="modifiedInfo.notes"></el-input>
                   </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -167,10 +167,10 @@
               <el-dialog title="重置密码" :visible.sync="resetFormVisible">
                 <el-form :model="resetPasswordInfo" ref="resetPasswordInfo">
                   <el-form-item label="新的密码" type="password" prop="passWord" :rules="resetPasswordRule">
-                    <el-input type="password" v-model="resetPasswordInfo.passWord" placeholder="请输入密码"></el-input>
+                    <el-input clearable type="password" v-model="resetPasswordInfo.passWord" placeholder="请输入密码"></el-input>
                   </el-form-item>
                   <el-form-item label="确认密码" type="password" prop="checkPass" :rules="resetCheckPassRule">
-                    <el-input type="password" v-model="resetPasswordInfo.checkPass" placeholder="确认密码"></el-input>
+                    <el-input clearable type="password" v-model="resetPasswordInfo.checkPass" placeholder="确认密码"></el-input>
                   </el-form-item>
                   <el-form-item>
                     <el-button @click="resetFormVisible = false">取 消</el-button>
@@ -574,7 +574,7 @@
         var resultDep = []
         var resultRole = []
         var flags = [false, false, false, false]
-        if (this.name.length != 0) {
+        if (this.name.length) {
           flags[0] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].name.indexOf(this.name) != -1) {
@@ -582,7 +582,7 @@
             }
           }
         }
-        if (this.usrName.length != 0) {
+        if (this.usrName) {
           flags[1] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].userName.indexOf(this.usrName) != -1) {
@@ -590,7 +590,7 @@
             }
           }
         }
-        if (this.department.length != 0) {
+        if (this.department) {
           flags[2] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].department.indexOf(this.department) != -1) {
@@ -598,7 +598,7 @@
             }
           }
         }
-        if (this.role.length != 0) {
+        if (this.role) {
           flags[3] = true
           for (var emp in this.employeeData) {
             if (this.employeeData[emp].role.indexOf(this.role) != -1) {
@@ -606,7 +606,7 @@
             }
           }
         }
-        if (this.name.length == 0 && this.usrName.length == 0 && this.department.length == 0 && this.role.length == 0) {
+        if (!this.name && !this.usrName && !this.department && !this.role) {
           this.curData = this.employeeData
           return
         }
